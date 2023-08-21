@@ -20,17 +20,17 @@
     var CONFIG = {"hostname":"dtxharry.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="随便写点自己的笔记">
+  <meta name="description" content="越权漏洞很常见的一种逻辑漏洞,写些我的一些想法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="越权漏洞">
 <meta property="og:url" content="https://dtxharry.github.io/2023/08/21/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E/index.html">
 <meta property="og:site_name" content="Dtx&#39;s Realm">
-<meta property="og:description" content="随便写点自己的笔记">
+<meta property="og:description" content="越权漏洞很常见的一种逻辑漏洞,写些我的一些想法">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-21T08:42:40.000Z">
-<meta property="article:modified_time" content="2023-08-21T08:42:40.458Z">
+<meta property="article:modified_time" content="2023-08-21T14:53:20.565Z">
 <meta property="article:author" content="dtxHarry">
-<meta property="article:tag" content="渗透测试">
+<meta property="article:tag" content="逻辑漏洞">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://dtxharry.github.io/2023/08/21/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E/">
@@ -222,11 +222,22 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2023-08-21 16:42:40" itemprop="dateCreated datePublished" datetime="2023-08-21T16:42:40+08:00">2023-08-21</time>
+              <time title="创建时间：2023-08-21 16:42:40 / 修改时间：22:53:20" itemprop="dateCreated datePublished" datetime="2023-08-21T16:42:40+08:00">2023-08-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E6%B8%97%E9%80%8F/" itemprop="url" rel="index"><span itemprop="name">web渗透</span></a>
+                </span>
             </span>
 
           
+            <div class="post-description">越权漏洞很常见的一种逻辑漏洞,写些我的一些想法</div>
 
         </div>
       </header>
@@ -237,7 +248,18 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <h1 id="越权定义"><a href="#越权定义" class="headerlink" title="越权定义"></a>越权定义</h1><p>是一种很常见的逻辑安全漏洞.由于服务器端对客户提出的数据操作请求过分信任，忽略了对该用户操作权限的判定，导致修改相关参数就可以拥有了其他账户的增、删、查、改功能，从而导致越权漏洞,通俗的讲,我是普通用户,但是我做了管理员的操作,越过权限了.</p>
+<h1 id="越权分类"><a href="#越权分类" class="headerlink" title="越权分类"></a>越权分类</h1><h2 id="垂直越权"><a href="#垂直越权" class="headerlink" title="垂直越权"></a>垂直越权</h2><p>普通用户做了管理员的操作</p>
+<h2 id="平行越权"><a href="#平行越权" class="headerlink" title="平行越权"></a>平行越权</h2><p>相同权限的用户互相越权,A用户影响B用户或者A管理影响B管理</p>
+<h2 id="交叉越权"><a href="#交叉越权" class="headerlink" title="交叉越权"></a>交叉越权</h2><p>既是平行越权也是垂直越权的越权</p>
+<h1 id="与未授权访问的区别"><a href="#与未授权访问的区别" class="headerlink" title="与未授权访问的区别"></a>与未授权访问的区别</h1><p><strong>越权</strong>:你必然掌握了一定权限</p>
+<p><strong>未授权访问</strong>:你肯定毫无权限.<br>不属于越权漏洞，但是在日常测试中常常会遇见（只要输入正确的网址就可以直接访问，例如/admin默认是登录，登录后跳转到user.php,然后你直接访问user.php，发现你直接有后台权限）(<a target="_blank" rel="noopener" href="http://cn-sec.com/archives/9806.html),(http://cn-sec.com/archives/17524.html">http://cn-sec.com/archives/9806.html),(http://cn-sec.com/archives/17524.html</a>) (业务逻辑绕过） Web攻防之业务安全实战指南 (陈晓光 胡兵 张作峰 等 著)  </p>
+<h1 id="常见的越权漏洞"><a href="#常见的越权漏洞" class="headerlink" title="常见的越权漏洞"></a>常见的越权漏洞</h1><p>1.通过修改GET传参来越权（<a target="_blank" rel="noopener" href="http://cn-sec.com/archives/2572.html）(http://cn-sec.com/archives/2861.html">http://cn-sec.com/archives/2572.html）(http://cn-sec.com/archives/2861.html</a>)</p>
+<p>2.修改POST传参进行越权（<a target="_blank" rel="noopener" href="http://cn-sec.com/archives/1682.html）">http://cn-sec.com/archives/1682.html）</a></p>
+<p>3.修改cookie传参进行越权（<a target="_blank" rel="noopener" href="http://cn-sec.com/archives/6421.html）">http://cn-sec.com/archives/6421.html）</a></p>
+<p>4.抓取传参可以在浏览器、APP、应用程序（exe）<a target="_blank" rel="noopener" href="http://cn-sec.com/archives/5930.html">http://cn-sec.com/archives/5930.html</a></p>
+<h1 id="越权测试过程"><a href="#越权测试过程" class="headerlink" title="越权测试过程"></a>越权测试过程</h1><h2 id="把握住传参就能把握住逻辑漏洞的命脉"><a href="#把握住传参就能把握住逻辑漏洞的命脉" class="headerlink" title="把握住传参就能把握住逻辑漏洞的命脉"></a><strong>把握住传参就能把握住逻辑漏洞的命脉</strong></h2><p>传参ID参数需要自己检测（常见：uid=  id= user= 等）<br>通常使用burp进行爆破传参（传参可能在GET POST COOKIE）<br>常见平行越权（不需要输入原密码的修改密码，抓包改用户名或者用户id修改他人密码修改资料的时候修改用户id查看订单的时候，遍历订单id等）</p>
+
     </div>
 
     
@@ -262,6 +284,9 @@
 
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E/" rel="tag"># 逻辑漏洞</a>
+          </div>
 
         
 
@@ -335,6 +360,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B6%8A%E6%9D%83%E5%AE%9A%E4%B9%89"><span class="nav-text">越权定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B6%8A%E6%9D%83%E5%88%86%E7%B1%BB"><span class="nav-text">越权分类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9E%82%E7%9B%B4%E8%B6%8A%E6%9D%83"><span class="nav-text">垂直越权</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B3%E8%A1%8C%E8%B6%8A%E6%9D%83"><span class="nav-text">平行越权</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%A4%E5%8F%89%E8%B6%8A%E6%9D%83"><span class="nav-text">交叉越权</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8E%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-text">与未授权访问的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E"><span class="nav-text">常见的越权漏洞</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B6%8A%E6%9D%83%E6%B5%8B%E8%AF%95%E8%BF%87%E7%A8%8B"><span class="nav-text">越权测试过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%8A%E6%8F%A1%E4%BD%8F%E4%BC%A0%E5%8F%82%E5%B0%B1%E8%83%BD%E6%8A%8A%E6%8F%A1%E4%BD%8F%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E%E7%9A%84%E5%91%BD%E8%84%89"><span class="nav-text">把握住传参就能把握住逻辑漏洞的命脉</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -357,13 +383,13 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

