@@ -3,7 +3,6 @@ https://dtxharry.github.io/about/index.html
 https://dtxharry.github.io/categories/index.html
 https://dtxharry.github.io/404.html
 https://dtxharry.github.io/tags/index.html
-https://dtxharry.github.io/2023/08/21/hello-world/
 https://dtxharry.github.io/
 https://dtxharry.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/
 https://dtxharry.github.io/categories/CyberSecurity/
