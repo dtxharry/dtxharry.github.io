@@ -20,17 +20,19 @@
     var CONFIG = {"hostname":"dtxharry.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="随便写点自己的笔记">
+  <meta name="description" content="一款经典的远控工具">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Cobalt_Strike(CS)">
 <meta property="og:url" content="https://dtxharry.github.io/2023/08/21/Cobalt-Strike-CS/index.html">
 <meta property="og:site_name" content="Dtx&#39;s Realm">
-<meta property="og:description" content="随便写点自己的笔记">
+<meta property="og:description" content="一款经典的远控工具">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-21T08:53:17.000Z">
-<meta property="article:modified_time" content="2023-08-21T08:53:17.112Z">
+<meta property="article:modified_time" content="2023-08-21T15:26:15.719Z">
 <meta property="article:author" content="dtxHarry">
-<meta property="article:tag" content="渗透测试">
+<meta property="article:tag" content="渗透工具">
+<meta property="article:tag" content="木马">
+<meta property="article:tag" content="远控">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://dtxharry.github.io/2023/08/21/Cobalt-Strike-CS/">
@@ -222,11 +224,22 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2023-08-21 16:53:17" itemprop="dateCreated datePublished" datetime="2023-08-21T16:53:17+08:00">2023-08-21</time>
+              <time title="创建时间：2023-08-21 16:53:17 / 修改时间：23:26:15" itemprop="dateCreated datePublished" datetime="2023-08-21T16:53:17+08:00">2023-08-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/" itemprop="url" rel="index"><span itemprop="name">内网渗透</span></a>
+                </span>
             </span>
 
           
+            <div class="post-description">一款经典的远控工具</div>
 
         </div>
       </header>
@@ -237,7 +250,27 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <p>渗透测试神器 - Cobalt Strike</p>
+<h1 id="Cobalt-Strike-工具"><a href="#Cobalt-Strike-工具" class="headerlink" title="Cobalt Strike 工具"></a>Cobalt Strike 工具</h1><pre><code> 内网渗透[后渗透]神器（远控）
+ CS可以团队作战  官网地址：https://www.cobaltstrike.com/（付费软件）
+</code></pre><h2 id="CS优势"><a href="#CS优势" class="headerlink" title="CS优势:"></a>CS优势:</h2><h3 id="团队协作："><a href="#团队协作：" class="headerlink" title="团队协作："></a>团队协作：</h3><p>​        可以多人合作完成渗透</p>
+<h3 id="跳板的功能"><a href="#跳板的功能" class="headerlink" title="跳板的功能"></a>跳板的功能</h3><p>​            CS分为两个部分。服务端、客户端</p>
+<p>​                服务端 - 架设在服务器上<br>​                客户端 - 在攻击者本机上</p>
+<p>​        溯源也只能溯源到服务端，无法溯源到攻击者<br>​        同一个CS，不同的用户，多地点登录权限相同</p>
+<h3 id="不间断监听"><a href="#不间断监听" class="headerlink" title="不间断监听"></a>不间断监听</h3><p>​            MSF会存在一个问题：<br>​                如果目标运行了木马，你的MSF监听没开启、电脑没开、没网。也没有意义<br>​                服务器 =&gt; 24小时不关机、不断网的主机</p>
+<h2 id="运行CS"><a href="#运行CS" class="headerlink" title="运行CS:"></a>运行CS:</h2><h3 id="运行服务端-gt"><a href="#运行服务端-gt" class="headerlink" title="运行服务端 =&gt;"></a>运行服务端 =&gt;</h3><p> 管理员模式 =&gt; 填ip =&gt; 填密码<br>        CS服务端默认端口<strong>50050</strong></p>
+<h3 id="启动客户端-gt"><a href="#启动客户端-gt" class="headerlink" title="启动客户端 =&gt;"></a>启动客户端 =&gt;</h3><p>​        后渗透神器、远控程序</p>
+<h4 id="1、设置监听"><a href="#1、设置监听" class="headerlink" title="1、设置监听"></a>1、设置监听</h4><h4 id="2、制作木马"><a href="#2、制作木马" class="headerlink" title="2、制作木马"></a>2、制作木马</h4><h4 id="3、上线"><a href="#3、上线" class="headerlink" title="3、上线"></a>3、上线</h4><p>​            改变<strong>心跳包</strong>时间 默认是60(心跳包:因为http不是一直连接的,所以要定期连一下同步信息)</p>
+<p>​        exe 木马</p>
+<p>​        =&gt; 宏病毒 （针对于office的病毒）<br>​        =&gt; 你打开了一个陌生的word xls<br>​        =&gt; WPS无法上线宏 [宏是WPS的收费功能，不付钱没有]</p>
+<p>​    进程注入=&gt;</p>
+<h3 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h3><p>1、持久控制：开机自启木马<br>        一、任务计划程序<br>        二、服务运行 管理员才能生成服务<br>            SYSTEM 是计算机中最高的权限<br>    2、CS插件：让CS功能更加强大<br>        <a target="_blank" rel="noopener" href="https://blog.csdn.net/ZPFCD/article/details/125824127">https://blog.csdn.net/ZPFCD/article/details/125824127</a></p>
+<p>​    &lt;?php eval(decode_base64($_REQUEST[7]))?&gt;</p>
+<p>​    7=phpinfo();<br>​    =&gt;cGhwaW5mbygpOw==</p>
+<p>​    加密数据：<br>​        https<br>​        走UDP代码<br>​        走icmp<br>​        改马，上AES RSA加密</p>
+<p>​        exe正常情况下改不了，编译后的产物<br>​        逆向：OD、ida =&gt; 把exe转换为汇编</p>
+<p>​        echo “Hello” =&gt;   100行-200行 500 1000行</p>
+
     </div>
 
     
@@ -262,6 +295,11 @@
 
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%B8%97%E9%80%8F%E5%B7%A5%E5%85%B7/" rel="tag"># 渗透工具</a>
+              <a href="/tags/%E6%9C%A8%E9%A9%AC/" rel="tag"># 木马</a>
+              <a href="/tags/%E8%BF%9C%E6%8E%A7/" rel="tag"># 远控</a>
+          </div>
 
         
 
@@ -335,6 +373,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Cobalt-Strike-%E5%B7%A5%E5%85%B7"><span class="nav-text">Cobalt Strike 工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CS%E4%BC%98%E5%8A%BF"><span class="nav-text">CS优势:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C%EF%BC%9A"><span class="nav-text">团队协作：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%B3%E6%9D%BF%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="nav-text">跳板的功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E9%97%B4%E6%96%AD%E7%9B%91%E5%90%AC"><span class="nav-text">不间断监听</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E8%A1%8CCS"><span class="nav-text">运行CS:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%9C%8D%E5%8A%A1%E7%AB%AF-gt"><span class="nav-text">运行服务端 &#x3D;&gt;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E5%AE%A2%E6%88%B7%E7%AB%AF-gt"><span class="nav-text">启动客户端 &#x3D;&gt;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1%E3%80%81%E8%AE%BE%E7%BD%AE%E7%9B%91%E5%90%AC"><span class="nav-text">1、设置监听</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2%E3%80%81%E5%88%B6%E4%BD%9C%E6%9C%A8%E9%A9%AC"><span class="nav-text">2、制作木马</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3%E3%80%81%E4%B8%8A%E7%BA%BF"><span class="nav-text">3、上线</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tips"><span class="nav-text">Tips</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -357,13 +396,13 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

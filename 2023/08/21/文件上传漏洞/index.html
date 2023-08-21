@@ -20,17 +20,17 @@
     var CONFIG = {"hostname":"dtxharry.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="随便写点自己的笔记">
+  <meta name="description" content="比较详细的介绍了文件上传漏洞的利用方式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="文件上传漏洞">
 <meta property="og:url" content="https://dtxharry.github.io/2023/08/21/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/index.html">
 <meta property="og:site_name" content="Dtx&#39;s Realm">
-<meta property="og:description" content="随便写点自己的笔记">
+<meta property="og:description" content="比较详细的介绍了文件上传漏洞的利用方式">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-21T09:02:08.000Z">
-<meta property="article:modified_time" content="2023-08-21T09:02:08.585Z">
+<meta property="article:modified_time" content="2023-08-21T15:35:01.734Z">
 <meta property="article:author" content="dtxHarry">
-<meta property="article:tag" content="渗透测试">
+<meta property="article:tag" content="文件上传漏洞">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://dtxharry.github.io/2023/08/21/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/">
@@ -222,11 +222,22 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2023-08-21 17:02:08" itemprop="dateCreated datePublished" datetime="2023-08-21T17:02:08+08:00">2023-08-21</time>
+              <time title="创建时间：2023-08-21 17:02:08 / 修改时间：23:35:01" itemprop="dateCreated datePublished" datetime="2023-08-21T17:02:08+08:00">2023-08-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E6%B8%97%E9%80%8F/" itemprop="url" rel="index"><span itemprop="name">web渗透</span></a>
+                </span>
             </span>
 
           
+            <div class="post-description">比较详细的介绍了文件上传漏洞的利用方式</div>
 
         </div>
       </header>
@@ -237,7 +248,56 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <p>文件上传漏洞：<br>    <strong>文件上传 是 功能</strong><br>    文件上传 =&gt; 任意文件上传漏洞（对了一半）<br>    文件上传 =&gt; 可以上传<strong>恶意</strong>文件（php\后端脚本）</p>
+<p>上传网站木马（Webshell 一句话木马）</p>
+<p>上传恶意文件，他开始和我们斗智斗勇。</p>
+<h1 id="上传方法"><a href="#上传方法" class="headerlink" title="上传方法:"></a>上传方法:</h1><h2 id="前端检测"><a href="#前端检测" class="headerlink" title="前端检测:"></a>前端检测:</h2><p><strong>计算机一般是根据文件后缀来判断文件类型的</strong>。<br>前端检测：用前端代码检测（JS）  等于 没有检测<br>    1、删除检测代码（F12不能直接删 Burp法）<br>    2、不让JS执行（立杆见影）<br>    3、上传.jpg文件，然后抓包改成PHP（标准方法）</p>
+<form method='POST' enctype="multipart/form-data">
+<input type='file' name='a' />
+<input type='submit' /></form>
+
+<p>&lt;?php var_dump($_FILES);?&gt;</p>
+<p>array(1) { [“a”]=&gt; array(5) { [“name”]=&gt; string(7) “123.php” [“type”]=&gt; string(24) “application/octet-stream” [“tmp_name”]=&gt; string(45) “C:\Users\admin\AppData\Local\Temp\php2827.tmp” [“error”]=&gt; int(0) [“size”]=&gt; int(26) } }</p>
+<p>name 上传文件名<br>type 上传文件类型标识（浏览器给的）<br>tmp_name 上传文件的临时文件（文件上传 到目标的临时目录里面，然后通过代码移动重命名到你想放的地方)<br>size 大小</p>
+<p>move_uploaded_file 移动上传文件</p>
+<p>黑名单：名单上的某某某禁止<br>白名单：只有名单上的某某某可以做 .php</p>
+<h2 id="黑名单机制"><a href="#黑名单机制" class="headerlink" title="黑名单机制:"></a>黑名单机制:</h2><p><strong>php结尾才能当作php执行 php phtml php3 php4 php5</strong></p>
+<h3 id="htaccess"><a href="#htaccess" class="headerlink" title=".htaccess"></a>.htaccess</h3><p> 分布式配置文件（针对不同文件夹有不同的规则 伪静态 默认不开启）</p>
+<h3 id="大小写绕过"><a href="#大小写绕过" class="headerlink" title="大小写绕过"></a>大小写绕过</h3><p>不常见（主要：window服务器上有 大小写不敏感）</p>
+<h3 id="php-php空格"><a href="#php-php空格" class="headerlink" title="php / php空格"></a>php / php空格</h3><p>不同的服务器命名文件的时候会自动删除空格、点</p>
+<p>黄飞 / 黄飞鸿</p>
+<h3 id="循环检测"><a href="#循环检测" class="headerlink" title="循环检测"></a>循环检测</h3><p>：pphphp</p>
+<h3 id="文件流绕过"><a href="#文件流绕过" class="headerlink" title="文件流绕过"></a>文件流绕过</h3><p>：一个文件可以有多个文件流</p>
+<p>文件名 = 文件名::$DATA</p>
+<h2 id="白名单机制"><a href="#白名单机制" class="headerlink" title="白名单机制:"></a>白名单机制:</h2><h3 id="00截断"><a href="#00截断" class="headerlink" title="00截断"></a>00截断</h3><p>​    源于电报。  over 确定我自己话说完了 标识符：这个话说完了</p>
+<p>当数据传输的时候，出现00字符代表，这个数据内容的结束</p>
+<p>PHP中低版本 PHP 5.3&lt;<br>move_uploaded_file</p>
+<p>​    ../upload/1.php%00/2920220818201302.jpg<br>​<br><a target="_blank" rel="noopener" href="http://zmie8016.ia.aqlab.cn/upload/2920220818201302.jpg">http://zmie8016.ia.aqlab.cn/upload/2920220818201302.jpg</a><br><a target="_blank" rel="noopener" href="http://zmie8016.ia.aqlab.cn/UP5020220818201500.jpg">http://zmie8016.ia.aqlab.cn/UP5020220818201500.jpg</a></p>
+<p>图床（第三方图床 七牛云、阿里云、微博） 防止文件上传漏洞最有效的方法</p>
+<p>​    A 运行网站<br>​    B 啥都不装，装一个web容器，然后专门负责存放图片和文件</p>
+<p>根据信息安全管理条例，很多敏感信息是绝对不能放图床<br>to G 端 图传偏少 [互联网公司图床多]<br>a 61</p>
+<p>之前所有题目检测核心后缀</p>
+<p>13关开始，检测图片  </p>
+<h3 id="图片马"><a href="#图片马" class="headerlink" title="图片马"></a>图片马</h3><p>-图片和木马的结合<br>    <strong>要做图片马的图片，越小越好</strong><br>    而且本地测试成功再使用</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">copy</span> <span class="number">1</span>.jpg/b + <span class="number">2</span>.txt <span class="number">99</span>.jpg</span><br></pre></td></tr></table></figure>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">夹心图片马：图 + 马 + 图</span><br><span class="line">	<span class="built_in">copy</span> <span class="number">1</span>.jpg/b + <span class="number">2</span>.txt <span class="number">99</span>.jpg（末尾是&lt;?php?&gt;）</span><br><span class="line">	<span class="built_in">copy</span> <span class="number">99</span>.jpg/b + <span class="number">1</span>.jpg/b <span class="number">88</span>.jpg =&gt; 显示的都是<span class="number">1</span>.jpg</span><br></pre></td></tr></table></figure>
+<p>​    copy的好玩法 藏文件</p>
+<p>​    二次渲染绕过 (我把你的图片重新做一下)<br>​    图片有一些基础属性是无法改变的<br>​    绕二次渲染，jpg难 png难 gif动图</p>
+<h3 id="条件竞争"><a href="#条件竞争" class="headerlink" title="条件竞争"></a>条件竞争</h3><p>​        先上车 后买票<br>​        先买票 后上车</p>
+<p>​        先检测 还是 先上传</p>
+<p>​        1、检测，上传<br>​        2、上传，检测，不通过删除 （存在条件竞争）</p>
+<p>​        上传 -&gt; 检测 -&gt; 删除<br>​        1        1        1</p>
+<p>​        那么我们如果在删除前访问到文件，是不是代码就执行了</p>
+<p>​        马 生 马 =&gt; A木马运行生出B木马        </p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> <span class="title function_ invoke__">file_put_contens</span>(<span class="string">&#x27;abc.php&#x27;</span>,<span class="string">&#x27;&lt;?php eval($_REQUEST[8])?&gt;&#x27;</span>)<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>​        单身300年的手速，手是搓不出来，需要暴破模块</p>
+<p>​        一直上传、一直访问</p>
+<p>​        <a target="_blank" rel="noopener" href="http://192.168.1.4/upload/1.php">http://192.168.1.4/upload/1.php</a></p>
+<h1 id="IIS6-0解析漏洞-gt"><a href="#IIS6-0解析漏洞-gt" class="headerlink" title="IIS6.0解析漏洞 =&gt;"></a>IIS6.0解析漏洞 =&gt;</h1><p>IIS6.0 =&gt; IIS6.0(Web容器) IIS APACHE NGINX<br>解析漏洞 =&gt; 解析（上传[把木马放到可以访问到的根目录]）<br>    =&gt; .php  .jpg(交给jpg处理)  我们可以根据漏洞，用特殊的访问手法或者特殊的后缀名会被当作后端代码执行<br>    (.htaccess)</p>
+<p>IIS6.0 =&gt; windows server 2003 的全版本都默认安装自带IIS6.0(ASP)</p>
+<p>.asp 会被当作asp文件处理<br>.jpg 会被当作jpg文件处理<br>    =&gt; 后缀调用的文件</p>
+<p>1、asa cdx cer 都会当作asp执行（微软认为不是漏洞，是特殊的默认配置<br>2、特殊符号影响：test.asp;.jpg   test.asp/123.jpg<br>3、CGI解析漏洞（PHP和Web容器的通信方法）  任何文件后面加/1.php</p>
+
     </div>
 
     
@@ -262,6 +322,9 @@
 
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" rel="tag"># 文件上传漏洞</a>
+          </div>
 
         
 
@@ -332,6 +395,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8A%E4%BC%A0%E6%96%B9%E6%B3%95"><span class="nav-text">上传方法:</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E6%A3%80%E6%B5%8B"><span class="nav-text">前端检测:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%BB%91%E5%90%8D%E5%8D%95%E6%9C%BA%E5%88%B6"><span class="nav-text">黑名单机制:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#htaccess"><span class="nav-text">.htaccess</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%A7%E5%B0%8F%E5%86%99%E7%BB%95%E8%BF%87"><span class="nav-text">大小写绕过</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#php-php%E7%A9%BA%E6%A0%BC"><span class="nav-text">php &#x2F; php空格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF%E6%A3%80%E6%B5%8B"><span class="nav-text">循环检测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E6%B5%81%E7%BB%95%E8%BF%87"><span class="nav-text">文件流绕过</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%99%BD%E5%90%8D%E5%8D%95%E6%9C%BA%E5%88%B6"><span class="nav-text">白名单机制:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#00%E6%88%AA%E6%96%AD"><span class="nav-text">00截断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E7%89%87%E9%A9%AC"><span class="nav-text">图片马</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E7%AB%9E%E4%BA%89"><span class="nav-text">条件竞争</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IIS6-0%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E-gt"><span class="nav-text">IIS6.0解析漏洞 &#x3D;&gt;</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -354,13 +418,13 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

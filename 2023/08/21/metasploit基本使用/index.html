@@ -20,17 +20,19 @@
     var CONFIG = {"hostname":"dtxharry.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="随便写点自己的笔记">
+  <meta name="description" content="简单介绍一款经典且强大的工具&quot;美少妇&quot;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="metasploit基本使用">
 <meta property="og:url" content="https://dtxharry.github.io/2023/08/21/metasploit%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="Dtx&#39;s Realm">
-<meta property="og:description" content="随便写点自己的笔记">
+<meta property="og:description" content="简单介绍一款经典且强大的工具&quot;美少妇&quot;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-21T08:50:34.000Z">
-<meta property="article:modified_time" content="2023-08-21T08:50:34.517Z">
+<meta property="article:modified_time" content="2023-08-21T15:27:31.048Z">
 <meta property="article:author" content="dtxHarry">
-<meta property="article:tag" content="渗透测试">
+<meta property="article:tag" content="渗透工具">
+<meta property="article:tag" content="木马">
+<meta property="article:tag" content="远控">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://dtxharry.github.io/2023/08/21/metasploit%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">
@@ -222,11 +224,22 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2023-08-21 16:50:34" itemprop="dateCreated datePublished" datetime="2023-08-21T16:50:34+08:00">2023-08-21</time>
+              <time title="创建时间：2023-08-21 16:50:34 / 修改时间：23:27:31" itemprop="dateCreated datePublished" datetime="2023-08-21T16:50:34+08:00">2023-08-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/" itemprop="url" rel="index"><span itemprop="name">内网渗透</span></a>
+                </span>
             </span>
 
           
+            <div class="post-description">简单介绍一款经典且强大的工具"美少妇"</div>
 
         </div>
       </header>
@@ -237,7 +250,22 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <h1 id="Metasploit基础"><a href="#Metasploit基础" class="headerlink" title="Metasploit基础"></a>Metasploit基础</h1><h3 id="作用："><a href="#作用：" class="headerlink" title="作用："></a>作用：</h3><p>攻击nday漏洞</p>
+<p>攻击模块：exp</p>
+<p>​    怎么利用这个漏洞</p>
+<p>攻击载荷 payload</p>
+<p>​    维持通信用的。</p>
+<h3 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h3><p>sudo su root</p>
+<h3 id="第一次启动msf"><a href="#第一次启动msf" class="headerlink" title="第一次启动msf"></a>第一次启动msf</h3><p>启动数据库：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">systemctl start postgresql</span><br><span class="line">systemctl enable postgresql</span><br><span class="line">msfdb init</span><br><span class="line"># 启动msf终端</span><br><span class="line"> msfconsole</span><br><span class="line">msfupdate # 更新，不建议进行</span><br><span class="line"></span><br><span class="line">show auxiliary # ls/dir</span><br><span class="line"></span><br><span class="line">search arp_sweep #搜索命令</span><br><span class="line">search type:auxiliary ms17-010</span><br><span class="line"></span><br><span class="line">use auxiliary/scanner/discovery/arp_sweep </span><br><span class="line">use 编号</span><br><span class="line">	选中之后的状态</span><br><span class="line">	auxiliary(scanner/discovery/arp_sweep) &gt; </span><br><span class="line">back # 退出当前的模块</span><br><span class="line"></span><br><span class="line">sessions -l # 查看后台的sessions</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="进入模块之后的操作"><a href="#进入模块之后的操作" class="headerlink" title="进入模块之后的操作"></a>进入模块之后的操作</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">options # 查看配置</span><br><span class="line">	required 是否必须的 yes（必填项） no （选填参数）</span><br><span class="line">	rhosts 目标IP</span><br><span class="line"></span><br><span class="line">set name value # 配置参数</span><br><span class="line">run / exploit # 执行模块</span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+<p>ctrl+c 停止当前执行的内容</p>
+<h2 id="后渗透"><a href="#后渗透" class="headerlink" title="后渗透"></a>后渗透</h2><p>后渗透的前提是已经拿下了目标服务器</p>
+<p>  post/windows/manage/enable_rdp  # 开启远程桌面</p>
+<h2 id="meterpreter-终端"><a href="#meterpreter-终端" class="headerlink" title="meterpreter 终端"></a>meterpreter 终端</h2><p>特殊的终端，msf专属</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">getuid # 查看当前用户的权限</span><br><span class="line">hashdump # 抓取用户的hash</span><br><span class="line">load mimikatz # 加载插件 </span><br><span class="line">shell # 进入目标终端</span><br><span class="line"></span><br><span class="line">exit # 退出</span><br><span class="line">clearev # 删除日志</span><br><span class="line"></span><br><span class="line">background # 挂起，放到后台运行</span><br></pre></td></tr></table></figure>
+<h1 id="searchsploit"><a href="#searchsploit" class="headerlink" title="searchsploit"></a>searchsploit</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">searchsploit smb（软件名称、cve编号等）</span><br><span class="line">searchsploit -p   29767.txt # 查看内容</span><br></pre></td></tr></table></figure>
+
     </div>
 
     
@@ -262,6 +290,11 @@
 
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%B8%97%E9%80%8F%E5%B7%A5%E5%85%B7/" rel="tag"># 渗透工具</a>
+              <a href="/tags/%E6%9C%A8%E9%A9%AC/" rel="tag"># 木马</a>
+              <a href="/tags/%E8%BF%9C%E6%8E%A7/" rel="tag"># 远控</a>
+          </div>
 
         
 
@@ -335,6 +368,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Metasploit%E5%9F%BA%E7%A1%80"><span class="nav-text">Metasploit基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%9C%E7%94%A8%EF%BC%9A"><span class="nav-text">作用：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E6%9D%83"><span class="nav-text">提权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%90%AF%E5%8A%A8msf"><span class="nav-text">第一次启动msf</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%9B%E5%85%A5%E6%A8%A1%E5%9D%97%E4%B9%8B%E5%90%8E%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-text">进入模块之后的操作</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8E%E6%B8%97%E9%80%8F"><span class="nav-text">后渗透</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#meterpreter-%E7%BB%88%E7%AB%AF"><span class="nav-text">meterpreter 终端</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#searchsploit"><span class="nav-text">searchsploit</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -357,13 +391,13 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
