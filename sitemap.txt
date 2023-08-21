@@ -1,6 +1,9 @@
+http://dtxharry.github.io/2023/08/21/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/
 http://dtxharry.github.io/about/index.html
 http://dtxharry.github.io/categories/index.html
 http://dtxharry.github.io/404.html
 http://dtxharry.github.io/tags/index.html
 http://dtxharry.github.io/2023/08/21/hello-world/
 http://dtxharry.github.io/
+http://dtxharry.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/
+http://dtxharry.github.io/categories/CyberSecurity/
